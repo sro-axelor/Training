@@ -78,6 +78,15 @@
   675  git commit -a -m "p1.patch file added"
   676  git push origin wip-sujit
   677  git diff > p2.patch
+  678  history
+  679  git diff > p2.patch
+  680  cat p2.patch
+  681  git add .
+  682  git commit -m "p2.patch file added"
+  683  git push origin wip-sujit
+  684  git commit --amend 
+  685  git add .
+  686 git commit -m "new commands added in Commands.txt"
 
   
   #this is a comment
