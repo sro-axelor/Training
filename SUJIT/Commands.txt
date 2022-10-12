@@ -1,0 +1,65 @@
+  598  mkdir trainning
+  599  cd trainning/
+  600  cd Training/
+  601  git remote -v
+  602  git remote add origin git@github.com:rch-axelor/Training.git
+  603  git remote -v
+  604  git remote add upstream "git@github.com:rch-axelor/Training.git"
+  605  git remote -v
+  606  git branch wip-sujit
+  607  git br
+  608  git checkout wip-sujit
+  609  mkdir SUJIT
+  610  touch LinuxCommandExercise.sh
+  611  cd SUJIT/
+  612  touch LinuxCommandExercise.sh
+  613  git push upstrem LinuxCommandExercise.sh
+  614  git add .
+  615  git commit -m "Linux command exercise"
+  616  git push upstrem LinuxCommandExercise.sh
+  617  git push upstream "Linux command exercise"
+  618  git push upstream "LinuxCommandExercise.sh"
+  619  git push upstream wip-sujit
+  620  git clone git@github.com:sro-axelor/Training.git.
+  621  git clone git@github.com:rch-axelor/Training.git
+  622  git remote -v 
+  623  cd Training/
+  624  cd trainning/
+  625  cd Training/
+  626  cd sujit
+  627  cd SUJIT
+  628  git remote -v
+  629  git br
+  630  cd Training
+  631  cd trainning
+  632  cd Training/
+  633  cd SUJIT/
+  634  sh LinuxCommandExercise.sh 
+  635  vi LinuxCommandExercise.sh 
+  636  vi LinuxCommandExercise.sh
+  637  xdg-open LinuxCommandExercise.sh
+  638  git add LinuxCommandExercise.sh
+  639  git touch Commands.txt
+  640  touch Commands.txt
+  641  git log
+  642  history
+  643  git log
+  644  history
+  645  git status
+  646  git commit -m "Linux Command Exercise edited"
+  647  git status
+  648  git push origin wip-sujit 
+  649  git status
+  650  origin
+  651  git origin
+  652  git origin -v
+  653  git -v
+  654  git show origin
+  655  git remote -v
+  656  git remote add origin git@github.com:sro-axelor/Training.git
+  657  git remote set-url origin git@github.com:sro-axelor/Training.git
+  658  git remote -v
+  659  git push origin wip-sujit 
+  
+  
+  #this is a comment

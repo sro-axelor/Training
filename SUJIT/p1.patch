@@ -1,0 +1,12 @@
+diff --git a/SUJIT/LinuxCommandExercise.sh b/SUJIT/LinuxCommandExercise.sh
+index 1da3b95..1e4fb3b 100644
+--- a/SUJIT/LinuxCommandExercise.sh
++++ b/SUJIT/LinuxCommandExercise.sh
+@@ -33,3 +33,7 @@ grep -h "@gmail.com" *.txt > EmailAddresses.txt
+ cat EmailAddresses.txt
+ 
+ sed 's/@gmail.com/@axelor.com/' EmailAddresses.txt
++
++
++
++#This is a demo comment

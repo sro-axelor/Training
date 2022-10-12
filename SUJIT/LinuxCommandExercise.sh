@@ -12,16 +12,11 @@ path=/Training/Command/
 mkdir xml
 
 for file in $path
-
 do
 
-cp *.xml xml/ 
-
-
-
+cp *.xml xml/
 
 rename 's/(@|~|#|%)//' *.txt
-
 done
 
 grep -l "@gmail.com" *.txt > EmailAddressFiles.txt
