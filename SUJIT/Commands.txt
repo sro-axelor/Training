@@ -86,7 +86,8 @@
   683  git push origin wip-sujit
   684  git commit --amend 
   685  git add .
-  686 git commit -m "new commands added in Commands.txt"
+  686  git commit -m "new commands added in Commands.txt"
+  687  git push origin wip-sujit
 
   
   #this is a comment
