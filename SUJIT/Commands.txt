@@ -60,6 +60,24 @@
   657  git remote set-url origin git@github.com:sro-axelor/Training.git
   658  git remote -v
   659  git push origin wip-sujit 
-  
+  660  history
+  661  git diff
+  662  git log
+  663  xdg-open Commands.txt 
+  664  git diff
+  665  git status
+  666  git diff
+  667  git diff> p1.patch
+  668  xdg-open p1.patch 
+  669  git diff
+  670  git status 
+  671  git push origin wip-sujit
+  672  cat p1.patch
+  673  git add .
+  674  git status
+  675  git commit -a -m "p1.patch file added"
+  676  git push origin wip-sujit
+  677  git diff > p2.patch
+
   
   #this is a comment
