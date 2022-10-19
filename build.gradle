@@ -1,0 +1,120 @@
+plugins {
+	id 'java-library'
+}
+repositories {
+	mavenCentral()
+}
+dependencies {
+	
+}
+
+
+
+
+
+
+//make a custom task
+task MycustomTask{
+	group "custom task"
+	description "this is description for my task"
+	doLast{
+		println "this is custom task"
+	}
+}
+
+
+
+
+//copy files
+task copyFile (type :Copy) {
+	
+	group "my custom task copyfiles"
+	from "/home/axelor/sujit/newfile/a.txt"
+	into "/home/axelor/sujit/file1"
+}
+
+
+
+
+//do first and dolast block
+task helloWorld{
+	doFirst{
+		println "hi good morning this is Sujit"
+	}
+	doLast{
+		println "good night"
+	}
+}
+
+
+
+
+// creating group for task
+task creatingGroup1{
+	group "my custom task creatingGroup"
+	doLast{
+		println "this is creatingGroup 1"
+	}
+}  
+
+task creatingGroup2{
+	group "my custom task creatingGroup"
+	doLast{
+		println "this is creatingGroup 2"
+	}
+}
+
+
+
+
+//skip tasks in gradle
+task doTheOperation1{
+	
+	group "my custom task skip the task"
+	doLast{
+		println "this is Skip Operation 1"
+	}
+}
+
+task doTheOperation2{
+	
+	group " my custom task skip the task"
+	doLast{
+		println "this is Skip Operation "
+	}
+}
+
+doTheOperation1.onlyIf{
+	project.hasProperty('doOperation')
+}
+
+
+
+
+//task dependencies
+task doTheOperation3{
+	
+	group "my custom task dependency"
+	doLast{
+		println "this is task dependency Operation3"
+	}
+}
+
+task doTheOperation4(dependsOn: 'doTheOperation3'){
+	
+	group "my custom task dependency"
+	doLast{
+		println "this is task dependency Operation4 "
+	}
+}
+
+
+
+
+//create a zip file
+task createZip(type: Zip){
+	
+	archiveName = "my-Zipfile"
+	from "/home/axelor/sujit/newfile/a.txt"
+	destinationDir = file("/home/axelor/sujit/file1")
+} 
