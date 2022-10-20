@@ -1,0 +1,692 @@
+axelor@localhost:~$ pg sh
+/work # psql
+psql (14.5)
+Type "help" for help.
+
+axelor=# \c postgres
+You are now connected to database "postgres" as user "axelor".
+postgres=# create database company;
+CREATE DATABASE
+postgres=# \c
+You are now connected to database "postgres" as user "axelor".
+postgres=# \c company
+You are now connected to database "company" as user "axelor".
+company=# create table employees(id int primary key not null,name text not null,sal int not null);
+CREATE TABLE
+company=# create table audit(id int primary key not null,name text not null,entry_date text not null);
+CREATE TABLE
+company=# \d
+          List of relations
+ Schema |   Name    | Type  | Owner  
+--------+-----------+-------+--------
+ public | audit     | table | axelor
+ public | employees | table | axelor
+(2 rows)
+
+company=# create or replace function audit_log() returns trigger as $sr$
+company$# begin
+company$# insert into audit(id,name,entry_date)values(new.id,new.name,current_timestamp);
+company$# end;
+company$# $sr$ language plpgsql;
+CREATE FUNCTION
+company=# create trigger audit_trigger after insert on employees
+company-# for each row execute procedure audit_log();
+CREATE TRIGGER
+company=# select * from audit;
+ id | name | entry_date 
+----+------+------------
+(0 rows)
+
+company=# select * from employees;
+ id | name | sal 
+----+------+-----
+(0 rows)
+
+company=# insert into employees values(1,'ram',35000);
+ERROR:  control reached end of trigger procedure without RETURN
+CONTEXT:  PL/pgSQL function audit_log()
+company=# alter function
+company-# create or replace function audit_log() returns trigger as $sr$
+company$# begin
+company$# insert into audit(id,name,entry_date)values(new.id,new.name,current_timestamp);
+company$# return new;
+company$# end;
+company$# $sr$ language plpgsql;
+ERROR:  syntax error at or near "create"
+LINE 2: create or replace function audit_log() returns trigger as $s...
+        ^
+company=# create or replace function audit_log() returns trigger as $sr$
+company$# begin
+company$# insert into audit(id,name,entry_date)values(new.id,new.name,current_timestamp);
+company$# return new;
+company$# end;
+company$# $sr$ language plpgsql;
+CREATE FUNCTION
+company=# insert into employees values(1,'ram',35000);
+INSERT 0 1
+company=# select * from audit;
+ id | name |          entry_date           
+----+------+-------------------------------
+  1 | ram  | 2022-10-20 06:22:49.214572+00
+(1 row)
+
+company=# insert into employees values(2,'ashok',25000);
+INSERT 0 1
+company=# select * from audit;
+ id | name  |          entry_date           
+----+-------+-------------------------------
+  1 | ram   | 2022-10-20 06:22:49.214572+00
+  2 | ashok | 2022-10-20 06:24:18.585506+00
+(2 rows)
+
+company=# select * from employees;
+ id | name  |  sal  
+----+-------+-------
+  1 | ram   | 35000
+  2 | ashok | 25000
+(2 rows)
+
+company=# select s.fname,t.name from students as s,teachers as t where s.id=t.id;
+ERROR:  relation "students" does not exist
+LINE 1: select s.fname,t.name from students as s,teachers as t where...
+                                   ^
+company=# \d
+          List of relations
+ Schema |   Name    | Type  | Owner  
+--------+-----------+-------+--------
+ public | audit     | table | axelor
+ public | employees | table | axelor
+(2 rows)
+
+company=# \c school;
+You are now connected to database "school" as user "axelor".
+school=# \d
+         List of relations
+ Schema |   Name   | Type  | Owner  
+--------+----------+-------+--------
+ public | students | table | axelor
+ public | teachers | table | axelor
+(2 rows)
+
+school=# 
+school=# select s.firstname,t.name from students as s,teachers as t where s.id=t.id;
+ firstname | name 
+-----------+------
+ jhon      | A
+ Ram       | B
+ nidhi     | D
+ jack      | C
+(4 rows)
+
+school=# select students.fn,teachers.n from students firstname as fn, teachers name as n where s.id=t.id;
+ERROR:  syntax error at or near "as"
+LINE 1: ...ct students.fn,teachers.n from students firstname as fn, tea...
+                                                             ^
+school=# explain select * from students where firstname ='jack';
+                        QUERY PLAN                        
+----------------------------------------------------------
+ Seq Scan on students  (cost=0.00..20.12 rows=4 width=72)
+   Filter: (firstname = 'jack'::text)
+(2 rows)
+
+school=# select * from students where firstname ='jack';
+ id | firstname | lastname | age 
+----+-----------+----------+-----
+  3 | jack      | mar      |  21
+(1 row)
+
+school=# select * from students;
+ id | firstname | lastname | age 
+----+-----------+----------+-----
+  1 | jhon      | kater    |  20
+  2 | Ram       | kumar    |  24
+  3 | jack      | mar      |  21
+  4 | nidhi     | sharma   |  26
+  5 | ruchi     | sahoo    |  21
+  6 | rabi      | kumar    |  19
+(6 rows)
+
+school=# create index stud_index on students("firstname");
+CREATE INDEX
+school=# explain select * from students where firstname ='jack';
+                       QUERY PLAN                        
+---------------------------------------------------------
+ Seq Scan on students  (cost=0.00..1.07 rows=1 width=72)
+   Filter: (firstname = 'jack'::text)
+(2 rows)
+
+school=# drop index stud_index;
+DROP INDEX
+school=# explain select * from students where firstname ='jack';
+                       QUERY PLAN                        
+---------------------------------------------------------
+ Seq Scan on students  (cost=0.00..1.07 rows=1 width=72)
+   Filter: (firstname = 'jack'::text)
+(2 rows)
+
+school=# explain select * from students where firstname ='jack';
+                       QUERY PLAN                        
+---------------------------------------------------------
+ Seq Scan on students  (cost=0.00..1.07 rows=1 width=72)
+   Filter: (firstname = 'jack'::text)
+(2 rows)
+
+school=# drop index stud_index;
+ERROR:  index "stud_index" does not exist
+school=# explain select * from students where firstname ='jack';
+                       QUERY PLAN                        
+---------------------------------------------------------
+ Seq Scan on students  (cost=0.00..1.07 rows=1 width=72)
+   Filter: (firstname = 'jack'::text)
+(2 rows)
+
+school=# c\ employees
+invalid command \
+Try \? for help.
+school-# \c employees;
+connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  database "employees" does not exist
+Previous connection kept
+school-# \d
+         List of relations
+ Schema |   Name   | Type  | Owner  
+--------+----------+-------+--------
+ public | students | table | axelor
+ public | teachers | table | axelor
+(2 rows)
+
+school-# \l
+                              List of databases
+   Name    | Owner  | Encoding |  Collate   |   Ctype    | Access privileges 
+-----------+--------+----------+------------+------------+-------------------
+ axelor    | axelor | UTF8     | en_US.utf8 | en_US.utf8 | 
+ company   | axelor | UTF8     | en_US.utf8 | en_US.utf8 | 
+ postgres  | axelor | UTF8     | en_US.utf8 | en_US.utf8 | 
+ school    | axelor | UTF8     | en_US.utf8 | en_US.utf8 | 
+ template0 | axelor | UTF8     | en_US.utf8 | en_US.utf8 | =c/axelor        +
+           |        |          |            |            | axelor=CTc/axelor
+ template1 | axelor | UTF8     | en_US.utf8 | en_US.utf8 | =c/axelor        +
+           |        |          |            |            | axelor=CTc/axelor
+(6 rows)
+
+school-# \c company
+You are now connected to database "company" as user "axelor".
+company-# \q
+/work # exit
+axelor@localhost:~$ pg sh
+/work # psql
+psql (14.5)
+Type "help" for help.
+
+axelor=# \c company 
+You are now connected to database "company" as user "axelor".
+company=# \d
+          List of relations
+ Schema |   Name    | Type  | Owner  
+--------+-----------+-------+--------
+ public | audit     | table | axelor
+ public | employees | table | axelor
+(2 rows)
+
+company=# create table emp(id int not null primary key,name text not null,sal integer[],work_hours text[][]);
+CREATE TABLE
+company=# \d
+          List of relations
+ Schema |   Name    | Type  | Owner  
+--------+-----------+-------+--------
+ public | audit     | table | axelor
+ public | emp       | table | axelor
+ public | employees | table | axelor
+(3 rows)
+
+company=# insert into emp values(1,'sujit','{25000,30000}','{{"morning","two"},{"evening","three"}}');
+INSERT 0 1
+company=# insert into emp values(2,'jack','{15000,35000}','{{"morning","three"},{"evening","four"}}');
+INSERT 0 1
+company=# select * from emp;
+ id | name  |      sal      |            work_hours            
+----+-------+---------------+----------------------------------
+  1 | sujit | {25000,30000} | {{morning,two},{evening,three}}
+  2 | jack  | {15000,35000} | {{morning,three},{evening,four}}
+(2 rows)
+
+company=# select sal[2] from emp;
+  sal  
+-------
+ 30000
+ 35000
+(2 rows)
+
+company=# select work_hours[1][2] from emp;
+ work_hours 
+------------
+ two
+ three
+(2 rows)
+
+company=# select * from employees ;
+ id | name  |  sal  
+----+-------+-------
+  1 | ram   | 35000
+  2 | ashok | 25000
+(2 rows)
+
+company=# select * from audit ;
+ id | name  |          entry_date           
+----+-------+-------------------------------
+  1 | ram   | 2022-10-20 06:22:49.214572+00
+  2 | ashok | 2022-10-20 06:24:18.585506+00
+(2 rows)
+
+company=# create type mood as enum('sad','ok','happy');
+CREATE TYPE
+company=# create table person(name text,current_mood mood);
+CREATE TABLE
+company=# insert into person values('rahul','sad');
+INSERT 0 1
+company=# insert into person values('neha','ok');
+INSERT 0 1
+company=# insert into person values('sujit','happy');
+INSERT 0 1
+company=# insert into person values('sujit','angry');
+ERROR:  invalid input value for enum mood: "angry"
+LINE 1: insert into person values('sujit','angry');
+                                          ^
+company=# select * from person;
+ name  | current_mood 
+-------+--------------
+ rahul | sad
+ neha  | ok
+ sujit | happy
+(3 rows)
+
+company=# select min(current_mood) from person;
+ min 
+-----
+ sad
+(1 row)
+
+company=# select max(current_mood) from person;
+  max  
+-------
+ happy
+(1 row)
+
+company=# select * from person where current_mood >'sad';
+ name  | current_mood 
+-------+--------------
+ neha  | ok
+ sujit | happy
+(2 rows)
+
+company=# select * from person where current_mood >'ok';
+ name  | current_mood 
+-------+--------------
+ sujit | happy
+(1 row)
+
+company=# select * from person where current_mood >'sad';
+ name  | current_mood 
+-------+--------------
+ neha  | ok
+ sujit | happy
+(2 rows)
+
+company=# select * from person where current_mood <'happy';
+ name  | current_mood 
+-------+--------------
+ rahul | sad
+ neha  | ok
+(2 rows)
+
+company=# \c school;
+You are now connected to database "school" as user "axelor".
+school=# 
+school=# create table stud(roll_no integer check(roll_no >1000),name text not null);
+CREATE TABLE
+school=# insert into stud values(850,'ram');
+ERROR:  new row for relation "stud" violates check constraint "stud_roll_no_check"
+DETAIL:  Failing row contains (850, ram).
+school=# insert into stud values(1000,'ram');
+ERROR:  new row for relation "stud" violates check constraint "stud_roll_no_check"
+DETAIL:  Failing row contains (1000, ram).
+school=# insert into stud values(1001,'ram');
+INSERT 0 1
+school=# insert into stud values(1002,null);
+ERROR:  null value in column "name" of relation "stud" violates not-null constraint
+DETAIL:  Failing row contains (1002, null).
+school=# insert into stud values(1002);
+ERROR:  null value in column "name" of relation "stud" violates not-null constraint
+DETAIL:  Failing row contains (1002, null).
+school=# 
+
+school=# select 'hello' || 'world';
+  ?column?  
+------------
+ helloworld
+(1 row)
+
+school=# select 'hello ' || 'world';
+  ?column?   
+-------------
+ hello world
+(1 row)
+
+school=# select concat ('hello ','world');
+   concat    
+-------------
+ hello world
+(1 row)
+
+school=# select length('hello');
+ length 
+--------
+      5
+(1 row)
+
+school=# select char_length('hello');
+ char_length 
+-------------
+           5
+(1 row)
+
+school=# select length(4544615);
+ERROR:  function length(integer) does not exist
+LINE 1: select length(4544615);
+               ^
+HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+school=# select char_length(4544615);
+ERROR:  function char_length(integer) does not exist
+LINE 1: select char_length(4544615);
+               ^
+HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+
+school=# select lower('HeLLo');
+ lower 
+-------
+ hello
+(1 row)
+
+school=# select ascii('a');
+ ascii 
+-------
+    97
+(1 row)
+
+school=# select ascii('A');
+ ascii 
+-------
+    65
+(1 row)
+
+school=# select position ('e' in 'hello');
+ position 
+----------
+        2
+(1 row)
+
+school=# select position ('l' in 'hello');
+ position 
+----------
+        3
+(1 row)
+
+school=# select position ('o' in 'hello');
+ position 
+----------
+        5
+(1 row)
+
+school=# \l
+                              List of databases
+   Name    | Owner  | Encoding |  Collate   |   Ctype    | Access privileges 
+-----------+--------+----------+------------+------------+-------------------
+ axelor    | axelor | UTF8     | en_US.utf8 | en_US.utf8 | 
+ company   | axelor | UTF8     | en_US.utf8 | en_US.utf8 | 
+ postgres  | axelor | UTF8     | en_US.utf8 | en_US.utf8 | 
+ school    | axelor | UTF8     | en_US.utf8 | en_US.utf8 | 
+ template0 | axelor | UTF8     | en_US.utf8 | en_US.utf8 | =c/axelor        +
+           |        |          |            |            | axelor=CTc/axelor
+ template1 | axelor | UTF8     | en_US.utf8 | en_US.utf8 | =c/axelor        +
+           |        |          |            |            | axelor=CTc/axelor
+(6 rows)
+
+school=# who m i
+school-# 
+school-# \q
+/work # exit
+axelor@localhost:~$ pg sh
+/work # psql
+psql (14.5)
+Type "help" for help.
+
+axelor=# \c school;
+You are now connected to database "school" as user "axelor".
+school=# select * teachers where salary >(select avg(salary) from teachers);
+ERROR:  syntax error at or near "teachers"
+LINE 1: select * teachers where salary >(select avg(salary) from tea...
+                 ^
+school=# \d
+         List of relations
+ Schema |   Name   | Type  | Owner  
+--------+----------+-------+--------
+ public | stud     | table | axelor
+ public | students | table | axelor
+ public | teachers | table | axelor
+(3 rows)
+
+school=# select * from teachers;
+ id | name | salary 
+----+------+--------
+  1 | A    |  20000
+  2 | B    |  15000
+  4 | D    |  45000
+  3 | C    |  25000
+(4 rows)
+
+school=# insert into teachers values(5,'E',30000) (6,'F',35000) (7,'G',40000);
+ERROR:  syntax error at or near "("
+LINE 1: insert into teachers values(5,'E',30000) (6,'F',35000) (7,'G...
+                                                 ^
+school=# insert into teachers values(5,'E',30000), (6,'F',35000), (7,'G',40000);
+INSERT 0 3
+school=# select * from teachers;
+ id | name | salary 
+----+------+--------
+  1 | A    |  20000
+  2 | B    |  15000
+  4 | D    |  45000
+  3 | C    |  25000
+  5 | E    |  30000
+  6 | F    |  35000
+  7 | G    |  40000
+(7 rows)
+
+school=# select * from teachers where salary >(select avg(salary) from teachers);
+ id | name | salary 
+----+------+--------
+  4 | D    |  45000
+  6 | F    |  35000
+  7 | G    |  40000
+(3 rows)
+
+school=# select * from teachers where salary in(select salary from teachers where salary >20000);
+ id | name | salary 
+----+------+--------
+  4 | D    |  45000
+  3 | C    |  25000
+  5 | E    |  30000
+  6 | F    |  35000
+  7 | G    |  40000
+(5 rows)
+
+school=# create user sujit password 'Sujit@5678';
+CREATE ROLE
+school=# \c sujit
+connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  database "sujit" does not exist
+Previous connection kept
+school=# show tables;
+ERROR:  unrecognized configuration parameter "tables"
+school=# 
+school=# sudo su postgres
+school-# \q3
+invalid command \q3
+Try \? for help.
+school-# \q
+/work # exit
+axelor@localhost:~$ sudo su postgres
+[sudo] password for axelor: 
+Sorry, try again.
+[sudo] password for axelor: 
+Sorry, try again.
+[sudo] password for axelor: 
+su: user postgres does not exist or the user entry does not contain all the required fields
+axelor@localhost:~$ pg sh
+/work # psql
+psql (14.5)
+Type "help" for help.
+
+axelor=# \c postgres
+You are now connected to database "postgres" as user "axelor".
+postgres=# \l
+                              List of databases
+   Name    | Owner  | Encoding |  Collate   |   Ctype    | Access privileges 
+-----------+--------+----------+------------+------------+-------------------
+ axelor    | axelor | UTF8     | en_US.utf8 | en_US.utf8 | 
+ company   | axelor | UTF8     | en_US.utf8 | en_US.utf8 | 
+ postgres  | axelor | UTF8     | en_US.utf8 | en_US.utf8 | 
+ school    | axelor | UTF8     | en_US.utf8 | en_US.utf8 | 
+ template0 | axelor | UTF8     | en_US.utf8 | en_US.utf8 | =c/axelor        +
+           |        |          |            |            | axelor=CTc/axelor
+ template1 | axelor | UTF8     | en_US.utf8 | en_US.utf8 | =c/axelor        +
+           |        |          |            |            | axelor=CTc/axelor
+(6 rows)
+
+postgres=# \q
+/work # exit
+axelor@localhost:~$ pg_dumpall > ./home/axelor/sujit/backup.bak 
+bash: ./home/axelor/sujit/backup.bak: No such file or directory
+axelor@localhost:~$ pg_dumpall > /home/axelor/sujit/backup.bak 
+bash: pg_dumpall: command not found
+axelor@localhost:~$ pg sh
+/work # psql
+psql (14.5)
+Type "help" for help.
+
+axelor=# pg_dumpall > /home/axelor/sujit/backup.bak
+axelor-# pg\l
+                              List of databases
+   Name    | Owner  | Encoding |  Collate   |   Ctype    | Access privileges 
+-----------+--------+----------+------------+------------+-------------------
+ axelor    | axelor | UTF8     | en_US.utf8 | en_US.utf8 | 
+ company   | axelor | UTF8     | en_US.utf8 | en_US.utf8 | 
+ postgres  | axelor | UTF8     | en_US.utf8 | en_US.utf8 | 
+ school    | axelor | UTF8     | en_US.utf8 | en_US.utf8 | 
+ template0 | axelor | UTF8     | en_US.utf8 | en_US.utf8 | =c/axelor        +
+           |        |          |            |            | axelor=CTc/axelor
+ template1 | axelor | UTF8     | en_US.utf8 | en_US.utf8 | =c/axelor        +
+           |        |          |            |            | axelor=CTc/axelor
+(6 rows)
+
+axelor-# pg_dump company > /home/axelor/sujit/test.sql
+axelor-# pg_dumpall > /home/axelor/sujit/backup.sql
+axelor-# psql company < /home/axelor/sujit/abc.sql
+axelor-# exit
+Use \q to quit.
+axelor-# psql company < /home/axelor/sujit/abc4.sql
+axelor-# \q
+/work # psql company < /home/axelor/sujit/abc4.sql
+/bin/sh: can't open /home/axelor/sujit/abc4.sql: no such file
+/work # psql company > /home/axelor/sujit/abc4.sql
+/bin/sh: can't create /home/axelor/sujit/abc4.sql: nonexistent directory
+/work # exit
+axelor@localhost:~$ pg sh
+/work # psql
+psql (14.5)
+Type "help" for help.
+
+axelor=# psql company < /home/axelor/sujit/abc4.sql
+axelor-# \q
+/work # psql "company" < /home/axelor/sujit/abc4.sql
+/bin/sh: can't open /home/axelor/sujit/abc4.sql: no such file
+/work # exit
+axelor@localhost:~$ pg sh
+/work # createdb abc;
+/work # \l
+/bin/sh: l: not found
+/work # psql
+psql (14.5)
+Type "help" for help.
+
+axelor=# \l
+                              List of databases
+   Name    | Owner  | Encoding |  Collate   |   Ctype    | Access privileges 
+-----------+--------+----------+------------+------------+-------------------
+ abc       | axelor | UTF8     | en_US.utf8 | en_US.utf8 | 
+ axelor    | axelor | UTF8     | en_US.utf8 | en_US.utf8 | 
+ company   | axelor | UTF8     | en_US.utf8 | en_US.utf8 | 
+ postgres  | axelor | UTF8     | en_US.utf8 | en_US.utf8 | 
+ school    | axelor | UTF8     | en_US.utf8 | en_US.utf8 | 
+ template0 | axelor | UTF8     | en_US.utf8 | en_US.utf8 | =c/axelor        +
+           |        |          |            |            | axelor=CTc/axelor
+ template1 | axelor | UTF8     | en_US.utf8 | en_US.utf8 | =c/axelor        +
+           |        |          |            |            | axelor=CTc/axelor
+(7 rows)
+
+axelor=# \q
+/work # pg_dump company > /home/axelor/sujit/hjgdha.sql
+/bin/sh: can't create /home/axelor/sujit/hjgdha.sql: nonexistent directory
+/work # psql
+psql (14.5)
+Type "help" for help.
+
+axelor=# pg_dump company > /home/axelor/sujit/hjgdha.sql
+axelor-# \q
+/work # pg_dump axelor > /home/axelor/sdchsdgh.sql
+/bin/sh: can't create /home/axelor/sdchsdgh.sql: nonexistent directory
+/work # pg_dump axelor > sdchsdgh.sql
+/work # pg_dump company > djsjhs.sql
+/work # pg_dumpall > shxshxgsh.sql
+/work # psql
+psql (14.5)
+Type "help" for help.
+
+axelor=# pg_dumpall > hxgsh.sql
+axelor-# \q
+/work # pg_dumpall > /home/axelor/sujit/shxshxgsh.sql
+/bin/sh: can't create /home/axelor/sujit/shxshxgsh.sql: nonexistent directory
+/work # pg_dumpall > /home/sujit/shxshxgsh.sql
+/bin/sh: can't create /home/sujit/shxshxgsh.sql: nonexistent directory
+/work # psql
+psql (14.5)
+Type "help" for help.
+
+axelor=# \d
+Did not find any relations.
+axelor=# \l
+                              List of databases
+   Name    | Owner  | Encoding |  Collate   |   Ctype    | Access privileges 
+-----------+--------+----------+------------+------------+-------------------
+ abc       | axelor | UTF8     | en_US.utf8 | en_US.utf8 | 
+ axelor    | axelor | UTF8     | en_US.utf8 | en_US.utf8 | 
+ company   | axelor | UTF8     | en_US.utf8 | en_US.utf8 | 
+ postgres  | axelor | UTF8     | en_US.utf8 | en_US.utf8 | 
+ school    | axelor | UTF8     | en_US.utf8 | en_US.utf8 | 
+ template0 | axelor | UTF8     | en_US.utf8 | en_US.utf8 | =c/axelor        +
+           |        |          |            |            | axelor=CTc/axelor
+ template1 | axelor | UTF8     | en_US.utf8 | en_US.utf8 | =c/axelor        +
+           |        |          |            |            | axelor=CTc/axelor
+(7 rows)
+
+axelor=# \c company 
+You are now connected to database "company" as user "axelor".
+company=# \d
+          List of relations
+ Schema |   Name    | Type  | Owner  
+--------+-----------+-------+--------
+ public | audit     | table | axelor
+ public | emp       | table | axelor
+ public | employees | table | axelor
+ public | person    | table | axelor
+(4 rows)
+
+company=# 
