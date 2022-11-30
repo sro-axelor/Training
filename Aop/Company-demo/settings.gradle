@@ -1,0 +1,5 @@
+rootProject.name = 'Company-demo'
+
+include "modules:company-details"
+//include "modules:company-departments"
+//include "modules:company-sale"

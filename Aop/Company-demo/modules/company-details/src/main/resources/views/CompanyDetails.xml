@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views  
+  http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+  <grid name="companydetails-grid"  
+        title="CompanyDetails"   
+        model="com.axelor.companydetails.db.CompanyDetails"> 
+        
+    <field name="enterCompanyName" />
+    <field name="companyemail" />
+    <field name="companyphone" />
+    <field name="openingDate" />
+  </grid>
+
+  <form name="companydetails-form"  
+        title="CompanyDetails"  
+        model="com.axelor.companydetails.db.CompanyDetails"> 
+        
+    <panel name="overviewPanel" title="Overview"> 
+      <field name="enterCompanyName" readonly="false" showTitle="false">
+        <editor> 
+          <field name="companyName" colSpan="6"/>
+        </editor>
+      </field>
+      
+      <field name="openingDate" />
+      
+      <field name="companyemail">
+        <viewer><![CDATA[ 
+        <a href="mailto:{{record.email}}">{{record.email}}</a>
+        ]]></viewer>
+      </field>
+      
+      <field name="companyphone">
+        <viewer><![CDATA[
+        <a href="tel:{{record.phone}}">{{record.phone}}</a>
+        ]]></viewer>
+      </field>
+    </panel>
+    
+    <panel name="aboutcompanyPanel" title="About company">
+        <field name="notes" showTitle="false" colSpan="12"/>
+    </panel>
+    
+    <panel-related name="companydepartmentsPanel"  
+    			   field="companydepartments"   
+    			   form-view="companydepartments-form-popup"> 
+    			   
+        <field name="departmentName"/>
+        <field name="departmentId"/> 
+        <field name="departmentLocation"/>
+    </panel-related>
+    
+      <panel name="sidePanel" sidebar="true"> 
+      <field name="createdOn"/>
+      <field name="createdBy"/>
+      <field name="updatedOn"/>
+      <field name="updatedBy"/>
+    </panel> 
+  </form>
+
+  <form name="companydepartments-form-popup"  
+  		title="CompanyDepartment"  
+  		model="com.axelor.companydetails.db.CompanyDepartment">
+  		
+    <panel title="Overview">
+      <field name="departmentName" />
+      <field name="departmentId"/>  
+      <field name="departmentLocation" />
+    </panel>
+  </form>
+
+</object-views>

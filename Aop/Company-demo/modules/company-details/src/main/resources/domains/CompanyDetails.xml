@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
+  http://axelor.com/xml/ns/domain-models/domain-models_5.4.xsd">
+
+ <module name="companydetails" package="com.axelor.companydetails.db" />
+ 
+  <!-- entity definitions here -->
+ <entity name="CompanyDetails">
+
+	<string name="companyName" required="true" min="1"/>
+	
+		 <string name="enterCompanyName" namecolumn="true" search="companyName"> 
+	    	<![CDATA[
+	    	if (companyName == null){
+	   	    	 return null;
+	   	    }
+	        	return companyName;
+	  		]]></string>
+	  		
+	<date name="openingDate" />
+		 
+	<string name="companyemail" required="true" unique="true" max="100" />
+    <string name="companyphone" max="20" massUpdate="true" />
+    <string name="notes" title="About Company" large="true" multiline="true" />
+    
+    <one-to-many name="companydepartments" ref="CompanyDepartment" mappedBy="companydetails"/>
+    
+    <finder-method name="findbyName" using="enterCompanyName"/>
+    <finder-method name="findByEmail" using="companyemail"/>
+    
+	  
+ </entity>
+ 
+</domain-models>
