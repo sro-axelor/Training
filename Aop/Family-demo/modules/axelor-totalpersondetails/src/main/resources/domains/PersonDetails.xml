@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models  http://axelor.com/xml/ns/domain-models/domain-models_5.4.xsd">
+
+
+  <module name="persondetails" package="com.axelor.persondetails.db"/>
+
+  <entity name="PersonDetails">
+    
+    <string name="firstName" required="true" /> 
+    <string name="middleName" required="true" />
+    <string name="lastName" required="true" />
+
+    <string name="fullName"> 
+    <![CDATA[
+		    if (firstName == null && middleName == null && lastName == null) {
+		        return null;
+		    }
+		        return firstName + " " + middleName + " " + lastName;
+    ]]></string>
+
+    <date name="dateOfBirth" />
+
+    <string name="email" required="true" unique="true" max="100" />
+    <string name="phone" max="20" massUpdate="true" />
+    <string name="notes" title="About me" large="true" />
+
+    <one-to-many name="personaddresses" ref="PersonAddress" mappedBy="persondetails" /> 
+
+    <finder-method name="findByName" using="fullName" /> 
+    <finder-method name="findByEmail" using="email" />
+  </entity>
+</domain-models>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:schemaLocation="http://axelor.com/xml/ns/object-views  http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+  <menuitem name="menu-persondetails-book"
+            title="All Person Details" /> 
+
+<!-- for person details -->
+  <menuitem name="menu-persondetails-friends"
+            parent="menu-persondetails-book"
+            title="Enter Person Details"
+            action="persondetails.all"/> 
+               
+  <action-view name="persondetails.all"
+               title="All Person Details"
+               model="com.axelor.persondetails.db.PersonDetails"> 
+               
+  	  	<view type="grid" name="persondetails-grid"/> 
+     	<view type="form" name="persondetails-form"/> 
+  </action-view>
+
+<!-- for job details -->
+  <menuitem name="menu-contact-friends"
+            parent="menu-persondetails-book"
+            title="Enter Person Job Details"
+            action="personjobdetails.all"/> 
+            
+   <action-view name="personjobdetails.all"
+               title="All Person Job Details"
+               model="com.axelor.persondetails.db.PersonDetails"> 
+               
+  	  	<view type="grid" name="persondetails-grid"/> 
+     	<view type="form" name="persondetails-form"/> 
+  </action-view>
+
+</object-views>
