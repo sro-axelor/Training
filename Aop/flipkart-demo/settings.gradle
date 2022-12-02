@@ -1,0 +1,3 @@
+rootProject.name = 'flipkart-demo'
+
+include "modules:flipkart-order"

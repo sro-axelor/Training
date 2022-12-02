@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+  <grid name="mobiles-grid"
+        title="OrderDetails"
+        model="com.axelor.orderdetails.db.OrderDetails"> 
+    <field name="fullName" />
+    <field name="email" />
+    <field name="phone" />
+    <field name="orderDate" />
+  	<field name="orderTime" />  
+  </grid>
+  
+  
+<!-- main form -->  
+<form name="orderdetails-form"
+        title="Order Details"
+        model="com.axelor.orderdetails.db.OrderDetails" width="large" > 
+
+        
+<!-- item panel -->   
+	   <panel-related name="itemPanel" field="item" form-view="item-form-popup"> 
+	      <field name="name" />
+	      <field name="brand" />
+	      <field name="color" />
+	      <field name="price" />
+	    </panel-related>
+
+</form>
+  
+  
+<!-- Item form -->
+	    <form name="item-form-popup"
+	        title="Item"
+	        model="com.axelor.orderdetails.db.Item">
+	    <panel title="Item Overview">
+	      <field name="name" />
+	      <field name="brand" />
+	      <field name="color" />
+	      <field name="price" />
+	    </panel>
+	  </form>
+
+</object-views>

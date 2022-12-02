@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
+  http://axelor.com/xml/ns/domain-models/domain-models_5.4.xsd">
+
+  <module name="orderdetails" package="com.axelor.orderdetails.db"/>
+
+  <entity name="OrderDetails">
+
+	
+	
+    <one-to-many name="item" ref="Item" mappedBy="orderdetails" />  
+
+    <string name="firstName" required="true" /> 
+    <string name="middleName" required="true" /> 
+    <string name="lastName" required="true" />
+
+    <string name="fullName" namecolumn="true" search="firstName,middleName,lastName"> 
+	    <![CDATA[
+		    if (firstName == null && middleName == null && lastName == null) {
+		        return null;
+		    }
+		        return firstName + " " + middleName + " " + lastName;
+	    ]]></string>
+
+    <date name="orderDate" />
+	<time name="orderTime" />
+	
+	
+    <string name="email" required="true" unique="true" max="100" />
+    <string name="phone" max="20" massUpdate="true" />
+    <string name="notes" title="About Order" large="true" />
+
+    <one-to-many name="orderaddresses" ref="OrderAddress" mappedBy="orderdetails" /> 
+
+    <finder-method name="findByName" using="fullName" /> 
+    <finder-method name="findByEmail" using="email" />
+    
+    <entity-listener class="com.axelor.orderdetails.db.repo.ContactListener"/>
+  </entity>
+</domain-models>

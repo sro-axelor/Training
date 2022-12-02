@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+<!-- all items -->
+<!-- Mobiles -->
+  <menuitem name="AllMobiles" title="Mobiles" icon="fas fa-mobile" icon-background="pink" />
+  
+<!--   <menuitem name="menu-orderdetails-friends" parent="OrderDetails-menu" title="All Order Details" icon="fa-duotone fa-cart-plus" icon-background="blue" action="orderdetails.all"/> 
+  
+   <action-view name="AllMobiles.all" title="OrderDetails" model="com.axelor.orderdetails.db.OrderDetails"> 
+     <view type="grid" name="orderdetails-grid"/> 
+     <view type="form" name="orderdetails-form"/> 
+   </action-view>  -->
+
+
+<!-- Fashion -->  
+  <menuitem name="AllDress" title="Fashion" icon-background="yellow" />
+
+
+  
+<!-- Appliances -->
+  <menuitem name="AllAppliances" title="Appliances" icon-background="violet" />
+
+
+
+  
+<!-- My Order -->
+<menuitem name="OrderDetails-menu" title="MY Order" icon="fas fa-shopping-cart" icon-background="green" /> 
+
+  <menuitem name="menu-orderdetails-friends" parent="OrderDetails-menu" title="All Order Details" icon="fa-duotone fa-cart-plus" icon-background="blue" action="orderdetails.all"/>   
+
+  <action-view name="orderdetails.all" title="OrderDetails" model="com.axelor.orderdetails.db.OrderDetails"> 
+     <view type="grid" name="orderdetails-grid"/> 
+     <view type="form" name="orderdetails-form"/> 
+  </action-view>
+
+</object-views>
