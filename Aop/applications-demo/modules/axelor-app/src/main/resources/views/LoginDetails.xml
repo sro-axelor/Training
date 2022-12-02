@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+  <grid name="logindetails-grid" title="Login Details" model="com.axelor.app.db.LoginDetails"> 
+    <field name="fullName" />
+    <field name="email" />
+    <field name="phone" />
+    <field name="orderDate" />
+  	<field name="orderTime" />  
+  	<field name="seq" title="Entery Id"/>
+  </grid>
+  
+  
+<!-- main form -->  
+<form name="logindetails-form"  title="Login Details"  model="com.axelor.app.db.LoginDetails" width="large" > 
+   
+<!-- Name panel -->            
+	    <panel name="overviewPanel" title="Overview">
+
+<!-- binary photo -->
+	    <field name="photo"/> 
+	    
+<!-- entery-logindetails -->
+		    <field name="seq" title="Entery Id"/>
+	
+<!-- name feild -->		         
+	      <field name="fullName" readonly="false" colSpan="8">
+	        <editor> 
+	          <field name="firstName" colSpan="4"/>
+	          <field name="middleName" colSpan="4"/>
+	          <field name="lastName" colSpan="4"/>
+	        </editor>
+	      </field>
+
+<!-- order Date and time -->   
+       <field name="loginDate" colSpan="2"/>
+ 	   <field name="loginTime" widget="time" colSpan="2"/>  
+ 
+     
+<!-- email field -->   
+      <field name="email">
+        <viewer><![CDATA[ 
+        <a href="mailto:{{record.email}}">{{record.email}}</a>
+        ]]></viewer>
+      </field>
+      
+      
+<!-- phone field -->   
+      <field name="phone">
+        <viewer><![CDATA[
+        <a href="tel:{{record.phone}}">{{record.phone}}</a>
+        ]]></viewer>
+      </field>
+ 
+<!-- enum feild -->     
+       <field name="gender" />
+   
+<!-- boolean -->    
+       <field name="active" title="Term And Condition" />
+       
+    </panel>    
+    
+    
+<!-- order addresses Panel -->
+	    <panel-related name="personaddressesPanel" title="Person Address" field="personaddresses" form-view="personaddress-form-popup"> 
+	        <field name="street"/>
+	        <field name="area"/>
+	        <field name="city"/>
+	        <field name="state"/>
+	        <field name="zip"/>
+	        <field name="country"/>
+	    </panel-related>
+ 
+ 
+ <!-- about Order Panel -->    
+    <panel name="reviewPanel" title="Review">
+        <field name="notes" showTitle="false" colSpan="12"/>
+    </panel>
+    
+    
+<!-- details Panel --> 
+      <panel name="detailsPanel" > 
+	      <field name="createdOn"/>
+	      <field name="createdBy"/>
+	      <field name="updatedOn"/>
+	      <field name="updatedBy"/>  
+	    </panel>
+    
+    
+<!-- side Panel -->   
+	     <!-- <panel name="sidePanel" sidebar="true"> 
+	      <field name="createdOn"/>
+	      <field name="createdBy"/>
+	      <field name="updatedOn"/>
+	      <field name="updatedBy"/>  
+	    </panel> -->
+</form>
+
+
+<!-- order address form -->
+	  <form name="personaddress-form-popup"  title="PersonAddress"  model="com.axelor.app.db.PersonAddress">
+	    <panel title="Overview">
+	      <field name="street" />
+	      <field name="area" />
+	      <field name="city" />
+	      <field name="zip" />
+	      <field name="state" />
+	      <field name="country" />
+	    </panel>
+      </form>
+
+</object-views>
