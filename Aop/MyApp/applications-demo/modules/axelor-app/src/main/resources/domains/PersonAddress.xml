@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models 
+  https://axelor.com/xml/ns/domain-models/domain-models_5.4.xsd">
+
+<!-- module -->
+  <module name="app" package="com.axelor.app.db" />
+
+
+<!-- entity class -->
+<entity name="PersonAddress" >
+    <string name="street" required="true" max="255" />
+    <string name="area" max="255" />
+    <string name="city" />
+    <string name="zip" />
+    <string name="state" />
+    <string name="country" />
+
+
+<!-- connect with logindetails -->  
+    <many-to-one name="hello" ref="LoginDetails" required="true" />
+    
+<!-- connect with myorder -->
+    <one-to-one name="paddress" ref="MyOrder" />
+
+</entity>
+
+</domain-models>
