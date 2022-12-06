@@ -6,20 +6,19 @@
 
 
 <!-- grid view -->
-  <grid name="logindetails-grid" title="Login Details" model="com.axelor.app.db.LoginDetails"> 
+  <grid name="logindetails-grid" title="Login Details" model="com.axelor.app.db.LoginDetails"  editable="false"  x-no-fetch="false"  x-selector="checkbox"  canArchive="false"> 
     <field name="fullName" />
     <field name="email" />
     <field name="phone" />
-    <field name="orderDate" />
-  	<field name="orderTime" />  
   	<field name="seq" title="Entery Id"/>
   </grid>
   
   
 <!-- main form -->  
-<form name="logindetails-form"  title="Login Details"  model="com.axelor.app.db.LoginDetails" width="large" > 
+<form name="logindetails-form"  title="Login Details"  model="com.axelor.app.db.LoginDetails"  width="large"  canSave="false"> 
    
-<!-- Name panel -->            
+<!-- Name panel -->     
+<panel-tabs>       
 	    <panel name="overviewPanel" title="Overview">
 
 <!-- binary photo -->
@@ -40,8 +39,8 @@
 <!-- order Date and time -->   
        <field name="loginDate" colSpan="2"/>
  	   <field name="loginTime" widget="time" colSpan="2"/>  
- 
-     
+
+
 <!-- email field -->   
       <field name="email">
         <viewer><![CDATA[ 
@@ -63,9 +62,9 @@
 <!-- boolean -->    
        <field name="active" title="Term And Condition" />
        
-    </panel>    
+ </panel>    
     
-    
+ 
 <!-- order addresses Panel -->
 	    <panel-related name="personaddressesPanel" title="Person Address" field="personaddresses" form-view="personaddress-form-popup" editable="true" canMove="true" height="4" x-selector="checkbox" > 
 	        <field name="street"/>
@@ -78,13 +77,48 @@
  
  
  <!-- about Order Panel -->    
-    <panel name="reviewPanel" title="Review">
-        <field name="notes" showTitle="false" colSpan="12" edit-window="popup"	/>
+    <panel name="reviewPanel" title="About You">
+        <field name="notes" title="About You"  colSpan="12" edit-window="popup"	/>
     </panel>
-    
+ 
+ 
+<!-- field editor -->
+<panel title="Custom">
+<!-- 	  <field name="fullName"> -->
+<!-- 		  <editor> -->
+<!-- 		    <field name="firstName" /> -->
+<!-- 		    <field name="middleName" /> -->
+<!-- 		    <field name="lastName" /> -->
+<!-- 		  </editor> -->
+<!-- 	  </field> -->
+
+<!-- editor for a many-to-one field -->
+	<field name="fullName">
+		  <editor x-viewer="true">
+		     <field name="firstName" />
+		     <field name="middleName" />
+		     <field name="lastName" />
+		     <field name="email" />
+		  </editor>
+	</field>
+
+		<!-- editor for a one-to-many field -->
+	  <field name="emails" showTitle="false">
+		 <editor layout="panel" onNew="compute-default-email">
+		    <field name="email" colSpan="12"/>
+		    <field name="primary" widget="toggle" x-icon="fa-star-o" x-icon-active="fa-star" x-exclusive="true" />
+		    <field name="Output" widget="toggle" x-icon="fa-ban" />
+		    <field name="invalid" widget="toggle" x-icon="fa-exclamation-circle" />
+		 </editor>
+	  </field>
+</panel>
+ 
+ 
+ 
+   
     
 <!-- details Panel --> 
-      <panel name="detailsPanel" > 
+      <panel name="detailsPanel" title="Details Panel"> 
 	      <field name="createdOn"/>
 	      <field name="createdBy"/>
 	      <field name="updatedOn"/>
@@ -93,40 +127,56 @@
     
     
 <!-- side Panel -->   
-	     <!-- <panel name="sidePanel" sidebar="true"> 
-	      <field name="createdOn"/>
-	      <field name="createdBy"/>
-	      <field name="updatedOn"/>
-	      <field name="updatedBy"/>  
-	    </panel> -->
+<!-- 	    <panel name="sidePanel" sidebar="true">  -->
+<!-- 	      <field name="createdOn"/> -->
+<!-- 	      <field name="createdBy"/> -->
+<!-- 	      <field name="updatedOn"/> -->
+<!-- 	      <field name="updatedBy"/>   -->
+<!-- 	    </panel> -->
 
 
-<!-- panel tabs -->
-<panel-tabs>
+  </panel-tabs>
+ 
+ 
+    
+<!-- paneltabs -->
+
+<!-- <panel-tabs> -->
   <!-- <panel-related field="relate" title="HELLO"/> -->
   
-  <panel title="Panel1">
-     <field name="notes" />
-  </panel>
+<!--   <panel title="Panel1"> -->
+<!--      <field name="notes" /> -->
+<!--   </panel> -->
   
-  <panel title="Panel2">
-     <field name="Name"/>
-  </panel>
+<!--   <panel title="Panel2"> -->
+<!--      <field name="Name"/> -->
+<!--   </panel> -->
 
-</panel-tabs>
+<!-- </panel-tabs> -->
 
 
 <!-- panelstack -->
-<panel-stack >
-  <panel title="Page 1"/>
-  <panel title="Page 2" />
-</panel-stack>
+
+<!-- <panel-stack > -->
+<!--   <panel title="Page 1"/> -->
+<!--   <panel title="Page 2" /> -->
+<!-- </panel-stack> -->
 
 
 <!-- <panel-stack showIf="color"> -->
 <!--   <panel title="Page 1" showIf="color == 'black'"/> -->
 <!--   <panel title="Page 2" showIf="color == 'blue'"/> -->
 <!-- </panel-stack> -->
+
+
+
+
+
+<!-- button -->
+<panel sidebar="true">
+  <button onClick="save" name="Save" title="Save"  prompt="You want's to save Record"/> 
+  <button onClick="delete" name="Delete" title="Delete"  prompt="You want's to deleted Record"/>
+</panel>
 
 
 </form>

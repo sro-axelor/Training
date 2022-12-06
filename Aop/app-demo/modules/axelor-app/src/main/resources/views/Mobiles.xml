@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+
+<!-- grid view -->
+<grid name="mobiles-grid" title="Mobiles" model="com.axelor.app.db.Mobiles" edit-icon="false" customSearch="false" x-selector="checkbox" freeSearch="true" x-no-fetch="true"> 
+  <field name="name"/> 
+  <field name="brand"/>  	
+  <field name="model"/>  	
+  <field name="color"/>  
+  <field name="price"/>  
+</grid>
+
+
+<!-- form view -->
+<form name="mobiles-form" title="Mobiles" model="com.axelor.app.db.Mobiles">
+
+
+<panel>
+   <field name="name"/>
+   <field name="brand"/>
+   
+<!-- <separator colSpan="12"/> -->
+<!-- <spacer colSpan="12"/>  -->
+<!-- <label/> -->
+
+<!-- <static name="sta" title="static text" >
+<![CDATA[
+        this is static field
+        ]]>
+</static> -->
+
+   <field name="model"/>
+   <field name="color"/>
+   <field name="price"/>
+   
+</panel>
+
+
+<!-- panel dashlet -->
+<panel-dashlet action="mobiles.all"/>
+
+
+<!-- save button -->
+<panel>
+	 <button onClick="save" name="Save" title="Add Mobiles" /> 
+</panel>
+
+</form>
+
+
+</object-views>

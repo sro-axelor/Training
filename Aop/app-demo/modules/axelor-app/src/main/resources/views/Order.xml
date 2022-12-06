@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+
+<!-- grid view -->
+<grid name="order-grid" title="Order" model="com.axelor.app.db.Order" > 
+
+  <field name="orderSeq" title="Order Id"/>
+  
+ <!--  <field name="orderName"/> -->
+<!-- <field name="orderId"/> -->  	
+</grid>
+
+
+<!-- form view -->
+<form name="order-form" title="Order" model="com.axelor.app.db.Order">
+
+
+<!-- panel include -->
+<!--  <panel title="extrapanel"> -->
+<!-- <panel-include view="logindetails-form"/>  -->
+<!-- </panel>  -->
+
+
+
+<panel>
+   <field name="orderSeq" title="Order Id" readonly="true"/>
+
+
+<!--    <field name="orderName"/> -->
+<!--    <field name="orderId"/> -->
+<!--    <field name="loginlist" colSpan="12"/>  -->
+
+<!-- panel include -->
+<!-- <panel-include view="logindetails-form"/>  -->
+</panel>
+
+
+<!-- panelrelated -->
+ <panel-related field="loginlist"/>
+ 
+ <panel-related field="mobileslist"/>
+
+
+<!-- button / button-group -->
+<panel sidebar="true">
+
+<!-- <button-group> -->
+<!--  <button onClick="save" name="Save" title="Place Order"  /> -->
+<!--   <button onClick="delete" name="Delete" title="Discard" />  -->
+<!-- </button-group> -->
+
+ <button onClick="save" name="Save" title="Place Order"  />
+<button onClick="delete" name="Delete" title="Discard" />
+</panel>
+
+
+</form>
+
+
+
+</object-views>

@@ -20,8 +20,12 @@
 
     <string name="fullName" namecolumn="true" search="firstName,middleName,lastName"> 
 	    <![CDATA[
-		    if (firstName == null && lastName == null) {
+		    if (firstName == null &&  middleName == null && lastName == null) {
 		        return null;
+		    }
+		    if (middleName == null)
+		    {
+		        return firstName + " " + lastName;
 		    }
 		        return firstName + " " + middleName + " " + lastName;
 	    ]]></string>
