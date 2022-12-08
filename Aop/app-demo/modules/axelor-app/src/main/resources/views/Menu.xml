@@ -4,7 +4,7 @@
   xsi:schemaLocation="http://axelor.com/xml/ns/object-views
   http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
 
-<!-- all menus -->
+
 <!-- My Order menu -->
 <menuitem name="MyOrder-menu" title="My Order" icon="fas fa-shopping-cart" icon-background="pink" />
  
@@ -16,15 +16,46 @@
     </action-view>
 
   
-<!-- Mobiles menu -->
-<menuitem name="AllMobiles-menu" title="Mobiles" icon="fas fa-mobile" icon-background="violet" />
   
-  <menuitem name="menu-allmobiles-friends" title="Select Mobile" parent="AllMobiles-menu" icon="fas fa-mobile" icon-background="orange" action="mobiles.all"/>
+  
+<!-- Mobiles parent-menu -->
+<menuitem name="AllMobiles-menu" title="Mobiles" icon="fas fa-mobile" icon-background="violet" />
+
+  <menuitem name="Allmobiles-parent-menu" title="Select Mobile" parent="AllMobiles-menu" icon="fas fa-mobile" icon-background="orange" action="mobiles.all"/>
 
     <action-view name="mobiles.all" title="All Mobiles" model="com.axelor.app.db.Mobiles">
 	   <view type="grid" name="mobiles-grid"/>
        <view type="form" name="mobiles-form"/>
 	</action-view>
+	
+<!-- SmartPhones child-menu -->  
+	
+  <menuitem name="Allsmartphones-child-menu" title="Select SmartPhones" parent="AllMobiles-menu" icon="fas fa-mobile" icon-background="blue" action="smartphones.all"/>
+
+       <action-view name="smartphones.all" title="All SmartPhones" model="com.axelor.app.db.SmartPhones">
+	      <view type="grid" name="smartphones-grid"/>
+          <view type="form" name="smartphones-form"/>
+	   </action-view>
+	   
+<!-- AndroidPhones grandchild-menu -->  
+    <menuitem name="Allandroidphones-grandchild-menu" title="Select AndroidPhones" parent="AllMobiles-menu" icon="fas fa-mobile" icon-background="pink" action="androidphones.all"/>
+	
+	   <action-view name="androidphones.all" title="All AndroidPhones" model="com.axelor.app.db.AndroidPhones">
+	      <view type="grid" name="androidphones-grid"/>
+          <view type="form" name="androidphones-form"/>
+	   </action-view>
+
+
+
+
+<!-- view menu -->
+<menuitem name="TreeView-menu" title="TreeView" parent="AllMobiles-menu" action="treeview.all"/>
+	
+	   <action-view name="treeview.all" title="All TreeView">
+          <view type="tree" name="All-Mobiles-Tree"/>
+	   </action-view>
+
+
 
 
 <!-- login menu -->
@@ -36,5 +67,6 @@
        <view type="grid" name="logindetails-grid"/> 
        <view type="form" name="logindetails-form"/> 
     </action-view>
+    
 
 </object-views>

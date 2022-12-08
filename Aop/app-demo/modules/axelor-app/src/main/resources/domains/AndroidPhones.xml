@@ -8,19 +8,15 @@
 
 
 <!-- entity -->
-<entity name="Mobiles" cacheable="true">
+<entity name="AndroidPhones" cacheable="true">
 	<string name="name" required="true"/>
 <!-- 	<string name="color"/> -->
 	<decimal name="price" required="true"/>
 	
-	
 <!-- relations -->
+<many-to-one  name="sphone" ref="SmartPhones"/>
 
-    <one-to-many  name="sphone" ref="SmartPhones" mappedBy="mob"/> 
-		
-<!-- 	<many-to-one name="orderlist" ref="Order" />  -->
-
-	<many-to-many name="orderlist" ref="Order"/>
+<!-- <many-to-one  name="mobileslist" ref="Mobiles"/> -->
 </entity>
 
 

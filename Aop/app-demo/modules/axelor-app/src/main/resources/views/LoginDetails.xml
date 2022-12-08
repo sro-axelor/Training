@@ -6,11 +6,13 @@
 
 
 <!-- grid view -->
-  <grid name="logindetails-grid" title="Login Details" model="com.axelor.app.db.LoginDetails"  editable="false"  x-no-fetch="false"  x-selector="checkbox"  canArchive="false"> 
+  <grid name="logindetails-grid" title="Login Details" model="com.axelor.app.db.LoginDetails"  editable="false"  x-no-fetch="false"  x-selector="checkbox"  canArchive="true" canEdit="true" orderBy="seq" groupBy="gender">  
+	<hilite background="green" if="$contains(email, 'gmail.com')"/> 
     <field name="fullName" />
     <field name="email" />
     <field name="phone" />
   	<field name="seq" title="Entery Id"/>
+  	<field name="gender"/>
   </grid>
   
   
@@ -20,6 +22,12 @@
 <!-- Name panel -->     
 <panel-tabs>       
 	    <panel name="overviewPanel" title="Overview">
+
+
+<!-- menu it is not working i have to check it again -->
+		<menu>
+		   <item action="order.all" title="Order menu"/>
+		</menu>
 
 <!-- binary photo -->
 	    <field name="photo"/> 
@@ -63,7 +71,7 @@
        <field name="active" title="Term And Condition" />
        
  </panel>    
-    
+     
  
 <!-- order addresses Panel -->
 	    <panel-related name="personaddressesPanel" title="Person Address" field="personaddresses" form-view="personaddress-form-popup" editable="true" canMove="true" height="4" x-selector="checkbox" > 
@@ -77,7 +85,7 @@
  
  
  <!-- about Order Panel -->    
-    <panel name="reviewPanel" title="About You">
+    <panel name="reviewPanel" title="About You" >
         <field name="notes" title="About You"  colSpan="12" edit-window="popup"	/>
     </panel>
  
@@ -92,7 +100,7 @@
 <!-- 		  </editor> -->
 <!-- 	  </field> -->
 
-<!-- editor for a many-to-one field -->
+  <!-- editor for a many-to-one field -->
 	<field name="fullName">
 		  <editor x-viewer="true">
 		     <field name="firstName" />
@@ -135,6 +143,18 @@
 <!-- 	    </panel> -->
 
 
+<!-- Field tooltip -->
+<panel title="Person FullName"> 
+<field name="customer" title="Customer Name">
+  <tooltip depends="fullName">
+  <![CDATA[
+  <strong>Name: </strong><span>{{record.fullName}}</span>
+  ]]>
+  </tooltip>
+</field>
+</panel>    
+   
+   
   </panel-tabs>
  
  
@@ -174,8 +194,8 @@
 
 <!-- button -->
 <panel sidebar="true">
-  <button onClick="save" name="Save" title="Save"  prompt="You want's to save Record"/> 
-  <button onClick="delete" name="Delete" title="Delete"  prompt="You want's to deleted Record"/>
+  <button onClick="save" name="Save" title="Save"  prompt="You want's to save Record" css="btn-success"/> 
+  <button onClick="delete" name="Delete" title="Delete"  prompt="You want's to deleted Record" css="btn-danger"/>
 </panel>
 
 

@@ -7,18 +7,31 @@
 
 
 <!-- grid view -->
-<grid name="order-grid" title="Order" model="com.axelor.app.db.Order" > 
+<grid name="order-grid" title="Order" model="com.axelor.app.db.Order" orderBy="orderSeq" edit-icon="false" customSearch="false" x-selector="checkbox" freeSearch="none" x-no-fetch="false" > 
 
-  <field name="orderSeq" title="Order Id"/>
-  
- <!--  <field name="orderName"/> -->
-<!-- <field name="orderId"/> -->  	
+		<toolbar>
+		  <button name="btnPrint" icon="fa-print" title="Print" onClick="act1"/>
+		  <button name="btnExport" icon="fa-rocket" title="Export" onClick="act2"/>
+		</toolbar>
+
+		<menubar>
+		  <menu title="Actions" icon="img/address-book.png" showTitle="false">
+		    <item title="Send Greetings" action="act1" />
+		    <item title="Home Page" action="act2"/>
+		    <divider/>
+		    <item title="Test" action="act3"/>
+		  </menu>
+		</menubar>
+
+
+      <field name="orderSeq" title="Order Id"/>
+ <!-- <field name="orderName"/> -->
+ <!-- <field name="orderId"/> -->  	
 </grid>
 
 
 <!-- form view -->
 <form name="order-form" title="Order" model="com.axelor.app.db.Order">
-
 
 <!-- panel include -->
 <!--  <panel title="extrapanel"> -->
@@ -26,24 +39,33 @@
 <!-- </panel>  -->
 
 
-
 <panel>
    <field name="orderSeq" title="Order Id" readonly="true"/>
-
-
-<!--    <field name="orderName"/> -->
-<!--    <field name="orderId"/> -->
-<!--    <field name="loginlist" colSpan="12"/>  -->
+  <!--    <field name="orderName"/> -->
+  <!--    <field name="orderId"/> -->
+  <!--    <field name="loginlist" colSpan="12"/>  -->
 
 <!-- panel include -->
-<!-- <panel-include view="logindetails-form"/>  -->
+     <!-- <panel-include view="logindetails-form"/>  -->
 </panel>
 
 
 <!-- panelrelated -->
- <panel-related field="loginlist"/>
- 
- <panel-related field="mobileslist"/>
+   <panel-related field="loginlist"/>
+   <panel-related field="mobileslist"/>
+
+
+<!-- dummy field -->
+<panel>
+<field name="dummyfield" title="Dummy Field"/>
+
+<!-- integer field, prefixed with $ to avoid dirty flag -->
+<field name="dummyfield" title="Find the saved record" type="integer" min="1" max="100" />
+
+<!-- relational fields -->
+<field name="dummyfield" type="many-to-many"  x-target="com.axelor.app.db.Mobiles"  x-target-name="mobileslist"  colSpan="12"/>
+
+</panel>
 
 
 <!-- button / button-group -->
@@ -54,13 +76,12 @@
 <!--   <button onClick="delete" name="Delete" title="Discard" />  -->
 <!-- </button-group> -->
 
- <button onClick="save" name="Save" title="Place Order"  />
-<button onClick="delete" name="Delete" title="Discard" />
+ <button onClick="save" name="Save" title="Place Order" css="btn-success" />
+ <button onClick="delete" name="Delete" title="Discard" css="btn-info"/>
 </panel>
 
 
 </form>
-
 
 
 </object-views>
