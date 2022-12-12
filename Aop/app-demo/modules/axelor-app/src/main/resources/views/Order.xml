@@ -5,33 +5,19 @@
   xsi:schemaLocation="http://axelor.com/xml/ns/object-views
   http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
 
-
 <!-- grid view -->
-<grid name="order-grid" title="Order" model="com.axelor.app.db.Order" orderBy="orderSeq" edit-icon="false" customSearch="false" x-selector="checkbox" freeSearch="none" x-no-fetch="false" > 
-
-		<toolbar>
-		  <button name="btnPrint" icon="fa-print" title="Print" onClick="act1"/>
-		  <button name="btnExport" icon="fa-rocket" title="Export" onClick="act2"/>
-		</toolbar>
-
-		<menubar>
-		  <menu title="Actions" icon="img/address-book.png" showTitle="false">
-		    <item title="Send Greetings" action="act1" />
-		    <item title="Home Page" action="act2"/>
-		    <divider/>
-		    <item title="Test" action="act3"/>
-		  </menu>
-		</menubar>
-
-
-      <field name="orderSeq" title="Order Id"/>
- <!-- <field name="orderName"/> -->
- <!-- <field name="orderId"/> -->  	
+<grid name="order-grid" title="Order" model="com.axelor.app.db.Order" orderBy="orderId" edit-icon="false" customSearch="false" x-selector="checkbox" freeSearch="none" x-no-fetch="false" >
+<!--       <field name="orderSeq" title="Order Id"/> -->
+ 	  <field name="orderId"/>
+ 	  <field name="orderName"/>
+ 	  <field name="orderDate"/>
+ 	  <field name="orderStatus" />
+      <field name="orderQuantity" />
 </grid>
 
 
 <!-- form view -->
-<form name="order-form" title="Order" model="com.axelor.app.db.Order">
+<form name="order-form" title="Order" model="com.axelor.app.db.Order" canSave="false" canDelete="false">
 
 <!-- panel include -->
 <!--  <panel title="extrapanel"> -->
@@ -40,8 +26,14 @@
 
 
 <panel>
-   <field name="orderSeq" title="Order Id" readonly="true"/>
-  <!--    <field name="orderName"/> -->
+<!--    <field name="orderSeq" title="Order Id" readonly="true"/> -->
+      <field name="orderId"/>
+      <field name="orderName"/>
+      <field name="orderDate"/>
+ 	  <field name="orderStatus" selection="order.list"/>
+      <field name="orderQuantity" selection="order.quantity"/>
+     
+     
   <!--    <field name="orderId"/> -->
   <!--    <field name="loginlist" colSpan="12"/>  -->
 
@@ -56,32 +48,51 @@
 
 
 <!-- dummy field -->
-<panel>
-<field name="dummyfield" title="Dummy Field"/>
+<!-- <panel> -->
+<!-- <field name="dummyfield" title="Dummy Field"/> -->
 
 <!-- integer field, prefixed with $ to avoid dirty flag -->
-<field name="dummyfield" title="Find the saved record" type="integer" min="1" max="100" />
+<!-- <field name="dummyfield" title="Find the saved record" type="integer" min="1" max="100" /> -->
 
 <!-- relational fields -->
-<field name="dummyfield" type="many-to-many"  x-target="com.axelor.app.db.Mobiles"  x-target-name="mobileslist"  colSpan="12"/>
+<!-- <field name="dummyfield" type="many-to-many"  x-target="com.axelor.app.db.Mobiles"  x-target-name="mobileslist"  colSpan="12"/> -->
 
-</panel>
+<!-- </panel> -->
 
 
 <!-- button / button-group -->
 <panel sidebar="true">
 
 <!-- <button-group> -->
-<!--  <button onClick="save" name="Save" title="Place Order"  /> -->
+<!--   <button onClick="save" name="Save" title="Place Order" /> -->
 <!--   <button onClick="delete" name="Delete" title="Discard" />  -->
 <!-- </button-group> -->
 
- <button onClick="save" name="Save" title="Place Order" css="btn-success" />
- <button onClick="delete" name="Delete" title="Discard" css="btn-info"/>
-</panel>
-
+  <button onClick="save" name="Save" title="Place Order" css="btn-success" />
+  <button onClick="delete" name="Delete" title="Discard" css="btn-info"/>
+ </panel>
 
 </form>
 
+<!-- selection -->
+<selection name="order.list">
+	<option value="draft" color="red" >DRAFT</option>
+	<option value="wishlist" color="pink" >WISHLIST</option>
+	<option value="ordered" color="blue" >ORDERED</option>
+	<option value="canceled" color="green" >CANCELED</option>
+</selection>
+
+
+<selection name="order.quantity">
+    <option value="0">0</option>
+    <option value="1">1</option>
+	<option value="2">2</option>
+	<option value="3">3</option>
+	<option value="4">4</option>
+	<option value="5">5</option>
+	<option value="6">6</option>
+	<option value="7">7</option>
+	<option value="8">8</option>
+</selection>
 
 </object-views>

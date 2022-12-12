@@ -14,9 +14,15 @@
 
 <!-- grid view -->
 <grid name="mobiles-grid" title="Mobiles" model="com.axelor.app.db.Mobiles" > 
+
+    <toolbar>
+  		<button name="treeView" icon="fa-tree" title="TreeView" onClick="treeview.all" css="btn-success" />
+	</toolbar>
+
   <field name="name"/> 
 <!--   <field name="color"/>   -->
   <field name="price"/>  
+
 </grid>
 
 
@@ -65,7 +71,7 @@
 <!--    <field name="color"/>   -->
    <field name="price"/>
    
-   <field name="sphone"/>
+   <field name="sphone" colSpan="12"/>
    
 </panel>
 

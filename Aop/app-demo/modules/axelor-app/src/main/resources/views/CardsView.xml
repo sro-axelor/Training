@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+  
+ <cards name="login-cards" title="Login Details" model="com.axelor.app.db.LoginDetails" orderBy="seq" width="400px" >
+  <field name="fullName" />
+  <field name="phone" />
+  <field name="email" />
+  <field name="seq" />
+<!--   <field name="address" /> -->
+<!--   <field name="hasImage" /> -->
+  <template>
+	  <![CDATA[
+			  <div class="span4 card-image d-flex">
+			    <img ng-src="{{$image(null, 'photo')}}">
+			    <strong>LoginId : {{seq}}</strong>
+			  </div>
+			  <div class="span8">
+			  <strong>Name : {{fullName}}</strong> <br>
+			  <strong>Email : {{email}}</strong> <br>
+			  <strong>Phone : {{phone}}</strong>
+			  <br>		
+			  <br>
+			  <button type="button" class="btn btn-mini btn-primary" ui-action-click="Delete" >Click button</button>
+			  </div>
+      ]]>
+  </template>
+</cards> 
+  
+  
+</object-views>

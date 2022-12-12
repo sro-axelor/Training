@@ -9,7 +9,7 @@
 
 
 <!-- sequence outside entity -->
-  <sequence name="entery-logindetails.sequence" initial="12" increment="1" padding="10" prefix="SUJIT" />
+  <sequence name="entery-logindetails.sequence" initial="8" increment="1" padding="10" prefix="SUJIT" />
 
 
 <!-- entity class-->

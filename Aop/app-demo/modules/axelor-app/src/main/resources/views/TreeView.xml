@@ -5,32 +5,27 @@
   xsi:schemaLocation="http://axelor.com/xml/ns/object-views
   http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
 
-<tree name="All-Mobiles-Tree" title="All Mobiles Tree">
+<tree name="All-Mobiles-Tree" title="All Mobiles Tree" >
 
-	<column name="treeName" type="string" />
-<!-- 	<column name="treeBrand" type="string" /> -->
-<!-- 	<column name="treeColor" type="string" /> -->
-	<column name="treePrice" type="decimal" />
+	<column name="mobileName" type="string" />
+	<column name="mobilePrice" type="decimal" />
 
 <!-- define 1st level node -->
 	<node model="com.axelor.app.db.Mobiles">
-	    <field name="name" as="treeName"/>
-<!-- 	    <field name="price" as="treePrice"/> -->
+	    <field name="name" as="mobileName"/>
+	    <field name="price" as="mobilePrice"/>
 	</node>
 	
 <!-- define 2nd level node -->
 	<node model="com.axelor.app.db.SmartPhones" parent="mob" draggable="true">
-	    <field name="name" as="treeName"/>
-<!-- 	    <field name="brand" as="treeBrand"/> -->
-	    <field name="price" as="treePrice"/>
+	    <field name="name" as="mobileName"/>
+	    <field name="price" as="mobilePrice"/>
 	</node>	
 	
 <!-- define 3rd level node -->
 	<node model="com.axelor.app.db.AndroidPhones" parent="sphone" draggable="false" onClick="mobiles.all" >
-	    <field name="name" as="treeName"/>
-<!-- 	    <field name="brand" as="treeBrand"/> -->
-<!-- 	    <field name="color" as="treeColor"/> -->
-	    <field name="price" as="treePrice"/>
+	    <field name="name" as="mobileName"/>
+	    <field name="price" as="mobilePrice"/>
 	</node>	
 	
 </tree>

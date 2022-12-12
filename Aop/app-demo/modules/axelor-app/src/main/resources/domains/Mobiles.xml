@@ -18,8 +18,6 @@
 
     <one-to-many  name="sphone" ref="SmartPhones" mappedBy="mob"/> 
 		
-<!-- 	<many-to-one name="orderlist" ref="Order" />  -->
-
 	<many-to-many name="orderlist" ref="Order"/>
 </entity>
 

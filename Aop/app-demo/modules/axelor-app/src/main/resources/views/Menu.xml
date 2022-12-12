@@ -6,15 +6,20 @@
 
 
 <!-- My Order menu -->
-<menuitem name="MyOrder-menu" title="My Order" icon="fas fa-shopping-cart" icon-background="pink" />
+<menuitem name="MyOrder-menu" title="My Order" icon="fas fa-shopping-cart" icon-background="pink" ></menuitem>
  
   <menuitem name="menu-myorder-friends" parent="MyOrder-menu" title="Create Order" icon="fa-duotone fa-cart-plus" icon-background="brown" action="order.all"/>  
  
     <action-view name="order.all" title="All Orders" model="com.axelor.app.db.Order"> 
       <view type="grid" name="order-grid"/> 
       <view type="form" name="order-form"/>
+      <view type="kanban" name="order-kaban" />
     </action-view>
+<!--  <menuitem name="menu-kanban" parent="MyOrder-menu" title="anbans" icon="fa-duotone fa-cart-plus" action="kanban.all"/>   -->
+ 
+<!--     <action-view name="kanban.all" title="kanbans" model="com.axelor.app.db.Order">  -->
 
+<!--     </action-view> -->
   
   
   
@@ -48,14 +53,34 @@
 
 
 
-<!-- view menu -->
-<menuitem name="TreeView-menu" title="TreeView" parent="AllMobiles-menu" action="treeview.all"/>
+<!-- tree view menu -->
+<!-- <menuitem name="TreeView-menu" title="TreeView" parent="AllMobiles-menu" action="treeview.all"/> -->
 	
 	   <action-view name="treeview.all" title="All TreeView">
           <view type="tree" name="All-Mobiles-Tree"/>
 	   </action-view>
 
 
+<!-- kanban required actions -->
+     <action-view name="onnew.action" title="onnew kanbanAction">
+            <view type="form" name="mobiles-form"/>
+	   </action-view>
+
+
+
+<!-- card menu -->
+<!-- <menuitem name="CardsView-menu" title="CardsView" parent="LoginDetails-menu" action="cardsview.all"/> -->
+	
+<!-- 	   <action-view name="cardsview.all" title="Cards View" model="com.axelor.app.db.LoginDetails"> -->
+<!--           <view type="cards" name="login-cards" /> -->
+<!-- 	   </action-view> -->
+
+
+<!-- master-details view -->
+<action-view name="two.login.view" model="com.axelor.app.db.LoginDetails" title="MasterView">
+  <view name="logindetails-grid" type="grid" /> 
+  <view-param name="details-view" value="true" /> 
+</action-view>
 
 
 <!-- login menu -->
@@ -65,8 +90,9 @@
 
     <action-view name="logindetails.all" title="All Login Details" model="com.axelor.app.db.LoginDetails"> 
        <view type="grid" name="logindetails-grid"/> 
-       <view type="form" name="logindetails-form"/> 
+        <view type="form" name="logindetails-form"/>
+       <view type="cards" name="login-cards"/> 
     </action-view>
-    
+
 
 </object-views>

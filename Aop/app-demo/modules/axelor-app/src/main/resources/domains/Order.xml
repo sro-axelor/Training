@@ -8,15 +8,17 @@
 <module name="app" package="com.axelor.app.db" />
 
 <!-- sequence -->
-<sequence name="order-placed.sequence" initial="10" increment="1" padding="10" prefix="ORDERED" />
-
-
+<!-- <sequence name="order-placed.sequence" initial="10" increment="1" padding="10" prefix="ORDERED" /> -->
 
 <entity name="Order" cacheable="true">
 
- <string name="orderSeq" sequence="order-placed.sequence"  readonly="true"/>
+<!--   <string name="orderSeq" sequence="order-placed.sequence"  readonly="true"/> -->
+ <integer name="orderId" min="1" max="1000"/>
+  	<string name="orderName"/>
+  	<date name="orderDate"/>
+  	<string name="orderStatus" selection="order.list"/>
+   <string name="orderQuantity" selection="order.quantity"/>
 
-<!-- <string name="orderName"/> -->
 <!-- <integer name="orderId"/> -->
  
  

@@ -20,7 +20,7 @@
 	  <field name="name"/> 
 <!-- 	  <field name="color"/>   -->
 	  <field name="price"/>
-	  <field name="aphone"/>
+	  <field name="aphone" colSpan="12"/>
 	</panel>
 </form>
 </object-views>

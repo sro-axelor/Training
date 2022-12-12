@@ -7,11 +7,16 @@
 
 <!-- grid view -->
   <grid name="logindetails-grid" title="Login Details" model="com.axelor.app.db.LoginDetails"  editable="false"  x-no-fetch="false"  x-selector="checkbox"  canArchive="true" canEdit="true" orderBy="seq" groupBy="gender">  
+	
+	    <toolbar>
+  		    <button name="masterView" icon="fa-master" title="MasterView" onClick="two.login.view" css="btn-info" />
+		</toolbar>
+	
 	<hilite background="green" if="$contains(email, 'gmail.com')"/> 
     <field name="fullName" />
     <field name="email" />
     <field name="phone" />
-  	<field name="seq" title="Entery Id"/>
+  	<field name="seq" title="Login Id"/>
   	<field name="gender"/>
   </grid>
   
