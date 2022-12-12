@@ -13,11 +13,11 @@
 <entity name="Order" cacheable="true">
 
 <!--   <string name="orderSeq" sequence="order-placed.sequence"  readonly="true"/> -->
- <integer name="orderId" min="1" max="1000"/>
+    <integer name="orderid" min="1" max="1000"/>
   	<string name="orderName"/>
   	<date name="orderDate"/>
   	<string name="orderStatus" selection="order.list"/>
-   <string name="orderQuantity" selection="order.quantity"/>
+    <integer name="orderQuantity" selection="order.quantity"/>
 
 <!-- <integer name="orderId"/> -->
  

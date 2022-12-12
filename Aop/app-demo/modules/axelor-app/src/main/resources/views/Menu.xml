@@ -8,7 +8,7 @@
 <!-- My Order menu -->
 <menuitem name="MyOrder-menu" title="My Order" icon="fas fa-shopping-cart" icon-background="pink" ></menuitem>
  
-  <menuitem name="menu-myorder-friends" parent="MyOrder-menu" title="Create Order" icon="fa-duotone fa-cart-plus" icon-background="brown" action="order.all"/>  
+  <menuitem name="menu-myorder-friends" parent="MyOrder-menu" title="Create Order" icon="fa-duotone fa-cart-plus" icon-background="brown" action="order.all" tag="click here" tag-style="info"/>  
  
     <action-view name="order.all" title="All Orders" model="com.axelor.app.db.Order"> 
       <view type="grid" name="order-grid"/> 
@@ -26,7 +26,7 @@
 <!-- Mobiles parent-menu -->
 <menuitem name="AllMobiles-menu" title="Mobiles" icon="fas fa-mobile" icon-background="violet" />
 
-  <menuitem name="Allmobiles-parent-menu" title="Select Mobile" parent="AllMobiles-menu" icon="fas fa-mobile" icon-background="orange" action="mobiles.all"/>
+  <menuitem name="Allmobiles-parent-menu" title="Select Mobile" parent="AllMobiles-menu" icon="fas fa-mobile" icon-background="orange" action="mobiles.all" tag="click here" tag-style="success"/>
 
     <action-view name="mobiles.all" title="All Mobiles" model="com.axelor.app.db.Mobiles">
 	   <view type="grid" name="mobiles-grid"/>
@@ -35,7 +35,7 @@
 	
 <!-- SmartPhones child-menu -->  
 	
-  <menuitem name="Allsmartphones-child-menu" title="Select SmartPhones" parent="AllMobiles-menu" icon="fas fa-mobile" icon-background="blue" action="smartphones.all"/>
+  <menuitem name="Allsmartphones-child-menu" title="Select SmartPhones" parent="AllMobiles-menu" icon="fas fa-mobile" icon-background="blue" action="smartphones.all" tag="click here" tag-style="default"/>
 
        <action-view name="smartphones.all" title="All SmartPhones" model="com.axelor.app.db.SmartPhones">
 	      <view type="grid" name="smartphones-grid"/>
@@ -43,7 +43,7 @@
 	   </action-view>
 	   
 <!-- AndroidPhones grandchild-menu -->  
-    <menuitem name="Allandroidphones-grandchild-menu" title="Select AndroidPhones" parent="AllMobiles-menu" icon="fas fa-mobile" icon-background="pink" action="androidphones.all"/>
+    <menuitem name="Allandroidphones-grandchild-menu" title="Select AndroidPhones" parent="AllMobiles-menu" icon="fas fa-mobile" icon-background="pink" action="androidphones.all" tag="click here" tag-style="inverse"/>
 	
 	   <action-view name="androidphones.all" title="All AndroidPhones" model="com.axelor.app.db.AndroidPhones">
 	      <view type="grid" name="androidphones-grid"/>
@@ -67,6 +67,12 @@
 	   </action-view>
 
 
+<!-- custom view for dash-board view -->
+     <action-view name="dashborad.action" title="Custom View">
+            <view type="dashboard" name="order-dashboard"/>
+	 </action-view>
+
+
 
 <!-- card menu -->
 <!-- <menuitem name="CardsView-menu" title="CardsView" parent="LoginDetails-menu" action="cardsview.all"/> -->
@@ -86,7 +92,7 @@
 <!-- login menu -->
 <menuitem name="LoginDetails-menu" title="Log in" icon="fa-solid fa-user" icon-background="green" /> 
 
-  <menuitem name="menu-logindetails-friends" parent="LoginDetails-menu" title="Fill Login Details" icon="fas fa-user-plus" icon-background="blue" action="logindetails.all"/>   
+  <menuitem name="menu-logindetails-friends" parent="LoginDetails-menu" title="Fill Login Details" icon="fas fa-user-plus" icon-background="blue" action="logindetails.all" tag="click here" tag-style="important"/>   
 
     <action-view name="logindetails.all" title="All Login Details" model="com.axelor.app.db.LoginDetails"> 
        <view type="grid" name="logindetails-grid"/> 

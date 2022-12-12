@@ -5,8 +5,8 @@
   xsi:schemaLocation="http://axelor.com/xml/ns/object-views
   http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
   
-<kanban columnBy="orderStatus" model="com.axelor.app.db.Order" sequenceBy="orderId" title="Order Kanban" name="order-kaban" width="mid" onNew="onnew.action" limit="5">
-<field name="orderId"/>
+<kanban columnBy="orderStatus" model="com.axelor.app.db.Order" sequenceBy="orderid" title="Order Kanban" name="order-kaban" width="mid" onNew="onnew.action" limit="5">
+<field name="orderid"/>
 <field name="orderName"/>
 <field name="orderDate"/>
 <field name="orderStatus"/>
@@ -21,7 +21,7 @@
   
 <template>
 <![CDATA[
-  <h4>{{orderId}}</h4>
+  <h4>{{orderid}}</h4>
   <h4>{{orderName}}</h4>
   <div class="card-body">{{orderQuantity}}</div>
   <div class="card-footer">

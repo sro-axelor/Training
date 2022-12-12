@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+ 
+ 
+<!-- dashboard for custom view action --> 
+	<dashboard name="order-dashboard" title="Order Dashboard" >
+	     <dashlet action="orderReport.action1"/> 
+	     <dashlet action="orderReport.action2"/> 
+	</dashboard>
+ 
+<!-- actionview of order custom view -->  
+   <action-view name="orderReport.action1" title="Custom View1" >
+      <view type="custom" name="Order-CustomView1"/>
+   </action-view>
+   
+   
+    <action-view name="orderReport.action2" title="Custom View2" >
+      <view type="custom" name="Order-CustomView2"/>      
+   </action-view>
+   
+</object-views>

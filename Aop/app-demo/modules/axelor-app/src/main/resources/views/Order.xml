@@ -6,14 +6,22 @@
   http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
 
 <!-- grid view -->
-<grid name="order-grid" title="Order" model="com.axelor.app.db.Order" orderBy="orderId" edit-icon="false" customSearch="false" x-selector="checkbox" freeSearch="none" x-no-fetch="false" >
+<grid name="order-grid" title="Order" model="com.axelor.app.db.Order" orderBy="orderid" edit-icon="false" customSearch="false" x-selector="checkbox" freeSearch="none" x-no-fetch="false" >
+
+
+<!-- button for custom view -->
+    <toolbar>
+  		<button name="customView" icon="fa-custom" title="Custom View" onClick="dashborad.action" css="btn-danger" />
+	</toolbar>
+
 <!--       <field name="orderSeq" title="Order Id"/> -->
- 	  <field name="orderId"/>
+ 	  <field name="orderid"/>
  	  <field name="orderName"/>
  	  <field name="orderDate"/>
  	  <field name="orderStatus" />
       <field name="orderQuantity" />
 </grid>
+
 
 
 <!-- form view -->
@@ -24,17 +32,15 @@
 <!-- <panel-include view="logindetails-form"/>  -->
 <!-- </panel>  -->
 
-
 <panel>
 <!--    <field name="orderSeq" title="Order Id" readonly="true"/> -->
-      <field name="orderId"/>
+      <field name="orderid"/>
       <field name="orderName"/>
       <field name="orderDate"/>
  	  <field name="orderStatus" selection="order.list"/>
       <field name="orderQuantity" selection="order.quantity"/>
-     
-     
-  <!--    <field name="orderId"/> -->
+         
+  <!--    <field name="orderid"/> -->
   <!--    <field name="loginlist" colSpan="12"/>  -->
 
 <!-- panel include -->
@@ -45,6 +51,7 @@
 <!-- panelrelated -->
    <panel-related field="loginlist"/>
    <panel-related field="mobileslist"/>
+
 
 
 <!-- dummy field -->
@@ -60,6 +67,8 @@
 <!-- </panel> -->
 
 
+
+
 <!-- button / button-group -->
 <panel sidebar="true">
 
@@ -73,6 +82,9 @@
  </panel>
 
 </form>
+
+
+
 
 <!-- selection -->
 <selection name="order.list">
@@ -94,5 +106,7 @@
 	<option value="7">7</option>
 	<option value="8">8</option>
 </selection>
+
+
 
 </object-views>

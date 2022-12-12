@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+<custom name="Order-CustomView1" title="CustomView1">
+	<dataset type="jpql">
+	  	<![CDATA[
+	  	 select sum(self.orderQuantity) as quantity, self.orderStatus as status, self.orderName as name, self.orderDate as date, self.orderid as id from Order self GROUP BY orderStatus ,orderName, orderDate ,orderid
+	  	]]>
+	</dataset>
+	
+	<template>
+            <![CDATA[
+              <div class="report-data" > 
+                   <small>Total sale</small>
+  				   <div class="report-percent font-bold text-info pull-right">20% <i class="fa fa-level-up"></i></div>
+    			   <div class="report-tags"><span class="label label-important">Monthly</span></div>
+              </div>
+              <report-table data='data' columns='id,name,date,status,quantity' sums='quantity'></report-table>
+            ]]>
+        </template>
+</custom>
+
+
+<custom name="Order-CustomView2" title="CustomView2">
+<dataset type="rpc">com.axelor.order.web.SomeController:SomeMethod</dataset>
+<template>
+	<![CDATA[
+	   <report-box label='lebel tag showing'
+	               value='first.first'
+	               icon='fa-search'
+	               percent='first.percent'
+	               tag='first.tag' tag-css='first.tagcss'
+	               up='first.up'
+	               ></report-box>
+	]]>
+</template>
+</custom>
+</object-views>
