@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+  
+<kanban columnBy="orderStatus" model="com.axelor.app.db.Order" sequenceBy="orderId" title="Order Kanban" name="order-kaban" width="mid" onNew="onnew.action" limit="5">
+<field name="orderId"/>
+<field name="orderName"/>
+<field name="orderDate"/>
+<field name="orderStatus"/>
+<field name="orderQuantity" />
+
+  <hilite color="danger" if="orderQuantity == 0" />
+  <hilite color="warning" if="orderQuantity == 4" />
+  <hilite color="danger" if="orderQuantity >= 5" />
+  <hilite color="success" if="orderQuantity == 1" />
+  <hilite color="success" if="orderQuantity == 2" />
+  <hilite color="info" if="orderQuantity == 3" />
+  
+<template>
+<![CDATA[
+  <h4>{{orderId}}</h4>
+  <h4>{{orderName}}</h4>
+  <div class="card-body">{{orderQuantity}}</div>
+  <div class="card-footer">
+    <i class='fa fa-clock-o'></i> <span>{{orderDate|date:'yyyy-MM-dd HH:mm:ss'}}</span>
+  </div>
+]]></template>
+</kanban>
+
+</object-views>

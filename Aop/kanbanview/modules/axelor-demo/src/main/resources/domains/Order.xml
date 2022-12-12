@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
+  http://axelor.com/xml/ns/domain-models/domain-models_5.4.xsd">
+ 
+<module name="app" package="com.axelor.demo.db" />
+
+
+<entity name="Order" >
+	<integer name="orderId" min="1" max="1000"/>
+  	<string name="orderName"/>
+  	<date name="orderDate"/>
+  	<string name="orderStatus" selection="order.list"/>
+
+</entity>
+
+</domain-models>
