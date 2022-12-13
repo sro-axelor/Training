@@ -16,6 +16,7 @@
     <integer name="orderid" min="1" max="1000"/>
   	<string name="orderName"/>
   	<date name="orderDate"/>
+  	<date name="delhiveryDate"/>
   	<string name="orderStatus" selection="order.list"/>
     <integer name="orderQuantity" selection="order.quantity"/>
 

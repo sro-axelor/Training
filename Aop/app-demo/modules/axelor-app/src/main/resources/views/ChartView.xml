@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+
+<!--pie chart -->
+<chart name="pie.chart" title="pie chart" stacked="false">
+ 
+   <search-fields> 
+     <field type="integer" name="integer" title="ID"/>
+     <field type="button" name="String" title="Click"/>
+  </search-fields>
+  
+    <dataset type="jpql">
+    <![CDATA[
+    SELECT
+    	 self.orderid as id,
+    	 self.orderName as name,
+    	 self.orderDate as date,
+         self.orderQuantity as quantity
+    FROM
+        Order self
+    ]]>
+    </dataset>
+    <category key="name" type="number" title="Order Id" />
+    <series key="quantity" groupBy="id" type="pie" title="Quantity" aggregate="count" scale="2" side="right"/>
+  </chart>
+
+
+
+<!-- bar chart -->
+<chart name="bar.chart" title="bar Chart" >
+  
+    <dataset type="sql">
+    			select orderid as id, sum(order_quantity) as quantity, order_name as name
+				from app_order ao  
+				group by orderid, order_name, order_quantity ;
+    </dataset>
+    
+    <category key="id" type="number" title="Order Id" />
+    <series key="quantity" groupBy="name" type="bar" title="Quantity" aggregate="count" scale="2" side="right"/>
+  </chart>
+  
+  
+  
+  
+<!-- horizantalbar chart --> 
+<chart name="hbar.chart" title="hbar Chart" >
+  
+    <dataset type="jpql">
+    <![CDATA[
+    SELECT
+    	 self.orderid as id,
+    	 self.orderName as name,
+    	 self.orderDate as date,
+         self.orderQuantity as quantity
+    FROM
+        Order self
+    ]]>
+    </dataset>
+    <category key="id" type="number" title="Order Id" />
+    <series key="quantity" groupBy="name" type="hbar" title="Quantity" />
+  </chart>
+  
+  
+  
+ <!-- line chart --> 
+  <chart name="line.chart" title="line Chart" >
+  
+    <dataset type="jpql">
+    <![CDATA[
+    SELECT
+    	 self.orderid as id,
+    	 self.orderName as name,
+         self.orderQuantity as quantity
+    FROM
+        Order self
+    ]]>
+    </dataset>
+    <category key="id" type="number" title="Order Id" />
+    <series key="quantity" groupBy="name" type="line" title="Quantity" />
+  </chart>  
+
+
+  
+  
+   <!-- area chart --> 
+  <chart name="area.chart" title="area Chart" >
+  
+    <dataset type="jpql">
+    <![CDATA[
+    SELECT
+    	 self.orderid as id,
+    	 self.orderName as name,
+         self.orderQuantity as quantity
+    FROM
+        Order self
+    ]]>
+    </dataset>
+    <category key="id" type="number" title="Order Id" />
+    <series key="quantity" groupBy="name" type="area" title="Quantity" />
+  </chart>  
+  
+  
+  
+<!-- donut Chart --> 
+  <chart name="donut.chart" title="donut Chart" >
+  
+    <dataset type="jpql">
+    <![CDATA[
+    SELECT
+    	 self.orderid as id,
+    	 self.orderName as name,
+         self.orderQuantity as quantity
+    FROM
+        Order self
+    ]]>
+    </dataset>
+    <category key="id" type="number" title="Order Id" />
+    <series key="quantity" groupBy="name" type="donut" title="Quantity" />
+  </chart>   
+  
+  
+  
+  
+<!-- radar Chart --> 
+  <chart name="radar.chart" title="radar Chart" >
+  
+    <dataset type="jpql">
+    <![CDATA[
+    SELECT
+    	 self.orderid as id,
+    	 self.orderName as name,
+         self.orderQuantity as quantity
+    FROM
+        Order self
+    ]]>
+    </dataset>
+    <category key="id" type="number" title="Order Id" />
+    <series key="quantity" groupBy="name" type="radar" title="Quantity" />
+  </chart>   
+  
+ 
+ 
+<!-- gauge Chart --> 
+  <chart name="gauge.chart" title="gauge Chart" >
+  
+    <dataset type="jpql">
+    <![CDATA[
+    SELECT
+    	 self.orderid as id,
+    	 self.orderName as name,
+         self.orderQuantity as quantity
+    FROM
+        Order self
+    ]]>
+    </dataset>
+    <category key="id" type="number" title="Order Id" />
+    <series key="quantity" groupBy="name" type="gauge" title="Quantity" />
+  </chart> 
+  
+  
+  
+<!-- scatter Chart --> 
+  <chart name="scatter.chart" title="scatter Chart" >
+  
+    <dataset type="jpql">
+    <![CDATA[
+		    SELECT
+		    	 self.orderid as id,
+		    	 self.orderName as name,
+		         self.orderQuantity as quantity
+		    FROM
+		        Order self
+    ]]>
+    </dataset>
+    
+    <category key="id" type="number" title="Order Id" />
+    <series key="quantity" groupBy="name" type="scatter" title="Quantity" />
+  </chart>  
+  
+   
+   
+<!-- funnel Chart --> 
+  <chart name="funnel.chart" title="funnel Chart" >
+  
+    <dataset type="jpql">
+    <![CDATA[
+    SELECT
+    	 self.orderid as id,
+    	 self.orderName as name,
+         self.orderQuantity as quantity
+    FROM
+        Order self
+    ]]>
+    </dataset>
+    <category key="name" type="number" title="Order Id" />
+    <series key="quantity" groupBy="id" type="funnel" title="Quantity" />
+  </chart>
+  
+  
+  
+<!-- text Chart --> 
+  <chart name="text.chart" title="text Chart" >
+  
+   <dataset type="sql">
+    			select orderid as id, sum(order_quantity) as quantity, order_name as name
+				from app_order ao  
+				group by orderid, order_name, order_quantity ;
+    </dataset>
+    
+    <category key="id" type="number" title="Order Id" />
+    <series key="quantity" groupBy="name" type="text" title="Quantity" />
+  </chart>
+</object-views>
+  

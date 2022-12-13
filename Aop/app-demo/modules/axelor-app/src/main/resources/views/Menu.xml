@@ -14,6 +14,7 @@
       <view type="grid" name="order-grid"/> 
       <view type="form" name="order-form"/>
       <view type="kanban" name="order-kaban" />
+      <view type="calendar" name="calendar-view"/>
     </action-view>
 <!--  <menuitem name="menu-kanban" parent="MyOrder-menu" title="anbans" icon="fa-duotone fa-cart-plus" action="kanban.all"/>   -->
  
@@ -21,7 +22,9 @@
 
 <!--     </action-view> -->
   
-  
+   
+   
+   
   
 <!-- Mobiles parent-menu -->
 <menuitem name="AllMobiles-menu" title="Mobiles" icon="fas fa-mobile" icon-background="violet" />
@@ -61,10 +64,14 @@
 	   </action-view>
 
 
+
+
 <!-- kanban required actions -->
      <action-view name="onnew.action" title="onnew kanbanAction">
             <view type="form" name="mobiles-form"/>
 	   </action-view>
+
+
 
 
 <!-- custom view for dash-board view -->
@@ -72,6 +79,12 @@
             <view type="dashboard" name="order-dashboard"/>
 	 </action-view>
 
+
+
+<!-- chart-view action -->
+     <action-view name="chartview.action" title="Chart View">
+            <view type="dashboard" name="order-dashboard"/>
+	 </action-view>
 
 
 <!-- card menu -->
@@ -82,11 +95,14 @@
 <!-- 	   </action-view> -->
 
 
+
+
 <!-- master-details view -->
 <action-view name="two.login.view" model="com.axelor.app.db.LoginDetails" title="MasterView">
   <view name="logindetails-grid" type="grid" /> 
   <view-param name="details-view" value="true" /> 
 </action-view>
+
 
 
 <!-- login menu -->

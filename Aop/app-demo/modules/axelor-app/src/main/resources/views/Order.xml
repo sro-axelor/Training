@@ -18,6 +18,7 @@
  	  <field name="orderid"/>
  	  <field name="orderName"/>
  	  <field name="orderDate"/>
+ 	  <field name="delhiveryDate"/>
  	  <field name="orderStatus" />
       <field name="orderQuantity" />
 </grid>
@@ -37,6 +38,7 @@
       <field name="orderid"/>
       <field name="orderName"/>
       <field name="orderDate"/>
+      <field name="delhiveryDate"/>
  	  <field name="orderStatus" selection="order.list"/>
       <field name="orderQuantity" selection="order.quantity"/>
          
