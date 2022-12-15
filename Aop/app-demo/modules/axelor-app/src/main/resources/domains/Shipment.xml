@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<domain-models
+	xmlns="http://axelor.com/xml/ns/domain-models"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
+  http://axelor.com/xml/ns/domain-models/domain-models_5.4.xsd">
+
+	<module name="app" package="com.axelor.app.db" />
+
+	<entity name="Shipment" cacheable="true">
+		<integer name="shipmentId" />
+		<string name="shipmentName" />
+		<datetime name="orderDateTime" />
+		<datetime name="deliveryDateTime" />
+		<integer name="progress" />
+
+		<one-to-many name="listorder" ref="Order"
+			mappedBy="shipmentlist" />
+
+		<many-to-many name="shipment" ref="Shipment" />
+
+		<!-- <many-to-many name="transportset" ref="TransportLogistics"/> -->
+
+	</entity>
+
+</domain-models>

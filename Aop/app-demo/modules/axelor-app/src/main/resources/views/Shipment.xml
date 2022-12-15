@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+	<grid name="shipment-grid" title="Shipment"
+		model="com.axelor.app.db.Shipment">
+		<field name="shipmentId" title="Shipment Id" />
+		<field name="shipmentName" />
+		<field name="orderDateTime" />
+		<field name="deliveryDateTime" />
+		<field name="progress" />
+	</grid>
+
+	<form name="shipment-form" title="Shipment"
+		model="com.axelor.app.db.Shipment">
+		<panel>
+			<field name="shipmentId" title="Shipment Id" />
+			<field name="shipmentName" />
+			<field name="orderDateTime" />
+			<field name="deliveryDateTime" />
+			<field name="progress" />
+		</panel>
+		<panel-related field="listorder" />
+		<panel-related field="shipment" />
+	</form>
+
+</object-views>

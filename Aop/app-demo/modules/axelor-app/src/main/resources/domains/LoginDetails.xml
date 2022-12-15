@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
+<domain-models
+	xmlns="http://axelor.com/xml/ns/domain-models"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
   http://axelor.com/xml/ns/domain-models/domain-models_5.4.xsd">
 
-
-  <module name="app" package="com.axelor.app.db"/>
-
+   <module name="app" package="com.axelor.app.db" />
 
 <!-- sequence outside entity -->
-  <sequence name="entery-logindetails.sequence" initial="8" increment="1" padding="10" prefix="SUJIT" />
+	<sequence name="entery-logindetails.sequence" initial="8"
+		increment="1" padding="10" prefix="SUJIT" />
 
+<!-- entity class -->
+	<entity name="LoginDetails" cacheable="true">
+		<string name="firstName" required="true" />
+		<string name="middleName" />
+		<string name="lastName" required="true" />
 
-<!-- entity class-->
-<entity name="LoginDetails" cacheable="true" >
-    <string name="firstName" required="true" /> 
-    <string name="middleName" /> 
-    <string name="lastName"  required="true"/>
-
-    <string name="fullName" namecolumn="true" search="firstName,middleName,lastName"> 
+		<string name="fullName" namecolumn="true"
+			search="firstName,middleName,lastName"> 
 	    <![CDATA[
 		    if (firstName == null &&  middleName == null && lastName == null) {
 		        return null;
@@ -31,52 +31,49 @@
 	    ]]></string>
 
 
-<!-- sequence -->	   
- <string name="seq" sequence="entery-logindetails.sequence"  readonly="true"/>
-	    
-	    
-<!-- enum -->	    
-<enum name="gender" ref="GenderType" />
+<!-- sequence -->
+		<string name="seq" sequence="entery-logindetails.sequence"
+			readonly="true" />
 
+<!-- enum -->
+		<enum name="gender" ref="GenderType" />
 
-<!-- date  -->
-    <date name="loginDate" />
+<!-- date -->
+		<date name="loginDate" />
 
 <!-- time -->
-	<time name="loginTime" />
+		<time name="loginTime" />
 
-<!-- binary picture -->	
-	<binary name="photo" image="true" />
-	
-    <string name="email" encrypted="true"/>
-    <string name="phone" max="20" massUpdate="true" required="true"/>
-    <string name="notes" title="About Order" large="true" />
+<!-- binary picture -->
+		<binary name="photo" image="true" />
 
+		<string name="email" encrypted="true" />
+		<string name="phone" max="20" massUpdate="true" required="true" />
+		<string name="notes" title="About Order" large="true" />
 
 <!-- relations -->
-     <one-to-many name="personaddresses" ref="PersonAddress" mappedBy="hello" /> 
-
-<!-- <one-to-many name="orderlist" ref="Order" mappedBy="loginlist" />  -->
-
-     <many-to-many name="orderlist" ref="Order" /> 
+		<one-to-many name="personaddresses" ref="PersonAddress"
+			mappedBy="hello" />
+<!-- <one-to-many name="orderlist" ref="Order" mappedBy="loginlist" /> -->
+		<many-to-many name="orderlist" ref="Order" />
 
 
 <!-- boolean -->
-<boolean name="active" />
+		<boolean name="active" />
 
-    <finder-method name="findByName" using="fullName" /> 
-    <finder-method name="findByEmail" using="email" />
+		<finder-method name="findByName" using="fullName" />
+		<finder-method name="findByEmail" using="email" />
 
 <!-- extra import -->
-  <extra-imports> 
+		<extra-imports> 
 	    <![CDATA[
  	    import javax.persistence.PostPersist; 
  	    import javax.persistence.PostUpdate;  
 	    	    ]]>  
-  </extra-imports> 
+  </extra-imports>
 
 <!-- extra code -->
-<extra-code>
+		<extra-code>
 		  <![CDATA[
 			@PostPersist
 			public void inserted(LoginDetails ld)
@@ -90,18 +87,19 @@
 	    		System.out.println("Logindetails update --> " +ld);
 	    	}
 	       ]]>
-</extra-code> 
+</extra-code>
 
 
 <!-- entity-listener -->
-    <entity-listener class="com.axelor.app.db.repo.LoginDetailsRepository"/>
+		<entity-listener
+			class="com.axelor.app.db.repo.LoginDetailsRepository" />
 
-  </entity>
-  
-<enum name="GenderType">
-  <item name="MALE" />
-  <item name="FEMALE" />
-  <item name="OTHER" />
-</enum>
+	</entity>
+
+	<enum name="GenderType">
+		<item name="MALE" />
+		<item name="FEMALE" />
+		<item name="OTHER" />
+	</enum>
 
 </domain-models>

@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <object-views xmlns="http://axelor.com/xml/ns/object-views"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
   http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
-  
- <cards name="login-cards" title="Login Details" model="com.axelor.app.db.LoginDetails" orderBy="seq" width="400px" >
-  <field name="fullName" />
-  <field name="phone" />
-  <field name="email" />
-  <field name="seq" />
-<!--   <field name="address" /> -->
-<!--   <field name="hasImage" /> -->
-  <template>
+
+	<cards name="login-cards" title="Login Details"
+		model="com.axelor.app.db.LoginDetails" orderBy="seq" width="400px">
+		<field name="fullName" />
+		<field name="phone" />
+		<field name="email" />
+		<field name="seq" />
+		<!-- <field name="address" /> -->
+		<!-- <field name="hasImage" /> -->
+		<template>
 	  <![CDATA[
 			  <div class="span4 card-image d-flex">
 			    <img ng-src="{{$image(null, 'photo')}}">
@@ -28,7 +29,7 @@
 			  </div>
       ]]>
   </template>
-</cards> 
-  
-  
+	</cards>
+
+
 </object-views>

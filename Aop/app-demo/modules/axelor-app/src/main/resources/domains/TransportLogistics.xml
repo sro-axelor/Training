@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <domain-models
 	xmlns="http://axelor.com/xml/ns/domain-models"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -7,20 +8,11 @@
 
 	<module name="app" package="com.axelor.app.db" />
 
-
-<!-- entity -->
-	<entity name="SmartPhones" cacheable="true">
-		<string name="name" required="true" />
-		<decimal name="price" required="true" />
-
-
-<!-- relations -->
-		<one-to-many name="aphone" ref="AndroidPhones"
-			mappedBy="sphone" />
-
-		<many-to-one name="mob" ref="Mobiles" />
+	<entity name="TransportLogistics" cacheable="true">
+		<string name="transportLogisticsName" />
+		<datetime name="transportStart" />
+		<datetime name="transportEnd" />
 
 	</entity>
-
 
 </domain-models>

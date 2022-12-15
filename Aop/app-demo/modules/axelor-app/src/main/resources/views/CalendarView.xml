@@ -6,8 +6,16 @@
   http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
 
  
-<calendar name="calendar-view"  title="Order Duration"  model="com.axelor.app.db.Order"  colorBy="orderStatus"  eventStart="orderDate"  eventStop="delhiveryDate"  eventLength="5">
-  <field name="orderName" />
+<calendar name="calendar-view"  
+   title="Shipment calender"  
+   model="com.axelor.app.db.Shipment"  
+   colorBy="listorder.orderName"  
+   eventStart="orderDateTime"  
+   eventStop="deliveryDateTime"  
+   eventLength="8" 
+   mode="month">
+   
+  <field name="shipmentName" />
 </calendar>
 
 

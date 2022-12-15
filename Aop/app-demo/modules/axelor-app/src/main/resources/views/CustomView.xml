@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <object-views xmlns="http://axelor.com/xml/ns/object-views"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
   http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
 
-<custom name="Order-CustomView1" title="CustomView1">
-	<dataset type="jpql">
+	<custom name="Order-CustomView1" title="CustomView1">
+		<dataset type="jpql">
 	  	<![CDATA[
 	  	 select sum(self.orderQuantity) as quantity, self.orderStatus as status, self.orderName as name, self.orderDate as date, self.orderid as id from Order self GROUP BY orderStatus ,orderName, orderDate ,orderid
 	  	]]>
 	</dataset>
-	
-	<template>
+
+		<template>
             <![CDATA[
               <div class="report-data" > 
                    <small>Total sale</small>
@@ -22,12 +22,12 @@
               <report-table data='data' columns='id,name,date,status,quantity' sums='quantity'></report-table>
             ]]>
         </template>
-</custom>
+	</custom>
 
 
-<custom name="Order-CustomView2" title="CustomView2">
-<dataset type="rpc">com.axelor.order.web.SomeController:SomeMethod</dataset>
-<template>
+	<custom name="Order-CustomView2" title="CustomView2">
+		<dataset type="rpc">com.axelor.order.web.SomeController:SomeMethod</dataset>
+		<template>
 	<![CDATA[
 	   <report-box label='lebel tag showing'
 	               value='first.first'
@@ -38,5 +38,5 @@
 	               ></report-box>
 	]]>
 </template>
-</custom>
+	</custom>
 </object-views>

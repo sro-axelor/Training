@@ -1,91 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <object-views xmlns="http://axelor.com/xml/ns/object-views"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
   http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
 
 
 <!-- another grid for check id -->
-<!-- <grid name="mobiles-grid" title="Mobiles" model="com.axelor.app.db.Mobiles" id="grid2">  -->
-<!--   <field name="name"/>  -->
-<!--   <field name="brand"/>  	 -->
-<!-- </grid> -->
+	<!-- <grid name="mobiles-grid" title="Mobiles" model="com.axelor.app.db.Mobiles" 
+		id="grid2"> -->
+	<!-- <field name="name"/> -->
+	<!-- <field name="brand"/> -->
+	<!-- </grid> -->
 
 <!-- grid view -->
-<grid name="mobiles-grid" title="Mobiles" model="com.axelor.app.db.Mobiles" > 
+	<grid name="mobiles-grid" title="Mobiles"
+		model="com.axelor.app.db.Mobiles">
 
-    <toolbar>
-  		<button name="treeView" icon="fa-tree" title="TreeView" onClick="treeview.all" css="btn-success" />
-	</toolbar>
+		<toolbar>
+			<button name="treeView" icon="fa-tree" title="TreeView"
+				onClick="treeview.all" css="btn-success" />
+		</toolbar>
 
-  <field name="name"/> 
-<!--   <field name="color"/>   -->
-  <field name="price"/>  
+		<field name="name" />
+		<field name="price" />
 
-</grid>
-
+	</grid>
 
 
-<!-- Advanced search it is not working-->
-	<!-- <search-filters name="filter-mobiles" title="Filter mobiles Orders" model="com.axelor.app.db.Mobiles"> -->
-	
-	  <!-- change title -->
-	<!--   <field name="name" title="Order Ref." /> -->
-	
-	  <!-- include nested field -->
-	<!--   <field name="customer.addresses.city" title="Customer city" /> -->
-	
-	  <!-- include nested field, but only if the condition is true -->
-	<!--   <field name="items.product.name" title="Product Name" if="some condition" /> -->
-	
-	  <!-- hide the field from advanced search -->
-	<!--   <field name="items" hidden="true" /> -->
-	
-	  <!-- optionally -->
-	<!--   <filter title="Confirmed" name="confirmed"> -->
-	<!--     <domain>self.confirmed = true</domain> -->
-	<!--   </filter> -->
-	
+
+<!-- Advanced search it is not working -->
+	<!-- <search-filters name="filter-mobiles" title="Filter mobiles Orders" 
+		model="com.axelor.app.db.Mobiles"> -->
+
+<!-- change title -->
+	<!-- <field name="name" title="Order Ref." /> -->
+
+<!-- include nested field -->
+	<!-- <field name="customer.addresses.city" title="Customer city" /> -->
+
+<!-- include nested field, but only if the condition is true -->
+	<!-- <field name="items.product.name" title="Product Name" if="some condition" 
+		/> -->
+
+<!-- hide the field from advanced search -->
+	<!-- <field name="items" hidden="true" /> -->
+
+<!-- optionally -->
+	<!-- <filter title="Confirmed" name="confirmed"> -->
+	<!-- <domain>self.confirmed = true</domain> -->
+	<!-- </filter> -->
+
 	<!-- </search-filters> -->
 
 
 <!-- form view -->
-<form name="mobiles-form" title="Mobiles" model="com.axelor.app.db.Mobiles">
+	<form name="mobiles-form" title="Mobiles"
+		model="com.axelor.app.db.Mobiles">
 
-<panel>
-   <field name="name"/> 
- 
-<!-- panel widgets -->   
+		<panel>
+			<field name="name" />
 
-<!-- <separator colSpan="12"/> -->
-<!-- <spacer colSpan="12"/>  -->
-<!-- <label/> -->
+<!-- panel widgets -->
+			<!-- <separator colSpan="12"/> -->
+			<!-- <spacer colSpan="12"/> -->
+			<!-- <label/> -->
 
-<!-- <static name="sta" title="static text" >
-<![CDATA[
-        this is static field
-        ]]>
-</static> -->
+			<!-- <static name="sta" title="static text" > <![CDATA[ this is static 
+				field ]]> </static> -->
 
-<!--    <field name="color"/>   -->
-   <field name="price"/>
-   
-   <field name="sphone" colSpan="12"/>
-   
-</panel>
+			<!-- <field name="color"/> -->
+			<field name="price" />
+
+			<field name="sphone" colSpan="12" />
+
+		</panel>
 
 
 <!-- panel dashlet -->
-<panel-dashlet action="mobiles.all"/>
+		<panel-dashlet action="mobiles.all" />
 
 
 <!-- save button -->
-<panel>
-	 <button onClick="save" name="Save" title="Add Mobiles" css="btn-warning"/> 
-</panel>
+		<panel>
+			<button onClick="save" name="Save" title="Add Mobiles"
+				css="btn-warning" />
+		</panel>
 
-</form>
+	</form>
 
 
 </object-views>

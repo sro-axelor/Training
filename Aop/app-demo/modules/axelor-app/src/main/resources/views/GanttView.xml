@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+<gantt name="shipment-gantt-view"
+ title="Gantt View"
+ model="com.axelor.app.db.Shipment" 
+ taskStart="orderDateTime" 
+ taskEnd="deliveryDateTime" 
+ taskParent="listorder"
+ taskProgress="progress"
+ x-finish-to-start="shipment">
+
+<field name="shipmentName"/>
+<field name="listorder.orderName"/>
+</gantt>
+
+</object-views>

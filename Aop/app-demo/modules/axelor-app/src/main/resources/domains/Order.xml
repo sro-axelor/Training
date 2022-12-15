@@ -1,38 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
+<domain-models
+	xmlns="http://axelor.com/xml/ns/domain-models"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
   http://axelor.com/xml/ns/domain-models/domain-models_5.4.xsd">
- 
-<module name="app" package="com.axelor.app.db" />
 
-<!-- sequence -->
-<!-- <sequence name="order-placed.sequence" initial="10" increment="1" padding="10" prefix="ORDERED" /> -->
+	<module name="app" package="com.axelor.app.db" />
 
-<entity name="Order" cacheable="true">
+	<entity name="Order" cacheable="true">
 
-<!--   <string name="orderSeq" sequence="order-placed.sequence"  readonly="true"/> -->
-    <integer name="orderid" min="1" max="1000"/>
-  	<string name="orderName"/>
-  	<date name="orderDate"/>
-  	<date name="delhiveryDate"/>
-  	<string name="orderStatus" selection="order.list"/>
-    <integer name="orderQuantity" selection="order.quantity"/>
+		<integer name="orderid" min="1" max="1000" />
+		<string name="orderName" />
+		<date name="orderDate" />
+		<string name="orderStatus" selection="order.list" />
+		<integer name="orderQuantity" selection="order.quantity" />
 
-<!-- <integer name="orderId"/> -->
- 
- 
-<!--  relations -->
-<!--  <many-to-one name="loginlist" ref="LoginDetails" /> -->
 
-<many-to-many name="loginlist" ref="LoginDetails"/>
+		<many-to-many name="loginlist" ref="LoginDetails" />
 
-<many-to-many name="mobileslist" ref="Mobiles"/>
+		<many-to-many name="mobileslist" ref="Mobiles" />
 
-<!-- <one-to-many name="mobileslist" ref="Mobiles" mappedBy="orderlist"/> -->
+		<many-to-one name="shipmentlist" ref="Shipment" />
 
-</entity>
+	</entity>
 
 
 </domain-models>

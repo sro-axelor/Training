@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models 
+<domain-models
+	xmlns="http://axelor.com/xml/ns/domain-models"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/domain-models 
   https://axelor.com/xml/ns/domain-models/domain-models_5.4.xsd">
 
-  <module name="app" package="com.axelor.app.db" />
+	<module name="app" package="com.axelor.app.db" />
 
-  <entity name="PersonAddress" >
-  
-    <many-to-one name="hello" ref="LoginDetails" />
-    
-    <string name="street" max="255" />
-    <string name="area" max="255" />
-    <string name="city" />
-    <string name="zip" />
-    <string name="state" />
-    <string name="country" />
-    
-  </entity>
+	<entity name="PersonAddress">
+
+		<many-to-one name="hello" ref="LoginDetails" />
+
+		<string name="street" max="255" />
+		<string name="area" max="255" />
+		<string name="city" />
+		<string name="zip" />
+		<string name="state" />
+		<string name="country" />
+
+	</entity>
 
 </domain-models>
