@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models
+	xmlns="http://axelor.com/xml/ns/domain-models"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
+  http://axelor.com/xml/ns/domain-models/domain-models_5.4.xsd">
+
+<module name="action" package="com.axelor.action.db" />
+
+	<sequence name="entery-customer.sequence" initial="5"
+		increment="1" padding="5" prefix="SU" />
+
+<entity name="Customer" cacheable="true">
+  
+		<string name="seq" sequence="entery-customer.sequence"
+			readonly="true" />
+	
+		<string name="firstName" required="true" />
+		<string name="middleName" />
+		<string name="lastName" required="true" />	
+		
+		<enum name="gender" ref="GenderType" />
+
+		<string name="email" encrypted="true" />
+		<string name="phone" max="20" massUpdate="true" />
+		<string name="notes" title="About Order" large="true" />
+
+		<many-to-many name="orderlist" ref="Order" />
+
+		<finder-method name="findByEmail" using="email" />
+
+</entity>
+
+		<enum name="GenderType">
+			<item name="MALE" />
+			<item name="FEMALE" />
+			<item name="OTHER" />
+		</enum>
+
+</domain-models>

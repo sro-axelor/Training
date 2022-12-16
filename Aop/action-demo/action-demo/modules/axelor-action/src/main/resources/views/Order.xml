@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+<!-- grid view -->
+	<grid name="order-grid" title="Order"
+		model="com.axelor.action.db.Order" orderBy="orderId" edit-icon="false"
+		customSearch="false" x-selector="checkbox" freeSearch="none"
+		x-no-fetch="false">
+
+		<field name="orderId" />
+		<field name="orderName" />
+		<field name="orderDate" />
+		<field name="orderStatus" />
+		<field name="orderQuantity" />
+	</grid>
+
+<!-- form view -->
+	<form name="order-form" title="Order"
+		model="com.axelor.action.db.Order" canSave="true" canDelete="false"
+		onSave="actionattribute-for-readonly-after-saving-ordeid" >
+		<panel>
+			<field name="orderId" />
+			<field name="orderName" />
+			<field name="orderDate" />
+			<field name="orderStatus" selection="order.list" />
+			<field name="orderQuantity" selection="order.quantity"
+				widget="NavSelect" />
+		</panel>
+
+<!-- panel relatted feild -->
+		<panel-related field="customerlist" />
+
+		<panel-related name="addressesPanel" title="Address"
+			field="addresses" form-view="address-form-popup" editable="true"
+			canMove="true" height="4" x-selector="checkbox" canSelect="true">
+			<field name="street" />
+			<field name="area" />
+			<field name="city" />
+			<field name="state" />
+			<field name="zip" />
+			<field name="country" />
+		</panel-related>
+
+		<panel sidebar="true">
+			<button onClick="save" name="Save" title="Place Order"
+				css="btn-success" />
+			<button onClick="delete" name="Delete" title="Discard"
+				css="btn-info" />
+		</panel>
+	</form>
+
+	<selection name="order.list" >
+		<option value="draft" color="red">DRAFT</option>
+		<option value="wishlist" color="pink">WISHLIST</option>
+		<option value="ordered" color="blue">ORDERED</option>
+		<option value="canceled" color="green">CANCELED</option>
+	</selection>
+
+
+	<selection name="order.quantity">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+		<option value="7">7</option>
+		<option value="8">8</option>
+		<option value="9">9</option>
+		<option value="10">10</option>
+	</selection>
+
+	<!-- for orderId make readonly true when onsave happened -->
+	<action-attrs
+		name="actionattribute-for-readonly-after-saving-ordeid"
+		model="com.axelor.action.db.Order">
+		<attribute for="orderId" name="readonly" expr="true" />
+	</action-attrs>
+
+</object-views>
