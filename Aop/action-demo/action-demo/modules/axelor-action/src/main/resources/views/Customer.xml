@@ -8,7 +8,7 @@
 	<grid name="customer-grid" title="Login Details"
 		model="com.axelor.action.db.Customer" editable="false"
 		x-no-fetch="false" x-selector="checkbox" canArchive="true"
-		canEdit="true" orderBy="seq" groupBy="gender" >
+		canEdit="true" orderBy="seq" groupBy="gender">
 
 		<hilite background="green" if="$contains(email, 'gmail.com')" />
 		<field name="firstName" />
@@ -21,40 +21,46 @@
 	</grid>
 
 
-	<form name="customer-form" title="Login Details"
+	<form name="customer-form" title="Details"
 		model="com.axelor.action.db.Customer" width="large" canSave="true"
-		onNew="action-record-onnew-test" >
+		onNew="action-record-onnew-test">
 
 		<panel name="overviewPanel" title="Overview">
+			<field name="seq" title="Customer Id" colSpan="3"/>
+			<field name="firstName" colSpan="3" />
+			<field name="middleName" colSpan="3" />
+			<field name="lastName" colSpan="3" />
+			
+			<separator colSpan="12" />
 
-			<field name="seq" title="Customer Id" />
-
-					<field name="firstName" colSpan="4" />
-					<field name="middleName" colSpan="4" />
-					<field name="lastName" colSpan="4" />
-
-
-			<field name="email">
+			<field name="email" colSpan="5">
 				<viewer><![CDATA[ 
-        <a href="mailto:{{record.email}}">{{record.email}}</a>
-        ]]></viewer>
+      						  <a href="mailto:{{record.email}}">{{record.email}}</a>
+        				]]></viewer>
 			</field>
 
 <!-- on change -->
-			<field name="phone" onChange="order.all">
-				<viewer><![CDATA[
-        <a href="tel:{{record.phone}}">{{record.phone}}</a>
-        ]]></viewer>
+			<field name="phone" onChange="order.all" colSpan="5">
+			<viewer><![CDATA[
+		        			<a href="tel:{{record.phone}}">{{record.phone}}</a>
+		       		]]></viewer>
 			</field>
 
 <!-- on select -->
-			<field name="gender" onSelect="order.all"/>
+			<field name="gender" onSelect="customer.all" colSpan="2" bgColor="btn-info"/>
 
-			<panel name="reviewPanel" title="About You">
-				<field name="notes" title="About You" colSpan="12"
-					edit-window="popup" />
-			</panel>
+			<spacer colSpan="12"/>
+			
+		 		<panel name="reviewPanel" colSpan="12">
+					<field name="notes" title="About You" colSpan="12"
+						   edit-window="popup" />
+				</panel>
+		</panel>
 
+<!-- buttons for test attributes -->
+		<panel>
+				<button onClick="actionattribute-for-test" name="collapse-test" title="Collapse Test" colSpan="2"/>
+				<button onClick="act.hello" name="actionmethod-test" title="ActionMethod Test" colSpan="2"/>
 		</panel>
 
 
@@ -75,29 +81,45 @@
 
 	</form>
 
+<!-- action attribute test -->
+	<action-attrs
+		name="actionattribute-for-test"
+		model="com.axelor.action.db.Customer">
+		
+<!-- for deatilspanel collapse is work there expr is true if you click button -->
+		<attribute name="collapse" for="detailsPanel" expr="true"/>
+	</action-attrs>
+	
+	
+<!-- action record -->
 <!-- onnew -->
 	<action-record name="action-record-onnew-test"
-		           model="com.axelor.action.db.Customer">
+		model="com.axelor.action.db.Customer">
 		<field name="email" expr="axelor@gmail.com" />
 	</action-record>
 
+<!-- action method --> 
+	<action-method name="act.hello" model="com.axelor.action.db.Customer">
+		  <call class="com.axelor.action.web.Hello" method="say('firstname')"/>
+	</action-method>
+
 <!-- onload -->
-<!-- 	<action-record name="action-record-onchange-test" -->
-<!-- 		           model="com.axelor.action.db.Customer"> -->
-<!-- 		<field name="email" expr="axelor@gmail.com" /> -->
-<!-- 	</action-record> -->
+	<!-- <action-record name="action-record-onchange-test" -->
+	<!-- model="com.axelor.action.db.Customer"> -->
+	<!-- <field name="email" expr="axelor@gmail.com" /> -->
+	<!-- </action-record> -->
 
 <!-- onsave -->
-<!-- 	<action-record name="action-record-onsave-test" -->
-<!-- 		           model="com.axelor.action.db.Customer"> -->
-<!-- 		<field name="email" expr="axelor@gmail.com" /> -->
-		
-<!-- 		<field name="" expr="eval: ..here you write groovy expression.."/> -->
-<!-- 		<field name="" expr="select: ..here you write  JPQL select queries.."/> -->
-<!-- 		<field name="" expr="action: ..here you write action expression.."/> -->
-<!-- 		<field name="" expr="call: ​....here you write call expression.... "/> -->
-<!-- 		<field name="" expr="#{​....here you write java expression....} "/> -->
-		
-<!-- 	</action-record> -->
-	
+	<!-- <action-record name="action-record-onsave-test" -->
+	<!-- model="com.axelor.action.db.Customer"> -->
+	<!-- <field name="email" expr="axelor@gmail.com" /> -->
+
+	<!-- <field name="" expr="eval: ..here you write groovy expression.."/> -->
+	<!-- <field name="" expr="select: ..here you write JPQL select queries.."/> -->
+	<!-- <field name="" expr="action: ..here you write action expression.."/> -->
+	<!-- <field name="" expr="call: ​....here you write call expression.... 
+		"/> -->
+	<!-- <field name="" expr="#{​....here you write java expression....} "/> -->
+	<!-- </action-record> -->
+
 </object-views>

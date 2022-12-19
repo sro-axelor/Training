@@ -18,7 +18,7 @@
 
 		<many-to-many name="customerlist" ref="Customer" />
 
-		<one-to-many name="addresses" ref="Address" mappedBy="hello" />
+		<one-to-many name="addresses" ref="Address" mappedBy="addresslist" />
 		
 </entity>
 
