@@ -13,12 +13,15 @@
 		<integer name="orderId" min="1" max="1000" />
 		<string name="orderName" />
 		<date name="orderDate" />
-		<string name="orderStatus" selection="order.list" />
-		<integer name="orderQuantity" selection="order.quantity" />
+		<date name="deliveryDate" />
+		<string name="orderStatus" selection="status" />
+		<integer name="orderQuantity" selection="quantity" />
 
 		<many-to-many name="customerlist" ref="Customer" />
 
-		<one-to-many name="addresses" ref="Address" mappedBy="addresslist" />
+		<many-to-many name="addresslist" ref="Address" />
+		
+		<one-to-many name="itemlist" ref="Item" mappedBy="orderes"/>
 		
 </entity>
 

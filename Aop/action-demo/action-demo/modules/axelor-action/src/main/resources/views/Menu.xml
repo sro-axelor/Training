@@ -6,50 +6,73 @@
 
 
 	<menuitem name="Customer-menu" title="Axelor App"
-		icon="fa-solid fa-user" icon-background="green" />
+		icon="fas fa-rocket" icon-background="purple" />
 
-	<menuitem name="menu-customer-submenu"
-		parent="Customer-menu" title="Fill Your Details"
-		icon="fas fa-user-plus" icon-background="blue"
-		action="customer.all" tag="click here" tag-style="important" />
+	<menuitem name="menu-customer-submenu" parent="Customer-menu"
+		title="Fill Your Details" icon="fas fa-user-plus"
+		icon-background="green" action="customer.all" tag="click here"
+		tag-style="important" />
 
-	<action-view name="customer.all"
-		title="Details" model="com.axelor.action.db.Customer">
+	<action-view name="customer.all" title="Details"
+		model="com.axelor.action.db.Customer">
 		<view type="grid" name="customer-grid" />
 		<view type="form" name="customer-form" />
-		
-<!-- view-param -->		
-	<view-param name="reload-dotted" value="false"/>
-		<view-param name="popup" value="true"/>
-		<view-param name="popup-save" value="false"/>
-		<view-param name="download" value="true"/>
+<!-- view-param -->
+		<view-param name="reload-dotted" value="false" />
+		<view-param name="popup" value="true" />
+		<view-param name="popup-save" value="false" />
+		<view-param name="download" value="true" />
 	</action-view>
 
-<!-- order menu -->	
+
+<!-- item menu -->
+	<menuitem name="menu-item-submenu" parent="Customer-menu"
+		title="Item Details" action="item.all" 
+		tag-style="inverse" tag-count="true" />
+	
+	<action-view name="item.all" title="All Items"
+		model="com.axelor.action.db.Item">
+		<view type="grid" name="item-grid" />
+		<view type="form" name="item-form" />
+	</action-view>
+	
+
+<!-- address menu action-view -->
+	<menuitem name="menu-address-submenu" parent="Customer-menu"
+		icon="fas fa-map-pin" title="Add Address" icon-background="pink"
+		action="address.all" tag-style="inverse" tag-count="true" />
+
+	<action-view name="address.all" title="All Address"
+		model="com.axelor.action.db.Address">
+		<view type="grid" name="address-grid" />
+		<view type="form" name="address-form" />
+	</action-view>
+
+
+<!-- order menu -->
 	<menuitem name="menu-myorder-submenu" parent="Customer-menu"
 		title="Create Order" icon="fa-duotone fa-cart-plus"
-		icon-background="brown" action="order.all"
-		tag-style="info" tag-count="true"/>
+		icon-background="orange" action="order.all" tag-style="inverse"
+		tag-count="true" />
 
+<!-- order action-view -->		
 	<action-view name="order.all" title="All Orders"
-		model="com.axelor.action.db.Order" >
+		model="com.axelor.action.db.Order">
 		<view type="grid" name="order-grid" />
 		<view type="form" name="order-form" />
 		
-<!-- view-param -->		
-		<view-param name="forceEdit" value="true"/>
-		<view-param name="forceTitle" value="true"/>
-		<view-param name="showArchived" value="true"/>
-		<view-param name="details-view" value="true"/>
-		<view-param name="limit" value="2"/>
-		<view-param name="popup" value="false"/>
-		<view-param name="popup.maximized" value="true"/>
-		<view-param name="show-toolbar" value="true"/>
-		<view-param name="show-confirm" value="true"/>
-		
-		<domain>self.orderStatus = :orderStatus </domain>
-		 <context name="orderStatus" expr="ordered"/>
-		
+<!-- view-param -->
+		<view-param name="forceEdit" value="true" />
+		<view-param name="forceTitle" value="true" />
+		<view-param name="showArchived" value="true" />
+        <!-- <view-param name="details-view" value="true"/> -->
+		<view-param name="limit" value="10" />
+		<view-param name="popup" value="false" />
+		<view-param name="popup.maximized" value="true" />
+		<view-param name="show-toolbar" value="true" />
+		<view-param name="show-confirm" value="true" />
+		<!-- <domain>self.orderStatus = :orderStatus </domain> -->
+		<!-- <context name="orderStatus" expr="ordered"/> -->
 	</action-view>
 
 

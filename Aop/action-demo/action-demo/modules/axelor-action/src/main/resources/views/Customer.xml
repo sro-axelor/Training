@@ -60,7 +60,7 @@
 <!-- buttons for test attributes -->
 		<panel>
 				<button onClick="actionattribute-for-test" name="collapse-test" title="Collapse Test" colSpan="2"/>
-				<button onClick="act.hello" name="actionmethod-test" title="ActionMethod Test" colSpan="2"/>
+				<button onClick="actionrecord-for-actionmethod-text" name="actionmethod-test" title="ActionMethod Test" colSpan="2"/>
 		</panel>
 
 
@@ -81,6 +81,8 @@
 
 	</form>
 
+
+
 <!-- action attribute test -->
 	<action-attrs
 		name="actionattribute-for-test"
@@ -89,19 +91,38 @@
 <!-- for deatilspanel collapse is work there expr is true if you click button -->
 		<attribute name="collapse" for="detailsPanel" expr="true"/>
 	</action-attrs>
+
+
 	
 	
 <!-- action record -->
 <!-- onnew -->
 	<action-record name="action-record-onnew-test"
 		model="com.axelor.action.db.Customer">
-		<field name="email" expr="axelor@gmail.com" />
+		<field name="email" expr="default@gmail.com" />
 	</action-record>
 
+
+<!-- two type of test using action record and action method -->    
+	<!-- <action-record name="actionrecord-for-actionmethod-text" model="com.axelor.action.db.Customer"> -->
+	<!-- 	<field name="firstName" expr="action: act.hello" /> -->
+	<!-- </action-record> -->
+
+ 	<action-record name="actionrecord-for-actionmethod-text" model="com.axelor.action.db.Customer">
+		<field name="firstName" expr="action: actionmethod.test" />
+    </action-record>
+
+
+
 <!-- action method --> 
-	<action-method name="act.hello" model="com.axelor.action.db.Customer">
-		  <call class="com.axelor.action.web.Hello" method="say('firstname')"/>
+<!-- 	<action-method name="actionmethod.test" model="com.axelor.action.db.Customer" > -->
+<!-- 		  <call class="com.axelor.action.web.Hello" method="say(firstName)"/> -->
+<!-- 	</action-method>  -->
+	
+   <action-method name="actionmethod.test" >
+		  <call class="com.axelor.action.web.Hello" method="say('ActionMethod')"/>
 	</action-method>
+
 
 <!-- onload -->
 	<!-- <action-record name="action-record-onchange-test" -->

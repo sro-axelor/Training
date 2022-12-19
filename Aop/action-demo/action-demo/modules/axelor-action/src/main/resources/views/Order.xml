@@ -11,9 +11,10 @@
 		customSearch="false" x-selector="checkbox" freeSearch="none"
 		x-no-fetch="false">
 		
-		<field name="orderId" />
+		<field name="orderId" title="Order Id"/>
 		<field name="orderName" />
 		<field name="orderDate" />
+		<field name="deliveryDate" />
 		<field name="orderStatus" />
 		<field name="orderQuantity" />
 		
@@ -24,32 +25,42 @@
 		model="com.axelor.action.db.Order" canSave="true" canDelete="false"
 		onSave="actionattribute-for-readonly-after-saving-ordeid" onNew="action-record-for-button" >
 		<panel>
-			<field name="orderId" />
+			<field name="orderId"  title="Order Id"/>
 			<field name="orderName" />
 			<field name="orderDate" />
-			<field name="orderStatus" selection="order.list" />
-			<field name="orderQuantity" selection="order.quantity"
+			<field name="deliveryDate" />
+			<field name="orderStatus" selection="status" />
+			<field name="orderQuantity" selection="quantity"
 				widget="NavSelect" />
 		</panel>
 
 <!-- buttons for test attributes -->
 		<panel>
-				<button onClick="add-address" name="adding-value" title="Value Adding" colSpan="2"/>
+				<button onClick="add-address" name="adding-value" title="One Address Adding" colSpan="2"/>
+				<button onClick="delete-address" name="deleting-value" title="One Address Deleting" colSpan="2"/>
+				<button onClick="action-script-test" name="action-script" title="Using Action-Script" colSpan="2"/>
+				<button onClick="create.hello" name="action-script-custom-models" title="Action-Script Custom-Models" colSpan="2"/>
+				<button onClick="action-order-validate" name="action-validate" title="Using Action-Validate" colSpan="2"/>
 		</panel>
 
 <!-- panel relatted feild -->
 		<panel-related field="customerlist" />
 
-		<panel-related name="addressesPanel" title="Address"
-			field="addresses" form-view="address-form-popup" editable="true"
-			canMove="true" height="4" x-selector="checkbox" canSelect="true">
-			<field name="street" />
-			<field name="area" />
-			<field name="city" />
-			<field name="state" />
-			<field name="zip" />
-			<field name="country" />
-		</panel-related>
+		<panel-related field="addresslist" x-selector="checkbox" canSelect="true" />
+
+
+<!-- <panel-related name="addressesPanel" title="Address" -->
+<!-- 			field="addresslist" form-view="address-form-popup" editable="true" -->
+<!-- 			canMove="true" height="4" x-selector="checkbox" canSelect="true"> -->
+<!-- 			<field name="street" /> -->
+<!-- 			<field name="area" /> -->
+<!-- 			<field name="city" /> -->
+<!-- 			<field name="state" /> -->
+<!-- 			<field name="zip" /> -->
+<!-- 			<field name="country" /> -->
+<!-- 		</panel-related> -->
+
+
 
 		<panel sidebar="true">
 			<button onClick="save" name="Save" title="Place Order"
@@ -59,7 +70,7 @@
 		</panel>
 	</form>
 
-	<selection name="order.list" >
+	<selection name="status" >
 		<option value="draft" color="red">DRAFT</option>
 		<option value="wishlist" color="pink">WISHLIST</option>
 		<option value="ordered" color="blue">ORDERED</option>
@@ -67,7 +78,7 @@
 	</selection>
 
 
-	<selection name="order.quantity">
+	<selection name="quantity">
 		<option value="1">1</option>
 		<option value="2">2</option>
 		<option value="3">3</option>
@@ -87,7 +98,14 @@
 		<attribute name="readonly" for="orderId" expr="true" />
 	</action-attrs>
 
+
+<!-- adding address -->
     <action-attrs name="add-address" model="com.axelor.action.db.Order" >
+        <attribute name="value:add" for="addresslist" expr="select: a from Address a"/>
+    </action-attrs>	
+
+<!-- deleting address -->
+    <action-attrs name="delete-address" model="com.axelor.action.db.Order" >
         <attribute name="value:del" for="addresslist" expr="select: a from Address a"/>
     </action-attrs>	
     	
@@ -96,5 +114,53 @@
 		           model="com.axelor.action.db.Order">
 		 <field name="orderDate" expr="eval: __date__"/>
 	</action-record>
+
+
+<!-- action-script -->
+<!-- after select status then it goes that status type like={draft,whishlist,ordered,cancled} to the ordername  -->
+		<action-script name="action-script-test" model="com.axelor.action.db.Order" >
+			  <script language="js" transactional="true" >
+				  <![CDATA[
+	 			  var req = $request;  
+				  var res = $response;  
+	 			  var co = req.context; 
+				  var order = new Order(); 
+	 			  var orderStatus = co.orderStatus; 
+
+	 			  res.setValue('orderName', orderStatus); 
+				  ]]> 
+			  </script>
+		</action-script>
+	
+	
+<!-- action-script can be used for custom models too --> 
+	<!-- 	<action-script name="create.hello" model="com.axelor.action.db.Order"> -->
+	<!-- 	  <script language="js" transactional="true"> -->
+	<!-- 	  <![CDATA[	 -->
+	<!-- 			    var hello = $json.create('Order');   -->
+	<!-- 			    hello.orderName = "Hello!!!";             -->
+						
+	<!-- 			   // var world = $json.all('world').by('orderName', '=', 'World!!!').fetchOne();   -->
+	<!-- 	 		   // if (world == null) {  -->
+	<!-- 		       // world = $json.create('world');  -->
+	<!-- 		       // world.orderName = "World!!!";  -->
+	<!-- 	 	       // world = $json.save(world);  -->
+			     
+	<!-- 		       // now we can't update world, as it's converted to real instance  -->
+	<!-- 	 		   // } -->
+	<!-- 	 		   // hello.world = world;   -->
+		 		    
+	<!-- 	 		   // return as response values  -->
+	<!-- 	 		   // $response.values = hello;  -->
+	<!-- 	 		       ]]>  -->
+	<!-- 		  </script> -->
+	<!-- 	</action-script> -->
+
+	<action-validate name="action-order-validate">
+<!-- 		  <error message="Order Date is not be in future,it should be today." if="orderStatus &amp;&amp; orderDate ==__date__"/> -->
+		  <error message="Order Date is not be in future,it should be today." if="orderStatus &amp;&amp; orderDate &gt;__date__"/>
+		  <error message="Delivery Date not before of orderDate it should be in the future." if="orderStatus &amp;&amp; deliveryDate &lt;orderDate"/>
+		  <alert message="No Sale Order Items. Would you like to continue?" if="orderStatus &amp;&amp; !orderQuantity"/>
+	</action-validate>
 
 </object-views>
