@@ -23,7 +23,8 @@
 <!-- form view -->
 	<form name="order-form" title="Order"
 		model="com.axelor.action.db.Order" canSave="true" canDelete="false"
-		onSave="actionattribute-for-readonly-after-saving-ordeid" onNew="action-record-for-button" >
+        onNew="action-record-for-button" onSave="group-of-actions-test">
+<!--    onSave="actionattribute-for-readonly-after-saving-ordeid, action-condition-test" -->
 		<panel>
 			<field name="orderId"  title="Order Id"/>
 			<field name="orderName" />
@@ -40,7 +41,7 @@
 				<button onClick="delete-address" name="deleting-value" title="One Address Deleting" colSpan="2"/>
 				<button onClick="action-script-test" name="action-script" title="Using Action-Script" colSpan="2"/>
 				<button onClick="create.hello" name="action-script-custom-models" title="Action-Script Custom-Models" colSpan="2"/>
-				<button onClick="action-order-validate" name="action-validate" title="Using Action-Validate" colSpan="2"/>
+<!-- 				<button onClick="action-order-validate" name="action-validate" title="Using Action-Validate" colSpan="2"/> -->
 		</panel>
 
 <!-- panel relatted feild -->
@@ -157,10 +158,23 @@
 	<!-- 	</action-script> -->
 
 	<action-validate name="action-order-validate">
-<!-- 		  <error message="Order Date is not be in future,it should be today." if="orderStatus &amp;&amp; orderDate ==__date__"/> -->
+    <!--  <error message="Order Date is not be in future,it should be today." if="orderStatus &amp;&amp; orderDate ==__date__"/>  -->
 		  <error message="Order Date is not be in future,it should be today." if="orderStatus &amp;&amp; orderDate &gt;__date__"/>
 		  <error message="Delivery Date not before of orderDate it should be in the future." if="orderStatus &amp;&amp; deliveryDate &lt;orderDate"/>
 		  <alert message="No Sale Order Items. Would you like to continue?" if="orderStatus &amp;&amp; !orderQuantity"/>
 	</action-validate>
+	
+	
+<!-- action-condition -->	
+	<action-condition name="action-condition-test-orderStatus">
+		<check field="orderName" if="eval:orderName == null" error="orderName should not be empty"/>
+	</action-condition>
+
+
+<!-- action group -->
+    <action-group name="group-of-actions-test">
+        <action name="action-order-validate"/>
+        <action name="action-condition-test-orderStatus"/>
+    </action-group>
 
 </object-views>

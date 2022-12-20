@@ -4,10 +4,12 @@
 	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
   http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
 
-
-	<menuitem name="Customer-menu" title="Axelor App"
+<!-- main menu -->
+ 	<menuitem name="Customer-menu" title="Axelor App"
 		icon="fas fa-rocket" icon-background="purple" />
 
+
+<!-- customer menu and customer action-view -->
 	<menuitem name="menu-customer-submenu" parent="Customer-menu"
 		title="Fill Your Details" icon="fas fa-user-plus"
 		icon-background="green" action="customer.all" tag="click here"
@@ -25,10 +27,11 @@
 	</action-view>
 
 
-<!-- item menu -->
+<!-- item menu and item action-view -->
 	<menuitem name="menu-item-submenu" parent="Customer-menu"
 		title="Item Details" action="item.all" 
-		tag-style="inverse" tag-count="true" />
+		tag-style="inverse" tag-count="true" 
+		icon="fas fa-sitemap" icon-background="blue" />
 	
 	<action-view name="item.all" title="All Items"
 		model="com.axelor.action.db.Item">
@@ -37,7 +40,7 @@
 	</action-view>
 	
 
-<!-- address menu action-view -->
+<!-- address menu address action-view -->
 	<menuitem name="menu-address-submenu" parent="Customer-menu"
 		icon="fas fa-map-pin" title="Add Address" icon-background="pink"
 		action="address.all" tag-style="inverse" tag-count="true" />
@@ -49,18 +52,16 @@
 	</action-view>
 
 
-<!-- order menu -->
+<!-- order menu and order action-view -->
 	<menuitem name="menu-myorder-submenu" parent="Customer-menu"
 		title="Create Order" icon="fa-duotone fa-cart-plus"
 		icon-background="orange" action="order.all" tag-style="inverse"
 		tag-count="true" />
 
-<!-- order action-view -->		
 	<action-view name="order.all" title="All Orders"
 		model="com.axelor.action.db.Order">
 		<view type="grid" name="order-grid" />
 		<view type="form" name="order-form" />
-		
 <!-- view-param -->
 		<view-param name="forceEdit" value="true" />
 		<view-param name="forceTitle" value="true" />

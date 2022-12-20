@@ -9,6 +9,7 @@
 		model="com.axelor.action.db.Item">
 		<field name="itemCode" />
 		<field name="itemName" />
+		<field name="whichItem" />		
 	</grid>
 
 	<form name="item-form" title="Item form"
@@ -16,32 +17,34 @@
 		<panel>
 			<field name="itemCode" />
 			<field name="itemName" />
+			<field name="whichItem" />
 		</panel>	
 		
-		<panel>
-			<button onClick="create.item" name="action-script-custom-models" title="Action-Script Custom-Models" colSpan="4"/>
-		</panel>	
+<!-- 		<panel> -->
+<!-- 			<button onClick="create.item" name="action-script-custom-models" title="Action-Script Custom-Models" colSpan="4"/> -->
+<!-- 		</panel>	 -->
 	</form>
 	
-	<!-- action-script can be used for custom models too -->
-	<action-script name="create.item" model="com.axelor.meta.db.MetaJsonRecord">
-	  <script language="js" transactional="true">
-	  <![CDATA[	
-			    var item = $json.create('item');
-			    item.itemCode = 1;  
-			    item.itemName = "bag";            
+<!-- action-script can be used for custom models too -->
+<!-- 	<action-script name="create.item" model="com.axelor.meta.db.MetaJsonRecord"> -->
+<!-- 	  <script language="js" transactional="true"> -->
+<!-- 	  <![CDATA[	 -->
+<!-- 			    var item = $json.create('item'); -->
+<!-- 			    item.itemCode = 1;   -->
+<!-- 			    item.itemName = "samsung";             -->
 					
-			    var order = $json.all('order').by('orderName', '=', 'flipkart').fetchOne();  
-	 		    if (order == null) { 
-		        order = $json.create('order'); 
-		        order.orderName = "amazon"; 
-	 	        order = $json.save(order); 
-	 		   }
-	 		   item.orderes = order;  
+<!-- 			    var order = $json.all('order').by('orderName', '=', 'flipkart').fetchOne();   -->
+<!-- 	 		    if (order == null) {  -->
+<!-- 		        order = $json.create('order');  -->
+<!-- 		        order.orderName = "amazon";  -->
+<!-- 	 	        order = $json.save(order);  -->
+<!-- 	 		   } -->
+<!-- 	 		   item.orderes = order;   -->
 	 		    
-	 		   // return as response values 
-	 		   $response.values = item; 
-	 		       ]]> 
-		  </script>
-	</action-script>
+<!-- 	 		   // return as response values  -->
+<!-- 	 		   $response.values = item;  -->
+<!-- 	 		       ]]>  -->
+<!-- 		  </script> -->
+<!-- 	</action-script> -->
+
 </object-views>

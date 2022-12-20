@@ -23,7 +23,7 @@
 
 	<form name="customer-form" title="Details"
 		model="com.axelor.action.db.Customer" width="large" canSave="true"
-		onNew="action-record-onnew-test">
+		onNew="action-record-onnew-test" onSave="action-condition-test-gender">
 
 		<panel name="overviewPanel" title="Overview">
 			<field name="seq" title="Customer Id" colSpan="3"/>
@@ -40,14 +40,14 @@
 			</field>
 
 <!-- on change -->
-			<field name="phone" onChange="order.all" colSpan="5">
+			<field name="phone" colSpan="5">
 			<viewer><![CDATA[
 		        			<a href="tel:{{record.phone}}">{{record.phone}}</a>
 		       		]]></viewer>
 			</field>
 
 <!-- on select -->
-			<field name="gender" onSelect="customer.all" colSpan="2" bgColor="btn-info"/>
+			<field name="gender" onSelect="address.all"/>
 
 			<spacer colSpan="12"/>
 			
@@ -61,6 +61,7 @@
 		<panel>
 				<button onClick="actionattribute-for-test" name="collapse-test" title="Collapse Test" colSpan="2"/>
 				<button onClick="actionrecord-for-actionmethod-text" name="actionmethod-test" title="ActionMethod Test" colSpan="2"/>
+				<button onClick="item.all" name="test" title="Test" colSpan="2"/>
 		</panel>
 
 
@@ -80,7 +81,6 @@
 		</panel>
 
 	</form>
-
 
 
 <!-- action attribute test -->
@@ -142,5 +142,13 @@
 		"/> -->
 	<!-- <field name="" expr="#{​....here you write java expression....} "/> -->
 	<!-- </action-record> -->
+
+
+<!-- action-condition -->	
+	<action-condition name="action-condition-test-gender">
+		<check field="gender" if="eval: gender == null" error="Gender should not be empty"/>
+	</action-condition>
+
+
 
 </object-views>
