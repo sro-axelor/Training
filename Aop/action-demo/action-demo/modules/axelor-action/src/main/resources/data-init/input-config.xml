@@ -5,11 +5,34 @@
 	xsi:schemaLocation="http://axelor.com/xml/ns/data-import
     http://axelor.com/xml/ns/data-import/data-import_5.4.xsd">
 
-<!-- 	<input file="customers.csv" type="com.axelor.action.db.Customer" /> -->
+	
 
+<!-- 	<input file="titles.csv" type="com.axelor.action.db.Title"/> -->	
 
-	<input file="orders.csv" type="com.axelor.action.db.Order" />
+	<input file="addresses.csv" type="com.axelor.action.db.Address"/>	
 
+	<input file="titles.csv" type="com.axelor.action.db.Title" >
+	    <bind to="code" column="code"/>
+	    <bind to="name" column="name" />
+	</input>
+
+<!-- 	<input file="titles-no-header.csv" type="com.axelor.action.db.Title" search="self.code = :code" update="true"> -->
+<!-- 	  <header>code,name</header> -->
+<!-- 	    <bind to="code" column="code"></bind> -->
+<!-- 	    <bind to="name" column="name" if-empty="true"></bind> -->
+<!-- 	  </input> -->
+
+	<input file="customers.csv" type="com.axelor.action.db.Customer">
+		<bind column="o2" to="orderlist" search="self.orderId in :o2" eval="o2.split('\\|') as List" />
+	</input>
+		
+		<input file="orders.csv" type="com.axelor.action.db.Order" />
+		<input file="items.csv" type="com.axelor.action.db.Item" />
+
+<!-- 	<input file="customers-update.csv" type="com.axelor.action.db.Customer"  -->
+<!--     	   search="self.firstName = :firstName AND self.middleName = :middleName AND self.lastName = :lastName" -->
+<!--    		   update="true"/> -->
+	
 <!-- 	<input file="orders.csv" type="com.axelor.action.db.Order"  > -->
 <!-- 			<bind to="orderId" column="id" /> -->
 <!-- 			<bind to="orderName" column="name" /> -->
@@ -17,11 +40,7 @@
 <!-- 			<bind to="deliveryDate" column="ddate" /> -->
 <!-- 	</input> -->
 
-
-
-
-
-	<input file="items.csv" type="com.axelor.action.db.Item" />
+	
 
 <!-- 	<input file="items.csv" type="com.axelor.action.db.Item" > -->
 <!-- 			<bind to="itemCode" column="itemCode" /> -->

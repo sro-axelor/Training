@@ -9,10 +9,8 @@
 
 	<entity name="Address">
 
-<!-- 		<many-to-one name="addresslist" ref="Order" /> -->
-
-		<many-to-many name="listorder" ref="Order"/>	
-
+		<many-to-one name="customeres" ref="Customer"/>
+		
 		<string name="street" max="255" />
 		<string name="area" max="255" />
 		<string name="city" />

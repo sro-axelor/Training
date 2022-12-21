@@ -11,9 +11,11 @@
 		canEdit="true" orderBy="seq" groupBy="gender">
 
 		<hilite background="green" if="$contains(email, 'gmail.com')" />
+<!-- 		<field name="customerId" /> -->
 		<field name="firstName" />
 		<field name="middleName" />
 		<field name="lastName" />
+		<field name="dateOfBirth" />
 		<field name="email" />
 		<field name="phone" />
 		<field name="seq" title="Customer Id" />
@@ -26,10 +28,12 @@
 		onNew="action-record-onnew-test" onSave="action-condition-test-gender">
 
 		<panel name="overviewPanel" title="Overview">
-			<field name="seq" title="Customer Id" colSpan="3"/>
+		<field name="seq" title="Customer Id" colSpan="3"/>
+<!-- 			<field name="customerId" title="Customer Id"/> -->
 			<field name="firstName" colSpan="3" />
 			<field name="middleName" colSpan="3" />
 			<field name="lastName" colSpan="3" />
+			<field name="dateOfBirth" colSpan="3" />
 			
 			<separator colSpan="12" />
 
@@ -57,11 +61,15 @@
 				</panel>
 		</panel>
 
+		<panel-related field="addresslist" x-selector="checkbox" canSelect="true" />
+
 <!-- buttons for test attributes -->
 		<panel>
 				<button onClick="actionattribute-for-test" name="collapse-test" title="Collapse Test" colSpan="2"/>
 				<button onClick="actionrecord-for-actionmethod-text" name="actionmethod-test" title="ActionMethod Test" colSpan="2"/>
 				<button onClick="item.all" name="test" title="Test" colSpan="2"/>
+				<button onClick="add-address" name="adding-value" title="One Address Adding" colSpan="2"/>
+				<button onClick="delete-address" name="deleting-value" title="One Address Deleting" colSpan="2"/>
 		</panel>
 
 
@@ -150,5 +158,26 @@
 	</action-condition>
 
 
+<!-- adding address -->
+    <action-attrs name="add-address" model="com.axelor.action.db.Order" >
+        <attribute name="value:add" for="addresslist" expr="select: a from Address a"/>
+    </action-attrs>	
+
+<!-- deleting address -->
+    <action-attrs name="delete-address" model="com.axelor.action.db.Order" >
+        <attribute name="value:del" for="addresslist" expr="select: a from Address a"/>
+    </action-attrs>	
+
+
+<!-- <panel-related name="addressesPanel" title="Address" -->
+<!-- 			field="addresslist" form-view="address-form-popup" editable="true" -->
+<!-- 			canMove="true" height="4" x-selector="checkbox" canSelect="true"> -->
+<!-- 			<field name="street" /> -->
+<!-- 			<field name="area" /> -->
+<!-- 			<field name="city" /> -->
+<!-- 			<field name="state" /> -->
+<!-- 			<field name="zip" /> -->
+<!-- 			<field name="country" /> -->
+<!-- 		</panel-related> -->
 
 </object-views>

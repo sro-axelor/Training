@@ -5,12 +5,12 @@
   http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
 
 <!-- main menu -->
- 	<menuitem name="Customer-menu" title="Axelor App"
+ 	<menuitem name="App-menu" title="Axelor App"
 		icon="fas fa-rocket" icon-background="purple" />
 
 
 <!-- customer menu and customer action-view -->
-	<menuitem name="menu-customer-submenu" parent="Customer-menu"
+	<menuitem name="menu-customer-submenu" parent="App-menu"
 		title="Fill Your Details" icon="fas fa-user-plus"
 		icon-background="green" action="customer.all" tag="click here"
 		tag-style="important" />
@@ -26,9 +26,20 @@
 		<view-param name="download" value="true" />
 	</action-view>
 
+	
+<!-- title menu and title action-view -->	
+	 <menuitem name="menu-customer-titles" parent="App-menu"
+  			   title="Titles" action="customer-title" icon="fas fa-tag" 
+  			   tag-count="true" tag-style="inverse" />
+
+	 <action-view name="customer-title" title="Title" model="com.axelor.action.db.Title">
+	    <view type="grid" name="title-grid"/>
+	    <view type="form" name="title-form"/>
+	 </action-view>
+
 
 <!-- item menu and item action-view -->
-	<menuitem name="menu-item-submenu" parent="Customer-menu"
+	<menuitem name="menu-item-submenu" parent="App-menu"
 		title="Item Details" action="item.all" 
 		tag-style="inverse" tag-count="true" 
 		icon="fas fa-sitemap" icon-background="blue" />
@@ -41,7 +52,7 @@
 	
 
 <!-- address menu address action-view -->
-	<menuitem name="menu-address-submenu" parent="Customer-menu"
+	<menuitem name="menu-address-submenu" parent="App-menu"
 		icon="fas fa-map-pin" title="Add Address" icon-background="pink"
 		action="address.all" tag-style="inverse" tag-count="true" />
 
@@ -53,7 +64,7 @@
 
 
 <!-- order menu and order action-view -->
-	<menuitem name="menu-myorder-submenu" parent="Customer-menu"
+	<menuitem name="menu-myorder-submenu" parent="App-menu"
 		title="Create Order" icon="fa-duotone fa-cart-plus"
 		icon-background="orange" action="order.all" tag-style="inverse"
 		tag-count="true" />

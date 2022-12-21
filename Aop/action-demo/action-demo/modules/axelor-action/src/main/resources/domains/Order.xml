@@ -19,8 +19,6 @@
 
 		<many-to-many name="customerlist" ref="Customer" />
 
-		<many-to-many name="addresslist" ref="Address" />
-		
 		<one-to-many name="itemlist" ref="Item" mappedBy="orderes"/>
 		
 </entity>

@@ -37,18 +37,13 @@
 
 <!-- buttons for test attributes -->
 		<panel>
-				<button onClick="add-address" name="adding-value" title="One Address Adding" colSpan="2"/>
-				<button onClick="delete-address" name="deleting-value" title="One Address Deleting" colSpan="2"/>
 				<button onClick="action-script-test" name="action-script" title="Using Action-Script" colSpan="2"/>
 				<button onClick="create.hello" name="action-script-custom-models" title="Action-Script Custom-Models" colSpan="2"/>
-<!-- 				<button onClick="action-order-validate" name="action-validate" title="Using Action-Validate" colSpan="2"/> -->
+<!-- 			<button onClick="action-order-validate" name="action-validate" title="Using Action-Validate" colSpan="2"/> -->
 		</panel>
 
 <!-- panel relatted feild -->
 		<panel-related field="customerlist" />
-
-		<panel-related field="addresslist" x-selector="checkbox" canSelect="true" />
-
 
 <!-- <panel-related name="addressesPanel" title="Address" -->
 <!-- 			field="addresslist" form-view="address-form-popup" editable="true" -->
