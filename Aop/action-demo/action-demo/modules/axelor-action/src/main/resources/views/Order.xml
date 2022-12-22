@@ -7,11 +7,11 @@
 
 <!-- grid view -->
 	<grid name="order-grid" title="Order"
-		model="com.axelor.action.db.Order" orderBy="orderId" edit-icon="false"
+		model="com.axelor.action.db.Order" edit-icon="false"
 		customSearch="false" x-selector="checkbox" freeSearch="none"
 		x-no-fetch="false">
 		
-		<field name="orderId" title="Order Id"/>
+<!-- 		<field name="orderId" title="Order Id"/> -->
 		<field name="orderName" />
 		<field name="orderDate" />
 		<field name="deliveryDate" />
@@ -26,7 +26,7 @@
         onNew="action-record-for-button" onSave="group-of-actions-test">
 <!--    onSave="actionattribute-for-readonly-after-saving-ordeid, action-condition-test" -->
 		<panel>
-			<field name="orderId"  title="Order Id"/>
+<!-- 			<field name="orderId"  title="Order Id"/> -->
 			<field name="orderName" />
 			<field name="orderDate" />
 			<field name="deliveryDate" />
@@ -88,11 +88,11 @@
 	</selection>
 
 <!-- for orderId make readonly true when onsave happened -->
-	<action-attrs
-		name="actionattribute-for-readonly-after-saving-ordeid"
-		model="com.axelor.action.db.Order">
-		<attribute name="readonly" for="orderId" expr="true" />
-	</action-attrs>
+<!-- 	<action-attrs -->
+<!-- 		name="actionattribute-for-readonly-after-saving-ordeid" -->
+<!-- 		model="com.axelor.action.db.Order"> -->
+<!-- 		<attribute name="readonly" for="orderId" expr="true" /> -->
+<!-- 	</action-attrs> -->
 
 
 <!-- adding address -->

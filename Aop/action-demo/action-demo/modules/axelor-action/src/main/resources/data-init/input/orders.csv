@@ -1,3 +1,0 @@
-"orderId","orderName","orderDate","deliveryDate","orderStatus","orderQuantity"
-10,"flipkart","2022-12-20","2022-12-24","draft",4
-20,"amazon","2022-12-21","2022-12-25","ordered",3

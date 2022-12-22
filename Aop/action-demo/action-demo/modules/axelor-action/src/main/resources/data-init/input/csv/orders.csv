@@ -1,0 +1,5 @@
+"orderName","orderDate","deliveryDate","orderStatus","orderQuantity"
+"flipkart","2022-12-20","2022-12-24","draft",2
+"amazon","2022-12-21","2022-12-25","ordered",1
+"zomato","2022-12-22","2022-12-27","ordered",3
+"dominos","2022-12-23","2022-12-28","ordered",5

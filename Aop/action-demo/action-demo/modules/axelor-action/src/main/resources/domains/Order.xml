@@ -10,14 +10,14 @@
 
 <entity name="Order" cacheable="true">
 
-		<integer name="orderId" min="1" max="1000" />
+<!-- 		<integer name="orderId" min="1" max="1000" /> -->
 		<string name="orderName" />
 		<date name="orderDate" />
 		<date name="deliveryDate" />
 		<string name="orderStatus" selection="status" />
 		<integer name="orderQuantity" selection="quantity" />
 
-		<many-to-many name="customerlist" ref="Customer" />
+<!-- 		<many-to-many name="customerlist" ref="Customer" /> -->
 
 		<one-to-many name="itemlist" ref="Item" mappedBy="orderes"/>
 		

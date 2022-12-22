@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE xml>
+
+<address-book>
+	<configs>
+		<titles>
+			<title code="mr">Mr.</title>
+			<title code="mrs">Mrs.</title>
+			<title code="miss">Miss</title>
+		</titles>
+		
+		<country code="IN">India</country>
+		<country code="FR">France</country>
+		<country code="UK">United Kingdom</country>
+	</configs>
+	
+ <customers>
+		<customer>
+			<title code="mr">Mr.</title>
+		    <name type="F">Ram</name>
+		    <name type="M">Kumar</name>
+		    <name type="L">R</name>
+		    <email>ram.r@gmail.com</email>
+		</customer>
+		
+		<customer>
+			<title code="mrs">Mrs.</title>
+		    <name type="F">mili</name>
+		    <name type="M">k</name>
+		    <name type="L">kumari</name>
+		</customer>
+		
+		<customer>
+		 	<title>Miss</title>
+            <name type="F">feen</name>
+		    <name type="M">mary</name>               
+            <name type="L">p</name>
+     		<email>feen.mary@gmail.com</email>
+      <my>
+        <address-list>
+            <address zip="1234">
+               <line1>My</line1>
+               <line2>Home</line2>
+               <city country="FR">France</city>
+            </address>
+            <address zip="5678">
+               <line1>My</line1>
+               <line2>Office</line2>
+               <city>Paris</city>
+            </address>
+        </address-list>
+      </my>
+    </customer>
+    
+    <customer location="FR">
+      <title>Mrs.</title>
+      <name type="F">helen</name>
+      <name type="M">f</name>
+      <name type="L">Harry</name>
+      <email>helen.harry@gmail.com</email>
+     <my>
+        <address-list>
+	          <address>
+	            <line1>My</line1>
+	            <line2>Home</line2>
+	            <city>France</city>
+	          </address>
+        </address-list>
+      </my>
+    </customer>
+ </customers>
+</address-book>
