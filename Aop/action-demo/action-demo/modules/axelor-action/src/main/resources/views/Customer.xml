@@ -28,30 +28,32 @@
 		onNew="action-record-onnew-test" onSave="action-condition-test-gender">
 
 		<panel name="overviewPanel" title="Overview">
-		<field name="seq" title="Customer Id" colSpan="3"/>
+		<field name="seq" title="Customer Id"/>
+		<spacer/>
 <!-- 			<field name="customerId" title="Customer Id"/> -->
 			<field name="firstName" colSpan="3" />
+			
 			<field name="middleName" colSpan="3" />
 			<field name="lastName" colSpan="3" />
 			<field name="dateOfBirth" colSpan="3" />
 			
 			<separator colSpan="12" />
 
-			<field name="email" colSpan="5">
+			<field name="email" colSpan="4">
 				<viewer><![CDATA[ 
       						  <a href="mailto:{{record.email}}">{{record.email}}</a>
         				]]></viewer>
 			</field>
 
 <!-- on change -->
-			<field name="phone" colSpan="5">
+			<field name="phone" colSpan="4">
 			<viewer><![CDATA[
 		        			<a href="tel:{{record.phone}}">{{record.phone}}</a>
 		       		]]></viewer>
 			</field>
 
 <!-- on select -->
-			<field name="gender" onSelect="address.all"/>
+			<field name="gender" onSelect="address.all" colSpan="4"/>
 
 			<spacer colSpan="12"/>
 			

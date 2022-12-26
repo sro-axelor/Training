@@ -1,4 +1,4 @@
-package com.axelor.action.domains;
+package com.axelor.action.Test;
 
 import java.io.File;
 import java.io.IOException;

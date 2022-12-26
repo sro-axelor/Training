@@ -12,7 +12,7 @@
 		x-no-fetch="false">
 		
 <!-- 		<field name="orderId" title="Order Id"/> -->
-		<field name="code" />
+<!-- 		<field name="code" /> -->
 		<field name="orderName" />
 		<field name="orderDate" />
 		<field name="deliveryDate" />
@@ -29,6 +29,7 @@
 <!--    onSave="actionattribute-for-readonly-after-saving-ordeid, action-condition-test" -->
 		<panel>
 <!-- 			<field name="orderId"  title="Order Id"/> -->
+<!-- 	      	<field name="code" /> -->
 			<field name="orderName" />
 			<field name="orderDate" />
 			<field name="deliveryDate" />

@@ -6,7 +6,7 @@
   http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
 
 <grid name="address-grid"  title="Address grid" model="com.axelor.action.db.Address">
-            <field name="acode" />
+<!--             <field name="acode" /> -->
             <field name="street" />
 			<field name="area" />
 			<field name="city" />
@@ -16,7 +16,7 @@
 </grid>
 
 <form name="address-form" title="Address form" model="com.axelor.action.db.Address">
-            <field name="acode" />
+<!--             <field name="acode" /> -->
  			<field name="street" />
 			<field name="area" />
 			<field name="city" />

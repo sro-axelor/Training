@@ -1,37 +1,43 @@
 buildscript {
 	ext.repos = {
-	  jcenter()
-	  mavenCentral()
-	  maven { url 'https://plugins.gradle.org/m2/' }
-	  maven { url 'https://repository.axelor.com/nexus/public/' }
+		jcenter()
+		mavenCentral()
+		maven { url 'https://plugins.gradle.org/m2/' }
+		maven { url 'https://repository.axelor.com/nexus/public/' }
 	}
 	repositories repos
 	dependencies {
-	  classpath 'com.axelor:axelor-gradle:5.4.0'
+		classpath 'com.axelor:axelor-gradle:5.4.0'
 	}
-  }
-  
-  allprojects {
+}
+
+allprojects {
 	repositories repos
-  }
-  
-  apply plugin: 'com.axelor.app'
-  
-  axelor {
+}
+
+apply plugin: 'com.axelor.app'
+
+axelor {
 	title = 'Axelor :: DEMO'
-  }
-  
-  allprojects {
+}
+
+allprojects {
 	apply plugin: 'idea'
 	apply plugin: 'eclipse'
-  
+
 	group = 'com.axelor'
 	version = '1.0.0'
-  
+
 	sourceCompatibility = 1.8
 	targetCompatibility = 1.8
-  }
-  
-  dependencies {
+}
+
+//configurations {
+//	  // Remove Junit4, only keep Junit5 provided by AOP
+//	testImplementation.exclude group: 'junit', module: 'junit'
+//	testImplementation.exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+//}
+
+dependencies {
 	implementation project(':modules:axelor-action')
-  }
+}
