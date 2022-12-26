@@ -1,106 +1,76 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 
-<csv-inputs xmlns="http://axelor.com/xml/ns/data-import"
+<xml-inputs xmlns="http://axelor.com/xml/ns/data-import"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://axelor.com/xml/ns/data-import
-    http://axelor.com/xml/ns/data-import/data-import_5.4.xsd">
+	xsi:schemaLocation="http://axelor.com/xml/ns/data-import 
+  https://axelor.com/xml/ns/data-import/data-import_5.4.xsd">
 
-	
-<!-- if you write csv input files inside csv floder which is inside the input floder then you have give the path ,write the file name with path it works  -->
-<!-- 	<input file="csv/titles.csv" type="com.axelor.action.db.Title"/>	 -->
+<!-- adaptors -->
+	<adapter name="LocalDate"
+		type="com.axelor.data.adapter.JavaTimeAdapter">
+		<option name="type" value="LocalDate" />
+		<option name="format" value="dd/MM/yyyy" />
+	</adapter>
 
-<!-- 	<input file="csv/addresses.csv" type="com.axelor.action.db.Address"/>	 -->
+	 <adapter name="Boolean" type="com.axelor.data.adapter.BooleanAdapter">
+     	<option name="falsePattern" value="(0|false|no|f|n)"/>
+	 </adapter>
 
-<!--     <input file="csv/items.csv" type="com.axelor.action.db.Item" /> -->
-	
-<!-- 	<input file="csv/orders.csv" type="com.axelor.action.db.Order" /> -->
+<!-- input and binding part -->
+    <input file="customers.xml" root="customer-root">
 
-<!--     <input file="csv/customers.csv" type="com.axelor.action.db.Customer"> -->
-<!-- 		   <bind column="orderlist_id" to="orderlist" search="self.id in :orderlist_id" eval="orderlist_id.split('\\|') as List" /> -->
-<!--     </input> -->
+		<bind node="configs/titles/title"
+			type="com.axelor.action.db.Title" search="self.code = :code"
+			update="false">
+			<bind node="@code" to="code" />
+			<bind node="text()" to="name" />
+		</bind>
+		<!-- <bind node="configs/orders/order" type="com.axelor.action.db.Order" 
+			search="self.orderId = :orderId" update="false"> -->
+		<!-- <bind node="@orderId" to="orderId" /> -->
+		<!-- <bind node="text()" to="orderName" /> -->
+		<!-- </bind> -->
 
+		<bind node="customers/customer"
+			type="com.axelor.action.db.Customer">
+			<bind node="title" to="title" search="self.name = :title" />
 
-<!-- if you write csv inputfiles inside input floder then simply write the file name it works  -->
-	<input file="titles.csv" type="com.axelor.action.db.Title"/>	
+<!-- if @code of node title exist and not empty then bind to field notes -->
+			<bind node="title/@code" to="notes" alias="title_code"
+				if="title_code &amp;&amp; !title_code.empty" />
 
-	<input file="addresses.csv" type="com.axelor.action.db.Address"/>	
+			<bind node="name[@type='F']" to="firstName" />
+			<bind node="name[@type='M']" to="middleName" />
+			<bind node="name[@type='L']" to="lastName" />
+			<bind node="dateOfBirth" to="dateOfBirth" />
+       <!-- <bind node="gender" to="gender"/> -->
+			<bind node="email" to="email" />
+			<bind node="phone" to="phone" />
 
-    <input file="items.csv" type="com.axelor.action.db.Item" />
-	
-	<input file="orders.csv" type="com.axelor.action.db.Order" />
+<!-- generate email if doesn't exist -->
+			<bind to="email"
+				eval='"${firstName}.${middleName}.${lastName}@gmail.com".toLowerCase()'
+				if="email == null || email.empty" />
 
-    <input file="customers.csv" type="com.axelor.action.db.Customer">
-		   <bind column="orderlist_id" to="orderlist" search="self.id in :orderlist_id" eval="orderlist_id.split('\\|') as List" />
+<!-- bind multi-value field -->
+			<bind node="my/address-list/address" to="addresslist">
+				<bind node="line1" to="street" />
+				<bind node="line2" to="area" />
+				<bind node="city" to="city" />
+				<bind node="@zip" to="zip" />
+				<bind node="state" to="state" />
+				<bind node="country" to="country" />
+			</bind>
+
+<!-- bind with many to many field -->
+			<bind node="myorder/order-list/orders" to="orderlist">
+				<bind node="orderName" to="orderName" />
+				<bind node="orderDate" to="orderDate" adapter="LocalDate"/>
+				<bind node="deliveryDate" to="deliveryDate" adapter="LocalDate"/>
+				<bind node="active" to="active" adapter="Boolean"/>
+			</bind>
+		</bind>
+
     </input>
 
-
-
-
-
-<!-- this below thins are for some testing purpose for me -->
-			
-<!-- 	<input file="titles.csv" type="com.axelor.action.db.Title" > -->
-<!-- 	    <bind to="code" column="code"/> -->
-<!-- 	    <bind to="name" column="name" /> -->
-<!-- 	</input> -->
-
-<!-- 	<input file="titles-no-header.csv" type="com.axelor.action.db.Title" search="self.code = :code" update="true"> -->
-<!-- 	    <header>code,name</header> -->
-<!-- 	    <bind to="code" column="code"></bind> -->
-<!-- 	    <bind to="name" column="name" if-empty="true"></bind> -->
-<!-- 	</input> -->
-		
-<!-- 		<input file="customers.csv" type="com.axelor.action.db.Customer"> -->
-<!-- 		      <bind column="orderlist_id" to="orderlist"  eval="orderlist_id.split('\\|') as List" /> -->
-<!-- 		</input> -->
-				
-<!-- 	working	 -->
- <!-- 	<input file="customers.csv" type="com.axelor.action.db.Customer"> -->  <!-- orderlist[].id -->
-<!-- 	   <bind to="firstName" column="firstName"/> -->
-<!-- 	   <bind to="middleName" column="middleName"/> -->
-<!-- 	   <bind to="lastName" column="lastName"/> -->
-<!-- 	   <bind to="dateOfBirth" column="dateOfBirth"/> -->
-<!-- 	   <bind to="gender" column="gender"/> -->
-<!-- 	   <bind to="_customers_ids" column="orderlist[].id"/> -->
-<!--       <bind to="_customers_ids2" eval="_customers_ids == null ? [0] : _customers_ids.split('\\|') as List"/> -->
-<!--       <bind to="orderlist" column="_customers_ids2" search="self.id in :_customers_ids2" if="_customers_ids2 != null &amp;&amp; _customers_ids2.size() &gt; 0" update="true"/> -->
-<!--	   <bind column="o2" to="orderlist" search="self.orderId in :o2" eval="o2.split('\\|') as List" /> --> 
-<!-- 	</input> -->
-		
-<!-- 	<input file="customers-update.csv" type="com.axelor.action.db.Customer"  -->
-<!--           search="self.firstName = :firstName AND self.middleName = :middleName AND self.lastName = :lastName" -->
-<!--    	   update="true"/> -->
-	
-<!-- 	<input file="orders.csv" type="com.axelor.action.db.Order"  > -->
-<!-- 			<bind to="orderId" column="id" /> -->
-<!-- 			<bind to="orderName" column="name" /> -->
-<!-- 			<bind to="orderDate" column="odate" /> -->
-<!-- 			<bind to="deliveryDate" column="ddate" /> -->
-<!-- 	</input> -->
-
-<!-- 	<input file="items.csv" type="com.axelor.action.db.Item" > -->
-<!-- 			<bind to="itemCode" column="itemCode" /> -->
-<!-- 			<bind to="itemName" column="itemName" /> -->
-<!-- 	</input> -->
-
-<!-- 	<input file="addresses.csv" type="com.axelor.action.db.Address" /> -->
-	
-<!-- 	 <input file="orders.csv" type="com.axelor.action.db.Order"  search="self.code = :code" update="true"> -->
-<!--           <bind column="date" to="orderDate"/> -->
-<!-- 		   <bind to="confirmDate" eval="java.time.LocalDate.now()"/> -->		    
-<!-- 		   <bind to="customer" search="self.email = :email" if="!email.empty"> -->
-<!-- 		      <bind column="firstName" to="firstName"/> -->
-<!-- 		      <bind column="middleName" to="middleName"/> -->
-<!-- 		      <bind column="lastName" to="lastName"/> -->
-<!-- 		      <bind column="email" to="email"/> -->
-<!-- 		   </bind> -->
-		
-<!-- 		   <bind to="customer" if="email.empty"> -->
-<!-- 		      <bind column="firstName" to="firstName"/> -->
-<!-- 		      <bind column="middleName" to="middleName"/> -->
-<!-- 		      <bind column="lastName" to="lastName"/> -->
-<!-- 		      <bind to="email" eval='"${firstName}.${lastName}@gmail.com".toLowerCase()'/> -->
-<!-- 		   </bind> -->
-<!--   </input> -->
-	
-</csv-inputs>
+</xml-inputs>

@@ -12,9 +12,11 @@
 		x-no-fetch="false">
 		
 <!-- 		<field name="orderId" title="Order Id"/> -->
+		<field name="code" />
 		<field name="orderName" />
 		<field name="orderDate" />
 		<field name="deliveryDate" />
+		<field name="active" title="Terms And Conditions" />
 		<field name="orderStatus" />
 		<field name="orderQuantity" />
 		
@@ -30,6 +32,7 @@
 			<field name="orderName" />
 			<field name="orderDate" />
 			<field name="deliveryDate" />
+			<field name="active" title="Terms And Conditions" />
 			<field name="orderStatus" selection="status" />
 			<field name="orderQuantity" selection="quantity"
 				widget="NavSelect" />

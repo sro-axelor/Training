@@ -10,7 +10,6 @@
 	<entity name="Address">
 
 		<many-to-one name="customeres" ref="Customer"/>
-		<string name="acode" required="true" unique="true" min="2"/>
 		<string name="street" max="255" />
 		<string name="area" max="255" />
 		<string name="city" />
