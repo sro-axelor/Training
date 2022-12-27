@@ -1,66 +1,85 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
 <object-views xmlns="http://axelor.com/xml/ns/object-views"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
   http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
 
 
-	<grid name="customer-grid" title="Login Details"
+ <grid name="customer-grid" title="Login Details"
 		model="com.axelor.action.db.Customer" editable="false"
 		x-no-fetch="false" x-selector="checkbox" canArchive="true"
 		canEdit="true" orderBy="seq" groupBy="gender">
 
 		<hilite background="green" if="$contains(email, 'gmail.com')" />
 <!-- 		<field name="customerId" /> -->
+		<field name="image" widget="image"/>
 		<field name="firstName" />
 		<field name="middleName" />
 		<field name="lastName" />
 		<field name="dateOfBirth" />
-		<field name="email" />
-		<field name="phone" />
+		<field name="email" widget="email"/>
+		<field name="phone" widget="phone"/>
+		<field name="website" widget="url" />
+		<field name="userName" title="User Name"/>
+		<field name="password" widget="password"/>
 		<field name="seq" title="Customer Id" />
 		<field name="gender" />
-	</grid>
+ </grid>
 
 
-	<form name="customer-form" title="Details"
+ <form name="customer-form" title="Details"
 		model="com.axelor.action.db.Customer" width="large" canSave="true"
 		onNew="action-record-onnew-test" onSave="action-condition-test-gender">
 
-		<panel name="overviewPanel" title="Overview">
-		<field name="seq" title="Customer Id"/>
-		<spacer/>
-<!-- 			<field name="customerId" title="Customer Id"/> -->
-			<field name="firstName" colSpan="3" />
-			
+	 <panel name="overviewPanel" title="Overview">
+			<field name="seq" title="Customer Id" colSpan="2"/>
+			<field name="image" widget="image" />
+			<spacer colSpan="12"/>
+<!-- 		<field name="customerId" title="Customer Id"/> -->
+			<field name="firstName" colSpan="3" />	
 			<field name="middleName" colSpan="3" />
 			<field name="lastName" colSpan="3" />
 			<field name="dateOfBirth" colSpan="3" />
 			
+			<spacer colSpan="12"/>
 			<separator colSpan="12" />
 
-			<field name="email" colSpan="4">
+			<field name="email" colSpan="5" widget="email">
 				<viewer><![CDATA[ 
       						  <a href="mailto:{{record.email}}">{{record.email}}</a>
         				]]></viewer>
 			</field>
 
 <!-- on change -->
-			<field name="phone" colSpan="4">
+			<field name="phone" colSpan="5" widget="phone" x-placeholder-number-type="FIXED_LINE" > 
 			<viewer><![CDATA[
 		        			<a href="tel:{{record.phone}}">{{record.phone}}</a>
 		       		]]></viewer>
 			</field>
 
 <!-- on select -->
-			<field name="gender" onSelect="address.all" colSpan="4"/>
-
+			<field name="gender" onSelect="address.all" colSpan="2"/>
+			
+			<spacer colSpan="12"/>
+			
+			<field name="website" widget="url" colSpan="3"/>
+			
+			<field name="userName" colSpan="3" title="User Name"/>
+			
+			<field name="password" widget="password" colSpan="3"/>
+			
 			<spacer colSpan="12"/>
 			
 		 		<panel name="reviewPanel" colSpan="12">
 					<field name="notes" title="About You" colSpan="12"
 						   edit-window="popup" />
 				</panel>
+				
+			<field name="titles" /> 	
+			<field name="code" x-type="many-to-one"
+			  x-target="com.axelor.action.db.Title"
+			  x-target-name="code" />
 		</panel>
 
 		<panel-related field="addresslist" x-selector="checkbox" canSelect="true" />
@@ -90,7 +109,7 @@
 				prompt="You want's to deleted Record" css="btn-danger" />
 		</panel>
 
-	</form>
+ </form>
 
 
 <!-- action attribute test -->

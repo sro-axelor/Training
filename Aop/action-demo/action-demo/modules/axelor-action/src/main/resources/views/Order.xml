@@ -15,11 +15,13 @@
 <!-- 		<field name="code" /> -->
 		<field name="orderName" />
 		<field name="orderDate" />
-		<field name="deliveryDate" />
-		<field name="active" title="Terms And Conditions" />
+		<field name="deliveryDate" widget="date" />
+		<field name="timeTest" widget="time" />
+		<field name="dateTimeTest" widget="date-time" />
+		<field name="active" title="Terms And Conditions" widget="boolean-radio" />
 		<field name="orderStatus" />
-		<field name="orderQuantity" />
-		
+		<field name="orderQuantity" widget="Integer"/>
+		<field name="price" widget="Decimal" x-scale="2" x-precision="18"/>
 	</grid>
 
 <!-- form view -->
@@ -32,11 +34,28 @@
 <!-- 	      	<field name="code" /> -->
 			<field name="orderName" />
 			<field name="orderDate" />
-			<field name="deliveryDate" />
-			<field name="active" title="Terms And Conditions" />
-			<field name="orderStatus" selection="status" />
+			<field name="deliveryDate" widget="date"/>
+			<field name="orderStatus" selection="status"  widget="RadioSelect" />
 			<field name="orderQuantity" selection="quantity"
-				widget="NavSelect" />
+				widget="NavSelect" colSpan="12"/>
+		    <field name="active" title="Terms And Conditions" widget="boolean-switch" />
+		    
+			<spacer colSpan="12"/>	
+			<separator colSpan="12"/>	
+			<field name="price" widget="Decimal" x-scale="2" x-precision="18"/>
+			<field name="binaryTest" widget="binary"/>
+			<field name="timeTest" widget="duration" />
+			<field name="dateTimeTest" widget="date-time" />
+			<help css="alert-info">
+				<![CDATA[
+				Some help text goes here....
+				]]>
+			</help>
+			<static>
+				<![CDATA[
+				Some static text goes here....
+				]]>
+		    </static>
 		</panel>
 
 <!-- buttons for test attributes -->

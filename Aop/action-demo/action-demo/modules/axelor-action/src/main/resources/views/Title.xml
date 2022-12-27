@@ -12,8 +12,8 @@
 
   <form name="title-form" title="Title" model="com.axelor.action.db.Title" width="mini">
     <panel title="Overview" itemSpan="12">
-      <field name="name" />
-      <field name="code" />
+        <field name="name" />
+        <field name="code" />
     </panel>
   </form>
 

@@ -15,10 +15,13 @@
 		<string name="orderName" />
 		<date name="orderDate" />
 		<date name="deliveryDate" />
+		<time name="timeTest"/>
+		<datetime name="dateTimeTest"/>
 		<boolean name="active" />
 		<string name="orderStatus" selection="status" />
 		<integer name="orderQuantity" selection="quantity" />
-
+		<decimal name="price" />
+		<binary name="binaryTest"/>
 <!-- 	<many-to-many name="customerlist" ref="Customer" /> -->
 
 		<one-to-many name="itemlist" ref="Item" mappedBy="orderes"/>
