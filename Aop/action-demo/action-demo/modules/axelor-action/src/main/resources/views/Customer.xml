@@ -5,92 +5,125 @@
 	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
   http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
 
-
- <grid name="customer-grid" title="Login Details"
+	<grid name="customer-grid" title="Login Details"
 		model="com.axelor.action.db.Customer" editable="false"
 		x-no-fetch="false" x-selector="checkbox" canArchive="true"
 		canEdit="true" orderBy="seq" groupBy="gender">
 
 		<hilite background="green" if="$contains(email, 'gmail.com')" />
-<!-- 		<field name="customerId" /> -->
-		<field name="image" widget="image"/>
+		<!-- <field name="customerId" /> -->
+		<field name="image" />
 		<field name="firstName" />
 		<field name="middleName" />
 		<field name="lastName" />
 		<field name="dateOfBirth" />
-		<field name="email" widget="email"/>
-		<field name="phone" widget="phone"/>
-		<field name="website" widget="url" />
-		<field name="userName" title="User Name"/>
-		<field name="password" widget="password"/>
+		<field name="email" />
+		<field name="phone" />
+		<field name="website" />
+		<field name="userName" title="User Name" />
+		<field name="password" />
 		<field name="seq" title="Customer Id" />
 		<field name="gender" />
- </grid>
+	</grid>
 
-
- <form name="customer-form" title="Details"
+	<form name="customer-form" title="Details"
 		model="com.axelor.action.db.Customer" width="large" canSave="true"
 		onNew="action-record-onnew-test" onSave="action-condition-test-gender">
 
-	 <panel name="overviewPanel" title="Overview">
-			<field name="seq" title="Customer Id" colSpan="2"/>
-			<field name="image" widget="image" />
-			<spacer colSpan="12"/>
-<!-- 		<field name="customerId" title="Customer Id"/> -->
-			<field name="firstName" colSpan="3" />	
+		<panel name="overviewPanel" title="Overview">
+			<field name="seq" title="Customer Id" colSpan="2" />
+			<field name="image" widget="image" colSpan="3" />
+			
+			<field name="imageUrl" widget="ImageSelect"
+				selection="selection-for-image" colSpan="2" />
+				
+			<field name="icon" widget="ImageSelect"
+				selection="selection-for-icon" colSpan="2" />
+			<spacer colSpan="12" />
+			<!-- <field name="customerId" title="Customer Id"/> -->
+			
+<!-- title relation field -->
+			<field name="title" x-type="many-to-one"
+			x-target="com.axelor.action.db.Title"
+			x-target-name="firstName" colSpan="3"/>
+			
+			<field name="firstName" colSpan="3" widget="string" />
 			<field name="middleName" colSpan="3" />
 			<field name="lastName" colSpan="3" />
-			<field name="dateOfBirth" colSpan="3" />
-			
-			<spacer colSpan="12"/>
-			<separator colSpan="12" />
 
-			<field name="email" colSpan="5" widget="email">
+			<spacer colSpan="12" />
+			
+			<field name="dateOfBirth" colSpan="4" />
+			<!-- <separator colSpan="12" /> -->
+			<field name="email" colSpan="4" widget="email">
 				<viewer><![CDATA[ 
       						  <a href="mailto:{{record.email}}">{{record.email}}</a>
         				]]></viewer>
 			</field>
 
-<!-- on change -->
-			<field name="phone" colSpan="5" widget="phone" x-placeholder-number-type="FIXED_LINE" > 
-			<viewer><![CDATA[
-		        			<a href="tel:{{record.phone}}">{{record.phone}}</a>
-		       		]]></viewer>
-			</field>
+			<field name="phone" widget="phone"
+				x-placeholder-number-type="FIXED_LINE" colSpan="4"/>
+			<!-- <field name="phone" widget="phone" /> -->
+			<spacer colSpan="12" />
+			<!-- on select -->
+			<field name="gender" onSelect="address.all" colSpan="6"
+				widget="RadioSelect" />
 
-<!-- on select -->
-			<field name="gender" onSelect="address.all" colSpan="2"/>
+			<field name="website" widget="url" colSpan="6" />
+
+			<spacer colSpan="12" />
+
+			<field name="userName" colSpan="3" title="User Name" />
+
+			<field name="password" widget="password" colSpan="3"
+				validIf="password.length &gt; 4" />
+
+			<field name="reference" selection="RefSelect.selection"
+				widget="RefSelect" colSpan="6" />
+
+			<spacer colSpan="12" />
+
+			<panel name="reviewPanel" colSpan="12">
+				<field name="notes" title="About You" edit-window="popup"
+					widget="html" colSpan="12" x-lite="true" />
+			</panel>
+
+			<field name="orderlist" widget="TagSelect"/>
 			
-			<spacer colSpan="12"/>
+			<!-- <field name="orderlist" colSpan="12" css="order-list" > -->
+			<!-- <viewer><![CDATA[ -->
+			<!-- <order> -->
+			<!-- {{record.orderName}} {{record.orderDate}}<br> -->
+			<!-- {{record.deliveryDate}}, {{record.orderStatus}} , {{record.orderQuantity}}<br> -->
+			<!-- </order> -->
+			<!-- ]]></viewer> -->
+			<!-- <editor x-show-titles="false"> -->
+			<!-- <field name="orderName" colSpan="12"/> -->
+			<!-- <field name="orderDate" colSpan="12"/> -->
+			<!-- <field name="deliveryDate" colSpan="4"/> -->
+			<!-- <field name="orderStatus" colSpan="4"/> -->
+			<!-- <field name="orderQuantity" colSpan="4"/> -->
+			<!-- </editor> -->
+			<!-- </field> -->
 			
-			<field name="website" widget="url" colSpan="3"/>
 			
-			<field name="userName" colSpan="3" title="User Name"/>
-			
-			<field name="password" widget="password" colSpan="3"/>
-			
-			<spacer colSpan="12"/>
-			
-		 		<panel name="reviewPanel" colSpan="12">
-					<field name="notes" title="About You" colSpan="12"
-						   edit-window="popup" />
-				</panel>
-				
-			<field name="titles" /> 	
-			<field name="code" x-type="many-to-one"
-			  x-target="com.axelor.action.db.Title"
-			  x-target-name="code" />
 		</panel>
 
-		<panel-related field="addresslist" x-selector="checkbox" canSelect="true" />
+		<panel-related field="addresslist" x-selector="checkbox"
+			canSelect="true" />
 
-<!-- buttons for test attributes -->
+		<!-- buttons for test attributes -->
 		<panel>
-				<button onClick="actionattribute-for-test" name="collapse-test" title="Collapse Test" colSpan="2"/>
-				<button onClick="actionrecord-for-actionmethod-text" name="actionmethod-test" title="ActionMethod Test" colSpan="2"/>
-				<button onClick="item.all" name="test" title="Test" colSpan="2"/>
-				<button onClick="add-address" name="adding-value" title="One Address Adding" colSpan="2"/>
-				<button onClick="delete-address" name="deleting-value" title="One Address Deleting" colSpan="2"/>
+			<button onClick="actionattribute-for-test"
+				name="collapse-test" title="Collapse Test" colSpan="2" />
+			<button onClick="actionrecord-for-actionmethod-text"
+				name="actionmethod-test" title="ActionMethod Test" colSpan="2" />
+			<button onClick="item.all" name="test" title="Test"
+				colSpan="2" />
+			<button onClick="add-address" name="adding-value"
+				title="One Address Adding" colSpan="2" />
+			<button onClick="delete-address" name="deleting-value"
+				title="One Address Deleting" colSpan="2" />
 		</panel>
 
 
@@ -109,21 +142,16 @@
 				prompt="You want's to deleted Record" css="btn-danger" />
 		</panel>
 
- </form>
-
+	</form>
 
 <!-- action attribute test -->
-	<action-attrs
-		name="actionattribute-for-test"
+	<action-attrs name="actionattribute-for-test"
 		model="com.axelor.action.db.Customer">
-		
+
 <!-- for deatilspanel collapse is work there expr is true if you click button -->
-		<attribute name="collapse" for="detailsPanel" expr="true"/>
+		<attribute name="collapse" for="detailsPanel" expr="true" />
 	</action-attrs>
 
-
-	
-	
 <!-- action record -->
 <!-- onnew -->
 	<action-record name="action-record-onnew-test"
@@ -132,24 +160,27 @@
 	</action-record>
 
 
-<!-- two type of test using action record and action method -->    
+<!-- two type of test using action record and action method -->
 	<!-- <action-record name="actionrecord-for-actionmethod-text" model="com.axelor.action.db.Customer"> -->
-	<!-- 	<field name="firstName" expr="action: act.hello" /> -->
+	<!-- <field name="firstName" expr="action: act.hello" /> -->
 	<!-- </action-record> -->
 
- 	<action-record name="actionrecord-for-actionmethod-text" model="com.axelor.action.db.Customer">
+	<action-record name="actionrecord-for-actionmethod-text"
+		model="com.axelor.action.db.Customer">
 		<field name="firstName" expr="action: actionmethod.test" />
-    </action-record>
+	</action-record>
 
 
 
-<!-- action method --> 
-<!-- 	<action-method name="actionmethod.test" model="com.axelor.action.db.Customer" > -->
-<!-- 		  <call class="com.axelor.action.web.Hello" method="say(firstName)"/> -->
-<!-- 	</action-method>  -->
-	
-   <action-method name="actionmethod.test" >
-		  <call class="com.axelor.action.web.Hello" method="say('ActionMethod')"/>
+<!-- action method -->
+	<!-- <action-method name="actionmethod.test" model="com.axelor.action.db.Customer" 
+		> -->
+	<!-- <call class="com.axelor.action.web.Hello" method="say(firstName)"/> -->
+	<!-- </action-method> -->
+
+	<action-method name="actionmethod.test">
+		<call class="com.axelor.action.web.Hello"
+			method="say('ActionMethod')" />
 	</action-method>
 
 
@@ -173,32 +204,65 @@
 	<!-- </action-record> -->
 
 
-<!-- action-condition -->	
+<!-- action-condition -->
 	<action-condition name="action-condition-test-gender">
-		<check field="gender" if="eval: gender == null" error="Gender should not be empty"/>
+		<check field="gender" if="eval: gender == null"
+			error="Gender should not be empty" />
 	</action-condition>
 
 
 <!-- adding address -->
-    <action-attrs name="add-address" model="com.axelor.action.db.Order" >
-        <attribute name="value:add" for="addresslist" expr="select: a from Address a"/>
-    </action-attrs>	
+	<action-attrs name="add-address"
+		model="com.axelor.action.db.Order">
+		<attribute name="value:add" for="addresslist"
+			expr="select: a from Address a" />
+	</action-attrs>
 
 <!-- deleting address -->
-    <action-attrs name="delete-address" model="com.axelor.action.db.Order" >
-        <attribute name="value:del" for="addresslist" expr="select: a from Address a"/>
-    </action-attrs>	
+	<action-attrs name="delete-address"
+		model="com.axelor.action.db.Order">
+		<attribute name="value:del" for="addresslist"
+			expr="select: a from Address a" />
+	</action-attrs>
 
 
-<!-- <panel-related name="addressesPanel" title="Address" -->
-<!-- 			field="addresslist" form-view="address-form-popup" editable="true" -->
-<!-- 			canMove="true" height="4" x-selector="checkbox" canSelect="true"> -->
-<!-- 			<field name="street" /> -->
-<!-- 			<field name="area" /> -->
-<!-- 			<field name="city" /> -->
-<!-- 			<field name="state" /> -->
-<!-- 			<field name="zip" /> -->
-<!-- 			<field name="country" /> -->
-<!-- 		</panel-related> -->
+	<!-- <panel-related name="addressesPanel" title="Address" -->
+	<!-- field="addresslist" form-view="address-form-popup" editable="true" -->
+	<!-- canMove="true" height="4" x-selector="checkbox" canSelect="true"> -->
+	<!-- <field name="street" /> -->
+	<!-- <field name="area" /> -->
+	<!-- <field name="city" /> -->
+	<!-- <field name="state" /> -->
+	<!-- <field name="zip" /> -->
+	<!-- <field name="country" /> -->
+	<!-- </panel-related> -->
+
+
+
+<!-- selection field for image -->
+	<selection name="selection-for-image">
+		<option
+			value="https://cdn.pixabay.com/photo/2016/12/15/23/22/lake-1910263__340.jpg"></option>
+		<option
+			value="https://img.freepik.com/free-photo/beautiful-scenery-phragmites-plants-by-sea-with-swimming-pelican-sunset_181624-37787.jpg"></option>
+		<option
+			value="https://images.pexels.com/photos/1172064/pexels-photo-1172064.jpeg"></option>
+		<option
+			value="https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg"></option>
+	</selection>
+
+	<selection name="selection-for-icon">
+		<option value="fa-home"></option>
+		<option value="fa-camera"></option>
+		<option value="fa-car"></option>
+		<option value="fa-book"></option>
+	</selection>
+
+<!-- RefSelect.selection -->
+	<selection name="RefSelect.selection">
+		<option value="com.axelor.action.db.Order">Order</option>
+		<option value="com.axelor.action.db.Customer"
+			data-domain="self.email LIKE '%gmail%'" data-grid="customer-grid">Customer</option>
+	</selection>
 
 </object-views>

@@ -13,7 +13,10 @@
 <entity name="Customer" cacheable="true">
   
   		
- 		<binary name="image" title="Photo" help="Max size 4MB." />		
+ 		<binary name="image" title="Photo" help="Max size 4MB." />
+ 		<binary name="imageUrl" title="imageUrl"  />
+ 		<binary name="icon" title="Icon" />
+ 				
 		<string name="seq" sequence="entery-customer.sequence"
 			readonly="true" />
 	
@@ -29,7 +32,9 @@
         <string name="password" />
 		<string name="email" encrypted="false" />
 		<string name="phone" max="20" massUpdate="true" />
-		<string name="notes" title="About Order" large="true" />
+		<string name="notes" title="About Order"  />
+		<string name="reference" /> 
+        <integer name="referenceId" />
 		
 		<many-to-one name="title" ref="Title"/>
 

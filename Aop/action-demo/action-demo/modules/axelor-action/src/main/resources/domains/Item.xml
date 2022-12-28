@@ -13,6 +13,7 @@
 		<string name="itemName" />
 		<enum name="whichItem" ref="Whichitems" />
 		<many-to-one name="orderes" ref="Order" />
+		<string name="selectItem"/>
 	</entity>
 	
 	<enum name="Whichitems" >

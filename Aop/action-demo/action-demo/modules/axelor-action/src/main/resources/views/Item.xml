@@ -10,6 +10,7 @@
 		<field name="itemCode" />
 		<field name="itemName" />
 		<field name="whichItem" />		
+	    <field name="selectItem" />
 	</grid>
 
 	<form name="item-form" title="Item form"
@@ -18,12 +19,38 @@
 			<field name="itemCode" />
 			<field name="itemName" />
 			<field name="whichItem" />
+			<field name="selectItem" selection="color.item.selection" widget="MultiSelect"/>
 		</panel>	
 		
 <!-- 		<panel> -->
 <!-- 			<button onClick="create.item" name="action-script-custom-models" title="Action-Script Custom-Models" colSpan="4"/> -->
 <!-- 		</panel>	 -->
 	</form>
+	
+    <selection name="color.item.selection">
+		  <option value="red" color="red">Mobile</option>
+		  <option value="pink" color="pink">Laptop</option>
+		  <option value="indigo" color="indigo">Bottle</option>
+		  <option value="blue" color="blue">Notebook</option>
+		  <option value="lightblue" color="lightblue">Bat</option>
+		  <option value="cyan" color="cyan">Cycle</option>
+		  <option value="teal" color="teal">Toy</option>
+		  <option value="green" color="green">Charger</option>
+		  <option value="lightgreen" color="lightgreen">Backcover</option>
+		  <option value="lime" color="lime">Screenguard</option>
+		  <option value="yellow" color="yellow">Ball</option>
+		  <option value="purple" color="purple">Watch</option>
+		  <option value="amber" color="amber">Playstation</option>
+		  <option value="orange" color="orange">Tv</option>
+		  <option value="deeporange" color="deeporange">Fridge</option>
+		  <option value="brown" color="brown">Washingmachine</option>
+		  <option value="grey" color="grey">Heater</option>
+		  <option value="deeppurple" color="deeppurple">Earphone</option>
+		  <option value="bluegrey" color="bluegrey">Speaker</option> <!-- new in version 5.4 -->
+		  <option value="black" color="black">Headphone</option>
+		  <option value="white" color="white">Toaster</option>
+   </selection>
+	
 	
 <!-- action-script can be used for custom models too -->
 <!-- 	<action-script name="create.item" model="com.axelor.meta.db.MetaJsonRecord"> -->

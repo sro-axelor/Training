@@ -6,7 +6,7 @@
   http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
 
 <!-- grid view -->
-	<grid name="order-grid" title="Order"
+  <grid name="order-grid" title="Order"
 		model="com.axelor.action.db.Order" edit-icon="false"
 		customSearch="false" x-selector="checkbox" freeSearch="none"
 		x-no-fetch="false">
@@ -15,30 +15,30 @@
 <!-- 		<field name="code" /> -->
 		<field name="orderName" />
 		<field name="orderDate" />
-		<field name="deliveryDate" widget="date" />
-		<field name="timeTest" widget="time" />
-		<field name="dateTimeTest" widget="date-time" />
-		<field name="active" title="Terms And Conditions" widget="boolean-radio" />
+		<field name="deliveryDate" />
+		<field name="timeTest" />
+		<field name="dateTimeTest"/>
+		<field name="active" title="Terms And Conditions"  />
 		<field name="orderStatus" />
-		<field name="orderQuantity" widget="Integer"/>
-		<field name="price" widget="Decimal" x-scale="2" x-precision="18"/>
-	</grid>
+		<field name="orderQuantity" />
+		<field name="price"/>
+  </grid>
 
 <!-- form view -->
-	<form name="order-form" title="Order"
+  <form name="order-form" title="Order"
 		model="com.axelor.action.db.Order" canSave="true" canDelete="false"
         onNew="action-record-for-button" onSave="group-of-actions-test">
 <!--    onSave="actionattribute-for-readonly-after-saving-ordeid, action-condition-test" -->
 		<panel>
 <!-- 			<field name="orderId"  title="Order Id"/> -->
 <!-- 	      	<field name="code" /> -->
-			<field name="orderName" />
+			<field name="orderName" readonlyIf="orderStatus != ordered "/>
 			<field name="orderDate" />
-			<field name="deliveryDate" widget="date"/>
-			<field name="orderStatus" selection="status"  widget="RadioSelect" />
+			<field name="deliveryDate" widget="date" />
+			<field name="orderStatus" selection="status"  widget="SingleSelect"  /> <!-- widget="MultiSelect" --> 
 			<field name="orderQuantity" selection="quantity"
 				widget="NavSelect" colSpan="12"/>
-		    <field name="active" title="Terms And Conditions" widget="boolean-switch" />
+		    <field name="active" title="Terms And Conditions" widget="boolean-switch"/>
 		    
 			<spacer colSpan="12"/>	
 			<separator colSpan="12"/>	
@@ -87,7 +87,7 @@
 			<button onClick="delete" name="Delete" title="Discard"
 				css="btn-info" />
 		</panel>
-	</form>
+  </form>
 
 	<selection name="status" >
 		<option value="draft" color="red">DRAFT</option>
