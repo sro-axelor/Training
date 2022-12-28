@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+<grid name="order-grid" title="Order" model="com.axelor.demo.db.Order" >
+ 	  <field name="orderId"/>
+ 	  <field name="orderName"/>
+ 	  <field name="orderDate"/>
+ 	  <field name="orderStatus" />
+</grid>
+
+
+<form name="order-form" title="Order" model="com.axelor.demo.db.Order" >
+
+<panel>
+	 <field name="orderId"/>
+     <field name="orderName"/>
+     <field name="orderDate"/>
+ 	  <field name="orderStatus" selection="order.list"/>
+</panel>
+
+</form>
+
+<selection name="order.list">
+	<option value="draft" color="red" >DRAFT</option>
+	<option value="wishlist" color="pink" >WISHLIST</option>
+	<option value="ordered" color="blue" >ORDERED</option>
+	<option value="canceled" color="green" >CANCELED</option>
+</selection>
+
+
+<kanban columnBy="orderStatus" model="com.axelor.demo.db.Order" sequenceBy="orderId" title="Order Kanban" name="order-kaban">
+<field name="orderId"/>
+<field name="orderName"/>
+<field name="orderDate"/>
+<field name="orderStatus"/>
+
+<template>
+<![CDATA[
+<h4>{{orderName}}</h4>
+  <div class="card-body">{{orderDate}}</div>
+  <div class="card-footer">
+    <i class='fa fa-clock-o'></i> <span>{{startDate|date:'yyyy-MM-dd HH:mm:ss'}}</span>
+  </div>
+]]></template>
+</kanban>
+  
+</object-views>

@@ -1,0 +1,39 @@
+apply plugin : 'java'
+apply plugin : 'eclipse'
+apply plugin : 'eclipse-wtp'
+apply plugin : 'war'
+apply plugin: 'application'
+apply plugin: 'java-library'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+	implementation 'org.postgresql:postgresql:42.3.4'
+	
+	implementation 'com.google.guava:guava:31.1-jre'
+
+	implementation 'javax.persistence:javax.persistence-api:2.2'
+	
+	implementation 'org.hibernate:hibernate-gradle-plugin:5.6.8.Final'
+	
+	implementation group: 'com.google.inject', name: 'guice', version: '5.1.0'
+
+	implementation 'javax.servlet:jstl:1.2'
+	
+	compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
+
+	compileOnly 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.3'
+
+	testImplementation 'junit:junit:4.13.2'
+}
+
+application {
+	mainClass = 'a.App'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

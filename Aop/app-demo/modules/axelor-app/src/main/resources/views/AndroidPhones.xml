@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+<!-- grid view -->
+	<grid name="androidphones-grid" title="AndroidPhones"
+		model="com.axelor.app.db.AndroidPhones">
+		<field name="name" />
+		<!-- <field name="color"/> -->
+		<field name="price" />
+	</grid>
+
+
+<!-- form view -->
+	<form name="androidphones-form" title="AndroidPhones"
+		model="com.axelor.app.db.AndroidPhones">
+		<panel>
+			<field name="name" />
+			<field name="price" />
+		</panel>
+	</form>
+</object-views>

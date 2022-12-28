@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+<!-- dashboard for custom view action -->
+	<dashboard name="order-dashboard" title="Order Dashboard">
+		<dashlet action="orderReport.action1" />
+		<dashlet action="orderReport.action2" />
+
+		<dashlet action="chart.action1" />
+		<dashlet action="chart.action2" />
+		<dashlet action="chart.action3" />
+		<dashlet action="chart.action4" />
+		<dashlet action="chart.action5" />
+		<dashlet action="chart.action6" />
+		<dashlet action="chart.action7" />
+		<dashlet action="chart.action8" />
+		<dashlet action="chart.action9" />
+		<dashlet action="chart.action10" />
+		<dashlet action="chart.action11" />
+
+	</dashboard>
+
+
+<!-- actionview of order custom view -->
+	<action-view name="orderReport.action1"
+		title="Custom View1">
+		<view type="custom" name="Order-CustomView1" />
+	</action-view>
+
+	<action-view name="orderReport.action2"
+		title="Custom View2">
+		<view type="custom" name="Order-CustomView2" />
+	</action-view>
+
+
+<!-- action view for chart-view -->
+	<action-view name="chart.action1" title="pie Chart">
+		<view type="chart" name="pie.chart" />
+	</action-view>
+
+	<action-view name="chart.action2" title="bar Chart">
+		<view type="chart" name="bar.chart" />
+	</action-view>
+
+	<action-view name="chart.action3" title="hbar Chart">
+		<view type="chart" name="hbar.chart" />
+	</action-view>
+
+	<action-view name="chart.action4" title="line Chart">
+		<view type="chart" name="line.chart" />
+	</action-view>
+
+	<action-view name="chart.action5" title="area Chart">
+		<view type="chart" name="area.chart" />
+	</action-view>
+
+	<action-view name="chart.action6" title="donut Chart">
+		<view type="chart" name="donut.chart" />
+	</action-view>
+
+	<action-view name="chart.action7" title="radar Chart">
+		<view type="chart" name="radar.chart" />
+	</action-view>
+
+	<action-view name="chart.action8" title="gauge Chart">
+		<view type="chart" name="gauge.chart" />
+	</action-view>
+
+	<action-view name="chart.action9" title="scatter Chart">
+		<view type="chart" name="scatter.chart" />
+	</action-view>
+
+	<action-view name="chart.action10" title="funnel Chart">
+		<view type="chart" name="funnel.chart" />
+	</action-view>
+
+	<action-view name="chart.action11" title="text Chart">
+		<view type="chart" name="text.chart" />
+	</action-view>
+
+
+</object-views>

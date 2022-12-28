@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+	<form name="logindetails-form" title="LoginDetails"
+		model="com.axelor.app.db.LoginDetails" id="login-extension-form"
+		extension="true">
+
+		<!-- Insert a dashlet after Overview panel. -->
+		<extend target="panel[@title='Overview']">
+			<insert position="after">
+				<panel-dashlet action="transportlogistics.all"
+					title="extensions" />
+			</insert>
+		</extend>
+
+		<!-- Replace fullName field by firstName and lastName fields. -->
+		<extend target="//field[@name='customer']">
+			<replace>
+				<field name="PersonName" />
+			</replace>
+		</extend>
+
+		<!-- Move Extra panel before first sidebar panel. -->
+		<extend target="panel[@sidebar='true']">
+			<move position="before" source="panel[@title='Custom']" />
+		</extend>
+
+		<!-- Change widget attribute on notes field. -->
+		<extend target="//field[@name='notes']">
+			<attribute name="widget" value="html" />
+		</extend>
+
+		<!-- Change attributes on the root element. -->
+		<extend target="/">
+			<attribute name="canAttach" value="false" />
+			<attribute name="width" value="large" />
+		</extend>
+
+	</form>
+
+</object-views>

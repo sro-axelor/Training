@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+
+<!-- Order menu -->  
+  <menuitem name="MyOrder-menu" title="My Order" icon="fas fa-shopping-cart" icon-background="pink" />
+ 
+  <menuitem name="menu-myorder-friends" parent="MyOrder-menu" title="All Orders" icon="fa-duotone fa-cart-plus" icon-background="blue" action="myorder.all"/>  
+  <action-view name="myorder.all" title="My Order Details" model="com.axelor.app.db.MyOrder"> 
+     <view type="grid" name="myorder-grid"/> 
+     <view type="form" name="myorder-form"/> 
+  </action-view>
+
+
+  
+<!-- Mobiles menu -->
+  <menuitem name="AllMobiles-menu" title="Mobiles" icon="fas fa-mobile" icon-background="violet" />
+
+  <menuitem name="menu-mobiles-friends" parent="AllMobiles-menu" title="All Mobiles" icon="fas fa-mobile" icon-background="blue" action="mobiles.all"/>   
+
+  <action-view name="mobiles.all" title="Mobiles Details" model="com.axelor.app.db.MyOrder"> 
+     <view type="grid" name="myorder-grid"/> 
+     <view type="form" name="myorder-form"/> 
+   </action-view> 
+
+
+
+  
+<!-- My Order -->
+<menuitem name="LoginDetails-menu" title="Log in" icon="fa-solid fa-user" icon-background="green" /> 
+
+  <menuitem name="menu-logindetails-friends" parent="LoginDetails-menu" title="All Login Details" icon="fas fa-user-plus" icon-background="blue" action="logindetails.all"/>   
+
+  <action-view name="logindetails.all" title="Login Details" model="com.axelor.app.db.LoginDetails"> 
+     <view type="grid" name="logindetails-grid"/> 
+     <view type="form" name="logindetails-form"/> 
+  </action-view>
+
+</object-views>

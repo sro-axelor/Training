@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
+  http://axelor.com/xml/ns/domain-models/domain-models_5.4.xsd">
+
+  <module name="app" package="com.axelor.app.db"/>
+
+
+<!-- sequence outside entity -->
+  <sequence name="my-ordering.sequence" initial="1" increment="1" padding="10" suffix="Ordered" />
+
+
+<!-- entity class -->
+<entity name="MyOrder" cacheable="true">
+	
+<!-- sequence -->	   
+ <string name="orderSeq" sequence="my-ordering.sequence"  readonly="true"/>	
+ 
+ 
+<!-- enum -->
+    <enum name="myOrderStatus" ref="OrderStatus" />
+
+<!-- date  -->
+    <date name="delhiveryDate" />
+
+<!-- relationship -->
+    <one-to-many name="mymob" ref="Mobiles" mappedBy="cMobile" />  
+
+    <one-to-one name="orderaddresses" ref="PersonAddress" mappedBy="paddress"/>
+
+	<!-- <many-to-many name="orderaddresses"  ref="PersonAddress"/> -->
+</entity>
+
+
+<!-- enum -->
+	 <enum name="OrderStatus">
+	    <item name="DRAFT" />
+	    <item name="OPEN" />
+	    <item name="CLOSED" />
+	    <item name="CANCELED" />
+	 </enum>
+
+
+</domain-models>

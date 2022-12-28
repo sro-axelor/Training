@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+<!-- myorder-grid -->
+  <grid name="myorder-grid"  title="MY Order"  model="com.axelor.app.db.MyOrder"> 
+      <field name="fullName" />
+      <field name="orderSeq" title="Order Id"/>
+	  <field name="delhiveryDate"/>
+  </grid>
+  
+<!-- mobiles grid -->  
+   <grid name="mobiles-grid"  title="Mobiles"  model="com.axelor.app.db.MyOrder"> 
+      <field name="fullName" />
+      <field name="orderSeq" title="Order Id"/>
+	  <field name="delhiveryDate"/>
+  </grid>
+  
+<!-- main form -->  
+<form name="myorder-form"  title="My Order"  model="com.axelor.app.db.MyOrder" width="large" > 
+		<panel name="orderpanel" title="orderOverview">
+		</panel>
+		
+        
+<!-- item panel -->   
+	   <panel-related name="mobilesPanel" field="mobiles" form-view="mobiles-form-popup"> 
+	      <field name="mobileName" />
+	      <field name="brand" />
+	      <field name="model" />	      
+	      <field name="color" />
+	      <field name="price" />
+	    </panel-related>
+</form>
+
+
+<!-- Item form -->
+<!-- 	<form name="mobiles-form-popup"  title="Mobiles"  model="com.axelor.app.db.Mobiles">
+	    <panel title="Mobile Overview">
+	    	<field name="mobileName" />
+	      <field name="brand" />
+	      <field name="model" />	      
+	      <field name="color" />
+	      <field name="price" />
+	    </panel>
+	</form> -->
+
+</object-views>

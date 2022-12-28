@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+	<tree name="All-Mobiles-Tree" title="All Mobiles Tree">
+
+		<column name="mobileName" type="string" />
+		<column name="mobilePrice" type="decimal" />
+
+<!-- define 1st level node -->
+		<node model="com.axelor.app.db.Mobiles">
+			<field name="name" as="mobileName" />
+			<field name="price" as="mobilePrice" />
+		</node>
+
+<!-- define 2nd level node -->
+		<node model="com.axelor.app.db.SmartPhones" parent="mob"
+			draggable="true">
+			<field name="name" as="mobileName" />
+			<field name="price" as="mobilePrice" />
+		</node>
+
+<!-- define 3rd level node -->
+		<node model="com.axelor.app.db.AndroidPhones" parent="sphone"
+			draggable="false" onClick="mobiles.all">
+			<field name="name" as="mobileName" />
+			<field name="price" as="mobilePrice" />
+		</node>
+
+	</tree>
+
+</object-views>

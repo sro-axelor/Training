@@ -1,0 +1,3 @@
+rootProject.name = 'applications-demo'
+
+include "modules:axelor-app"

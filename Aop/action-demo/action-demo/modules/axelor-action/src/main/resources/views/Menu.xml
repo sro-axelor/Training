@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+<!-- main menu -->
+ 	<menuitem name="App-menu" title="Axelor App"
+		icon="fas fa-rocket" icon-background="purple" />
+
+
+<!-- customer menu and customer action-view -->
+	<menuitem name="menu-customer-submenu" parent="App-menu"
+		title="Fill Your Details" icon="fas fa-user-plus"
+		icon-background="green" action="customer.all" tag="click here"
+		tag-style="important" />
+
+	<action-view name="customer.all" title="Details"
+		model="com.axelor.action.db.Customer">
+		<view type="grid" name="customer-grid" />
+		<view type="form" name="customer-form" />
+<!-- view-param -->
+		<view-param name="reload-dotted" value="false" />
+		<view-param name="popup" value="true" />
+		<view-param name="popup-save" value="false" />
+		<view-param name="download" value="true" />
+	</action-view>
+
+	
+<!-- title menu and title action-view -->	
+	 <menuitem name="menu-customer-titles" parent="App-menu"
+  			   title="Titles" action="customer-title" icon="fas fa-tag" 
+  			   tag-count="true" tag-style="inverse" />
+
+	 <action-view name="customer-title" title="Title" model="com.axelor.action.db.Title">
+	    <view type="grid" name="title-grid"/>
+	    <view type="form" name="title-form"/>
+	 </action-view>
+
+
+<!-- item menu and item action-view -->
+	<menuitem name="menu-item-submenu" parent="App-menu"
+		title="Item Details" action="item.all" 
+		tag-style="inverse" tag-count="true" 
+		icon="fas fa-sitemap" icon-background="blue" />
+	
+	<action-view name="item.all" title="All Items"
+		model="com.axelor.action.db.Item">
+		<view type="grid" name="item-grid" />
+		<view type="form" name="item-form" />
+	</action-view>
+	
+
+<!-- address menu address action-view -->
+	<menuitem name="menu-address-submenu" parent="App-menu"
+		icon="fas fa-map-pin" title="Add Address" icon-background="pink"
+		action="address.all" tag-style="inverse" tag-count="true" />
+
+	<action-view name="address.all" title="All Address"
+		model="com.axelor.action.db.Address">
+		<view type="grid" name="address-grid" />
+		<view type="form" name="address-form" />
+	</action-view>
+
+
+<!-- order menu and order action-view -->
+	<menuitem name="menu-myorder-submenu" parent="App-menu"
+		title="Create Order" icon="fa-duotone fa-cart-plus"
+		icon-background="orange" action="order.all" tag-style="inverse"
+		tag-count="true" />
+
+	<action-view name="order.all" title="All Orders"
+		model="com.axelor.action.db.Order">
+		<view type="grid" name="order-grid" />
+		<view type="form" name="order-form" />
+<!-- view-param -->
+		<view-param name="forceEdit" value="true" />
+		<view-param name="forceTitle" value="true" />
+		<view-param name="showArchived" value="true" />
+        <!-- <view-param name="details-view" value="true"/> -->
+		<view-param name="limit" value="10" />
+		<view-param name="popup" value="false" />
+		<view-param name="popup.maximized" value="true" />
+		<view-param name="show-toolbar" value="true" />
+		<view-param name="show-confirm" value="true" />
+		<!-- <domain>self.orderStatus = :orderStatus </domain> -->
+		<!-- <context name="orderStatus" expr="ordered"/> -->
+	</action-view>
+
+
+</object-views>

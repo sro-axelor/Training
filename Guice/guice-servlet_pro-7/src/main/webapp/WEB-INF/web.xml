@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app >
+
+	<filter>
+		<filter-name>Filter</filter-name>
+		<filter-class>com.axelor.GuiceFilter.WordFilter</filter-class>
+	</filter>
+	
+    <filter-mapping>
+		<filter-name>Filter</filter-name>
+		<url-pattern>/sujit</url-pattern>
+	</filter-mapping> 
+	
+	<listener>
+  		<listener-class>com.axelor.GuiceServlet.GuiceServletListener</listener-class>
+	</listener>
+	
+</web-app>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
+  http://axelor.com/xml/ns/domain-models/domain-models_5.4.xsd">
+
+<!-- module -->
+<module package="com.axelor.app.db" name="app"/>
+
+ <entity name="Mobiles" cacheable="true">
+    <string name="mobileName" required="true"/>
+    <string name="brand" required="true"/>
+    <string name="model" required="true"/> 
+    <string name="color" required="true"/>
+	<decimal name="price" precision="8" scale="2" />
+	
+	<string name="mob" namecolumn="true" search="mobileName,brand,model,color"> 
+	    <![CDATA[
+		    if (mobileName == null && brand== null && model == null && color == null) {
+		        return null;
+		    }
+		    return mobileName +" "+ brand +" "+ model +" "+ color;
+	    ]]>
+	</string>
+	
+	
+<!-- relation with myorder -->
+    <many-to-one name="cMobile" ref="MyOrder" required="true" />
+ 
+<!--  <finder-method name="findByName" using="mob"/> -->
+ </entity>
+</domain-models>

@@ -1,0 +1,743 @@
+axelor@localhost:~$ pg sh
+/work # psql
+psql (14.5)
+Type "help" for help.
+
+axelor=# \l
+                              List of databases
+   Name    | Owner  | Encoding |  Collate   |   Ctype    | Access privileges 
+-----------+--------+----------+------------+------------+-------------------
+ axelor    | axelor | UTF8     | en_US.utf8 | en_US.utf8 | 
+ postgres  | axelor | UTF8     | en_US.utf8 | en_US.utf8 | 
+ school    | axelor | UTF8     | en_US.utf8 | en_US.utf8 | 
+ template0 | axelor | UTF8     | en_US.utf8 | en_US.utf8 | =c/axelor        +
+           |        |          |            |            | axelor=CTc/axelor
+ template1 | axelor | UTF8     | en_US.utf8 | en_US.utf8 | =c/axelor        +
+           |        |          |            |            | axelor=CTc/axelor
+(5 rows)
+
+axelor=# \c school
+You are now connected to database "school" as user "axelor".
+school=# craete table teachers;
+ERROR:  syntax error at or near "craete"
+LINE 1: craete table teachers;
+        ^
+school=# create table teachers;
+ERROR:  syntax error at or near ";"
+LINE 1: create table teachers;
+                             ^
+school=# create table teachers ;
+ERROR:  syntax error at or near ";"
+LINE 1: create table teachers ;
+                              ^
+school=# create table teachers (id integer not null primary key,name 'char' not null, salary integer not null);
+ERROR:  syntax error at or near "'char'"
+LINE 1: ...le teachers (id integer not null primary key,name 'char' not...
+                                                             ^
+school=# create table teachers (id integer not null primary key,name varchar(20) not null,salary integer not null);
+CREATE TABLE
+school=# /d
+school-# \d
+         List of relations
+ Schema |   Name   | Type  | Owner  
+--------+----------+-------+--------
+ public | students | table | axelor
+ public | teachers | table | axelor
+(2 rows)
+
+school-# insert into teachers values (1,'a',200000);
+ERROR:  syntax error at or near "/"
+LINE 1: /d
+        ^
+school=# insert into teachers values(1,'A',20000);
+INSERT 0 1
+school=# insert into teachers values(2,'B',15000);
+INSERT 0 1
+school=# insert into teachers values(3,'B',25000),(4,'D',45000);
+INSERT 0 2
+school=# insert into teachers values(2,'B',15000);
+ERROR:  duplicate key value violates unique constraint "teachers_pkey"
+DETAIL:  Key (id)=(2) already exists.
+school=# insert into teachers values(5,'E',30000);
+INSERT 0 1
+school=# update teachers set name='C' where id=3;
+UPDATE 1
+school=# select * from teachers;
+ id | name | salary 
+----+------+--------
+  1 | A    |  20000
+  2 | B    |  15000
+  4 | D    |  45000
+  5 | E    |  30000
+  3 | C    |  25000
+(5 rows)
+
+school=# select * from teachers order by id asc;
+ id | name | salary 
+----+------+--------
+  1 | A    |  20000
+  2 | B    |  15000
+  3 | C    |  25000
+  4 | D    |  45000
+  5 | E    |  30000
+(5 rows)
+
+school=# select * from teachers order by salary asc;
+ id | name | salary 
+----+------+--------
+  2 | B    |  15000
+  1 | A    |  20000
+  3 | C    |  25000
+  5 | E    |  30000
+  4 | D    |  45000
+(5 rows)
+
+school=# select * from teachers order by salary desc;
+ id | name | salary 
+----+------+--------
+  4 | D    |  45000
+  5 | E    |  30000
+  3 | C    |  25000
+  1 | A    |  20000
+  2 | B    |  15000
+(5 rows)
+
+school=# insert into teachers values(6,'A',35000),(7,'D',10000);
+INSERT 0 2
+school=# select * from teachers;
+ id | name | salary 
+----+------+--------
+  1 | A    |  20000
+  2 | B    |  15000
+  4 | D    |  45000
+  5 | E    |  30000
+  3 | C    |  25000
+  6 | A    |  35000
+  7 | D    |  10000
+(7 rows)
+
+school=# select * from teachers order by asc;
+ERROR:  syntax error at or near "asc"
+LINE 1: select * from teachers order by asc;
+                                        ^
+school=# select * from teachers order by id asc;
+ id | name | salary 
+----+------+--------
+  1 | A    |  20000
+  2 | B    |  15000
+  3 | C    |  25000
+  4 | D    |  45000
+  5 | E    |  30000
+  6 | A    |  35000
+  7 | D    |  10000
+(7 rows)
+
+school=# select name,sum(salary) from teachers group by name;
+ name |  sum  
+------+-------
+ B    | 15000
+ C    | 25000
+ D    | 55000
+ E    | 30000
+ A    | 55000
+(5 rows)
+
+school=# select name from teachers group by name having count(name) >2;
+ name 
+------
+(0 rows)
+
+school=# select name from teachers group by name having count(name) < 2;
+ name 
+------
+ B
+ C
+ E
+(3 rows)
+
+school=# select name from teachers group by name having count(name) > 1;
+ name 
+------
+ D
+ A
+(2 rows)
+
+school=# select salary from teachers group by name having count(name) >=2 ;
+ERROR:  column "teachers.salary" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: select salary from teachers group by name having count(name)...
+               ^
+school=# select salary from teachers;
+ salary 
+--------
+  20000
+  15000
+  45000
+  30000
+  25000
+  35000
+  10000
+(7 rows)
+
+school=# select salary from teachers group by name having count(name)>1;
+ERROR:  column "teachers.salary" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: select salary from teachers group by name having count(name)...
+               ^
+school=# select salary from teachers group by salary having count(salary)>25000;
+ salary 
+--------
+(0 rows)
+
+school=# select * from students;
+ id | firstname | lastname | age 
+----+-----------+----------+-----
+  1 | jhon      | kater    |  20
+  2 | Ram       | kumar    |  24
+(2 rows)
+
+school=# insert into students values (3,'jack','mar',21),(4,'nidhi','sharma',26);
+INSERT 0 2
+school=# select * from students;
+ id | firstname | lastname | age 
+----+-----------+----------+-----
+  1 | jhon      | kater    |  20
+  2 | Ram       | kumar    |  24
+  3 | jack      | mar      |  21
+  4 | nidhi     | sharma   |  26
+(4 rows)
+
+school=# select * from students where lastname='sharma' AND age > 15;
+ id | firstname | lastname | age 
+----+-----------+----------+-----
+  4 | nidhi     | sharma   |  26
+(1 row)
+
+school=# select * from students where lastname='sharma' AND age >30;
+ id | firstname | lastname | age 
+----+-----------+----------+-----
+(0 rows)
+
+school=# select * from students where lastname='sharma' OR age >30;
+ id | firstname | lastname | age 
+----+-----------+----------+-----
+  4 | nidhi     | sharma   |  26
+(1 row)
+
+school=# select * from students where lastname='sharma' OR age >20;
+ id | firstname | lastname | age 
+----+-----------+----------+-----
+  2 | Ram       | kumar    |  24
+  3 | jack      | mar      |  21
+  4 | nidhi     | sharma   |  26
+(3 rows)
+
+school=# select * from students where (lastname='sharma' OR lastname='mar') AND age >20;
+ id | firstname | lastname | age 
+----+-----------+----------+-----
+  3 | jack      | mar      |  21
+  4 | nidhi     | sharma   |  26
+(2 rows)
+
+school=# select * from students;
+ id | firstname | lastname | age 
+----+-----------+----------+-----
+  1 | jhon      | kater    |  20
+  2 | Ram       | kumar    |  24
+  3 | jack      | mar      |  21
+  4 | nidhi     | sharma   |  26
+(4 rows)
+
+school=# select * from students where lastname is not null;
+ id | firstname | lastname | age 
+----+-----------+----------+-----
+  1 | jhon      | kater    |  20
+  2 | Ram       | kumar    |  24
+  3 | jack      | mar      |  21
+  4 | nidhi     | sharma   |  26
+(4 rows)
+
+school=# select * from students where firstname like 'j%';
+ id | firstname | lastname | age 
+----+-----------+----------+-----
+  1 | jhon      | kater    |  20
+  3 | jack      | mar      |  21
+(2 rows)
+
+school=# select * from students where firstname like 'ja%';
+ id | firstname | lastname | age 
+----+-----------+----------+-----
+  3 | jack      | mar      |  21
+(1 row)
+
+school=# select * from students where firstname like 'j___';
+ id | firstname | lastname | age 
+----+-----------+----------+-----
+  1 | jhon      | kater    |  20
+  3 | jack      | mar      |  21
+(2 rows)
+
+school=# select * from students where firstname like 'j__n';
+ id | firstname | lastname | age 
+----+-----------+----------+-----
+  1 | jhon      | kater    |  20
+(1 row)
+
+school=# select * from students where firstname like '%n';
+ id | firstname | lastname | age 
+----+-----------+----------+-----
+  1 | jhon      | kater    |  20
+(1 row)
+
+school=# select * from students where firstname like '%i';
+ id | firstname | lastname | age 
+----+-----------+----------+-----
+  4 | nidhi     | sharma   |  26
+(1 row)
+
+school=# select * from students where firstname like '__d__';
+ id | firstname | lastname | age 
+----+-----------+----------+-----
+  4 | nidhi     | sharma   |  26
+(1 row)
+
+school=# select * from students where firstname like '__0_';
+ id | firstname | lastname | age 
+----+-----------+----------+-----
+(0 rows)
+
+school=# select * from students where firstname like '__o_';
+ id | firstname | lastname | age 
+----+-----------+----------+-----
+  1 | jhon      | kater    |  20
+(1 row)
+
+school=# select * from students where age in (12,20,26);
+ id | firstname | lastname | age 
+----+-----------+----------+-----
+  1 | jhon      | kater    |  20
+  4 | nidhi     | sharma   |  26
+(2 rows)
+
+school=# select * from students;
+ id | firstname | lastname | age 
+----+-----------+----------+-----
+  1 | jhon      | kater    |  20
+  2 | Ram       | kumar    |  24
+  3 | jack      | mar      |  21
+  4 | nidhi     | sharma   |  26
+(4 rows)
+
+school=# select * from students where age between 15 and 21;
+ id | firstname | lastname | age 
+----+-----------+----------+-----
+  1 | jhon      | kater    |  20
+  3 | jack      | mar      |  21
+(2 rows)
+
+school=# create view new_students as select fname,age from students;
+ERROR:  column "fname" does not exist
+LINE 1: create view new_students as select fname,age from students;
+                                           ^
+school=# create view new_students as select firstname,age from students;
+CREATE VIEW
+school=# select * from new_students;
+ firstname | age 
+-----------+-----
+ jhon      |  20
+ Ram       |  24
+ jack      |  21
+ nidhi     |  26
+(4 rows)
+
+school=# create view new_students as select id,firstname from students;
+ERROR:  relation "new_students" already exists
+school=# create view new_student1 as select id,firstname from students;
+CREATE VIEW
+school=# select * from new_student1
+school-# select * from new_student1
+school-# select * from new_student1;
+ERROR:  syntax error at or near "select"
+LINE 2: select * from new_student1
+        ^
+school=# select * from new_student1;
+ id | firstname 
+----+-----------
+  1 | jhon
+  2 | Ram
+  3 | jack
+  4 | nidhi
+(4 rows)
+
+school=# drop view new_student1;
+DROP VIEW
+school=# \d
+           List of relations
+ Schema |     Name     | Type  | Owner  
+--------+--------------+-------+--------
+ public | new_students | view  | axelor
+ public | students     | table | axelor
+ public | teachers     | table | axelor
+(3 rows)
+
+school=# drop view new_students;
+DROP VIEW
+school=# \d
+         List of relations
+ Schema |   Name   | Type  | Owner  
+--------+----------+-------+--------
+ public | students | table | axelor
+ public | teachers | table | axelor
+(2 rows)
+
+school=# select students.firstname,students.lastname,teachers.name from students inner jion teachers on students.id = teachers.id;
+ERROR:  syntax error at or near "jion"
+LINE 1: ...udents.lastname,teachers.name from students inner jion teach...
+                                                             ^
+school=# select students.firstname,students.lastname,teachers.name from students inner join teachers on students.id = teachers.id;
+ firstname | lastname | name 
+-----------+----------+------
+ jhon      | kater    | A
+ Ram       | kumar    | B
+ nidhi     | sharma   | D
+ jack      | mar      | C
+(4 rows)
+
+school=# select students.firstname,students.age,teachers.name from students left join teachers on students.id = teachers.id;
+ firstname | age | name 
+-----------+-----+------
+ jhon      |  20 | A
+ Ram       |  24 | B
+ nidhi     |  26 | D
+ jack      |  21 | C
+(4 rows)
+
+school=# insert into students values(5,'ruchi','sahoo',21),(6,'rabi','kumar',19);
+INSERT 0 2
+school=# select * from students;
+ id | firstname | lastname | age 
+----+-----------+----------+-----
+  1 | jhon      | kater    |  20
+  2 | Ram       | kumar    |  24
+  3 | jack      | mar      |  21
+  4 | nidhi     | sharma   |  26
+  5 | ruchi     | sahoo    |  21
+  6 | rabi      | kumar    |  19
+(6 rows)
+
+school=# select * from teachers;
+ id | name | salary 
+----+------+--------
+  1 | A    |  20000
+  2 | B    |  15000
+  4 | D    |  45000
+  5 | E    |  30000
+  3 | C    |  25000
+  6 | A    |  35000
+  7 | D    |  10000
+(7 rows)
+
+school=# delete from teachers where id =6,7;
+ERROR:  syntax error at or near ","
+LINE 1: delete from teachers where id =6,7;
+                                        ^
+school=# delete from teachers where id =6;
+DELETE 1
+school=# delete from teachers where id =7;
+DELETE 1
+school=# select * from teachers;
+ id | name | salary 
+----+------+--------
+  1 | A    |  20000
+  2 | B    |  15000
+  4 | D    |  45000
+  5 | E    |  30000
+  3 | C    |  25000
+(5 rows)
+
+school=# select * from students;
+ id | firstname | lastname | age 
+----+-----------+----------+-----
+  1 | jhon      | kater    |  20
+  2 | Ram       | kumar    |  24
+  3 | jack      | mar      |  21
+  4 | nidhi     | sharma   |  26
+  5 | ruchi     | sahoo    |  21
+  6 | rabi      | kumar    |  19
+(6 rows)
+
+school=# delete from teachers where name= 'E';
+DELETE 1
+school=# select * from teachers;
+ id | name | salary 
+----+------+--------
+  1 | A    |  20000
+  2 | B    |  15000
+  4 | D    |  45000
+  3 | C    |  25000
+(4 rows)
+
+school=# select students.firstname,students.lastname,teachers.name from students left jion teachers on students.id = teachers.id;
+ERROR:  syntax error at or near "jion"
+LINE 1: ...tudents.lastname,teachers.name from students left jion teach...
+                                                             ^
+school=# select students.firstname,students.lastname,teachers.name from students left join teachers on students.id = teachers.id;
+ firstname | lastname | name 
+-----------+----------+------
+ jhon      | kater    | A
+ Ram       | kumar    | B
+ nidhi     | sharma   | D
+ jack      | mar      | C
+ ruchi     | sahoo    | 
+ rabi      | kumar    | 
+(6 rows)
+
+school=# select students.firstname,students.lastname,teachers.name,teachers.salary from students left join teachers on students.id = teacher
+s.id;
+ firstname | lastname | name | salary 
+-----------+----------+------+--------
+ jhon      | kater    | A    |  20000
+ Ram       | kumar    | B    |  15000
+ nidhi     | sharma   | D    |  45000
+ jack      | mar      | C    |  25000
+ ruchi     | sahoo    |      |       
+ rabi      | kumar    |      |       
+(6 rows)
+
+school=# select students.firstname,students.lastname,teachers.name,teachers.salary from students right join teachers on students.id = teachers.id;
+ firstname | lastname | name | salary 
+-----------+----------+------+--------
+ jhon      | kater    | A    |  20000
+ Ram       | kumar    | B    |  15000
+ nidhi     | sharma   | D    |  45000
+ jack      | mar      | C    |  25000
+(4 rows)
+school-# -q
+school-# \q
+/work # exit
+axelor@localhost:~$ pg sh
+/work # psql
+psql (14.5)
+Type "help" for help.
+
+axelor=# \c school
+You are now connected to database "school" as user "axelor".
+school=# select students.firstname,students.lastname,teachers.name from students full outer join teachers on students.id = teachers.id;
+ firstname | lastname | name 
+-----------+----------+------
+ jhon      | kater    | A
+ Ram       | kumar    | B
+ nidhi     | sharma   | D
+ jack      | mar      | C
+ ruchi     | sahoo    | 
+ rabi      | kumar    | 
+(6 rows)
+
+school=# select students.firstname,students.lastname,teachers.name,teachers.salary from students full outer join teachers on students.id = teachers.id;
+ firstname | lastname | name | salary 
+-----------+----------+------+--------
+ jhon      | kater    | A    |  20000
+ Ram       | kumar    | B    |  15000
+ nidhi     | sharma   | D    |  45000
+ jack      | mar      | C    |  25000
+ ruchi     | sahoo    |      |       
+ rabi      | kumar    |      |       
+(6 rows)
+
+school=# select * from teachers;
+ id | name | salary 
+----+------+--------
+  1 | A    |  20000
+  2 | B    |  15000
+  4 | D    |  45000
+  3 | C    |  25000
+(4 rows)
+
+school=# select * from students;
+ id | firstname | lastname | age 
+----+-----------+----------+-----
+  1 | jhon      | kater    |  20
+  2 | Ram       | kumar    |  24
+  3 | jack      | mar      |  21
+  4 | nidhi     | sharma   |  26
+  5 | ruchi     | sahoo    |  21
+  6 | rabi      | kumar    |  19
+(6 rows)
+
+school=# select firstname,name from students cross join teachers;
+ firstname | name 
+-----------+------
+ jhon      | A
+ Ram       | A
+ jack      | A
+ nidhi     | A
+ ruchi     | A
+ rabi      | A
+ jhon      | B
+ Ram       | B
+ jack      | B
+ nidhi     | B
+ ruchi     | B
+ rabi      | B
+ jhon      | D
+ Ram       | D
+ jack      | D
+ nidhi     | D
+ ruchi     | D
+ rabi      | D
+ jhon      | C
+ Ram       | C
+ jack      | C
+ nidhi     | C
+ ruchi     | C
+ rabi      | C
+(24 rows)
+
+school=# select min(age) as min_age from students;
+ min_age 
+---------
+      19
+(1 row)
+
+school=# select * from students;
+ id | firstname | lastname | age 
+----+-----------+----------+-----
+  1 | jhon      | kater    |  20
+  2 | Ram       | kumar    |  24
+  3 | jack      | mar      |  21
+  4 | nidhi     | sharma   |  26
+  5 | ruchi     | sahoo    |  21
+  6 | rabi      | kumar    |  19
+(6 rows)
+
+school=# select min(age) from students;
+ min 
+-----
+  19
+(1 row)
+
+school=# select max(age) as max_age from students;
+ max_age 
+---------
+      26
+(1 row)
+
+school=# select avg(age) as avg_age from students;
+       avg_age       
+---------------------
+ 21.8333333333333333
+(1 row)
+
+school=# select count(*) as total_rows from teachers;
+ total_rows 
+------------
+          4
+(1 row)
+
+school=# create or replace function total_students()
+school-# returns integer as $total$ 
+school$# declare total integer;
+school$# begin
+school$# select count(*) into total from students;
+school$# return total;
+school$# end;
+school$# $total$ language plpgsql;
+CREATE FUNCTION
+school=# select total_students;
+ERROR:  column "total_students" does not exist
+LINE 1: select total_students;
+               ^
+school=# select total_students();
+ total_students 
+----------------
+              6
+(1 row)
+
+school=# create function sum(var1 integere,var2 integer)
+school-# return integer as $sum$ language plpsql;
+
+school$# create function sum(var1 integer,var2 integer)
+school$# returns integer as $sum$
+school-# begin
+school-# return var1 + var2;
+school-# ends;
+school-# $sum$ language plpgsql;
+school$# create function sum(var1 integer,var2 integer)
+school$# school$# returns integer as $sum$
+school-# school-# begin
+school-# school-# return var1 + var2;
+school-# school-# ends;
+school-# school-# $sum$ language plpgsql;
+school$# create function sum(var1 integer,var2 integer)
+school$# returns integer as $sum$
+school-# create function sum(var1 integer,var2 integer) returns integer as $sum$ begin return var1 + var2; ends; $sum$ language plpgsql;
+ 
+school-# create function sum(var1 integer,var2 integer)
+school-# chool$# returns integer as $sum$
+school$# create function sum(var1 integer,var2 integer) returns integer as $sum$ begin return var1 + var2; ends; $sum$ language plpgsql;
+school$# create function sum(var1 integer,var2 integer) returns integer as $sum$ begin return var1 + var2; ends; $sum$ language plpgsql;
+
+school$# create function sum (va1 integer,va2 integer)
+school$# returns integer as $sum$
+school-# \q
+/work # exit
+axelor@localhost:~$ pg sh 
+/work # psql
+psql (14.5)
+Type "help" for help.
+
+axelor=# \c school
+You are now connected to database "school" as user "axelor".
+school=# create function sum(var1 integer,var2 integer)
+school-# returns integer as $sum$
+school$# begin 
+school$# return var1 + var2;
+school$# ends;
+school$# $sum$ language plpgsql;
+ERROR:  syntax error at or near "ends"
+LINE 5: ends;
+        ^
+school=# create function sum(var1 integer,var2 integer)
+returns integer as $sum$
+begin
+return var1 + var2;
+end;
+$sum$ language plpgsql;
+school-# 
+school-# 
+school-# 
+school-# 
+school-# 
+school-# 
+school-# 
+school-# \q
+/work # exit
+axelor@localhost:~$ pg sh
+/work # psql
+psql (14.5)
+Type "help" for help.
+
+axelor=# \c school
+You are now connected to database "school" as user "axelor".
+school=# create function sum(var1 integer,var2 integer)
+school-# returns integer as $sum$
+school$# begin
+school$# return var1 + var2;
+school$# ends;
+school$# $sum$ language plpgsql;
+ERROR:  syntax error at or near "ends"
+LINE 5: ends;
+        ^
+school=# create function sum(var1 integer,var2 integer)
+school-# returns integer as $sum$
+school$# begin
+school$# return var1 + var2;
+school$# end;
+school$# $sum$ language plpgsql;
+CREATE FUNCTION
+school=# select sum(2,5);
+ sum 
+-----
+   7
+(1 row)
+
+school=# 
+

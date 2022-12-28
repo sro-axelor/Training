@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views  
+  http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+  <menuitem name="menu-companydetails-book"
+            title="All Company Details" /> 
+
+  <menuitem name="menu-companydetails-friends"
+            parent="menu-companydetails-book"
+            title="Enter Company Details"
+            action="companydetails.all"/> 
+               
+  <action-view name="companydetails.all"
+               title="All Company Details"
+               model="com.axelor.companydetails.db.CompanyDetails"> 
+               
+  	  	<view type="grid" name="companydetails-grid"/> 
+     	<view type="form" name="companydetails-form"/> 
+  </action-view>
+
+</object-views>

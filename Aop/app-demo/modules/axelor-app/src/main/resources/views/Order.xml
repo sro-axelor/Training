@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+<!-- grid view -->
+	<grid name="order-grid" title="Order"
+		model="com.axelor.app.db.Order" orderBy="orderid" edit-icon="false"
+		customSearch="false" x-selector="checkbox" freeSearch="none"
+		x-no-fetch="false">
+
+
+<!-- button for custom view -->
+		<toolbar>
+			<button name="customView" icon="fa-custom" title="Custom View"
+				onClick="dashborad.action" css="btn-danger" />
+		</toolbar>
+
+		<field name="orderid" />
+		<field name="orderName" />
+		<field name="orderDate" />
+		<field name="orderStatus" />
+		<field name="orderQuantity" />
+	</grid>
+
+
+
+<!-- form view -->
+	<form name="order-form" title="Order"
+		model="com.axelor.app.db.Order" canSave="false" canDelete="false">
+
+		<panel>
+			<field name="orderid" />
+			<field name="orderName" />
+			<field name="orderDate" />
+			<field name="orderStatus" selection="order.list" />
+			<field name="orderQuantity" selection="order.quantity" />
+
+<!-- panel include -->
+			<!-- <panel-include view="logindetails-form"/> -->
+		</panel>
+
+
+<!-- panelrelated -->
+		<panel-related field="loginlist" />
+		<panel-related field="mobileslist" />
+
+
+<!-- dummy field -->
+		<!-- <panel> -->
+		<!-- <field name="dummyfield" title="Dummy Field"/> -->
+
+		<!-- integer field, prefixed with $ to avoid dirty flag -->
+		<!-- <field name="dummyfield" title="Find the saved record" type="integer" 
+			min="1" max="100" /> -->
+
+		<!-- relational fields -->
+		<!-- <field name="dummyfield" type="many-to-many" x-target="com.axelor.app.db.Mobiles" 
+			x-target-name="mobileslist" colSpan="12"/> -->
+
+		<!-- </panel> -->
+
+
+
+
+<!-- button / button-group -->
+		<panel sidebar="true">
+
+			<!-- <button-group> -->
+			<!-- <button onClick="save" name="Save" title="Place Order" /> -->
+			<!-- <button onClick="delete" name="Delete" title="Discard" /> -->
+			<!-- </button-group> -->
+
+			<button onClick="save" name="Save" title="Place Order"
+				css="btn-success" />
+			<button onClick="delete" name="Delete" title="Discard"
+				css="btn-info" />
+		</panel>
+
+	</form>
+
+
+
+
+<!-- selection -->
+	<selection name="order.list">
+		<option value="draft" color="red">DRAFT</option>
+		<option value="wishlist" color="pink">WISHLIST</option>
+		<option value="ordered" color="blue">ORDERED</option>
+		<option value="canceled" color="green">CANCELED</option>
+	</selection>
+
+
+	<selection name="order.quantity">
+		<option value="0">0</option>
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+		<option value="7">7</option>
+		<option value="8">8</option>
+	</selection>
+
+
+
+</object-views>

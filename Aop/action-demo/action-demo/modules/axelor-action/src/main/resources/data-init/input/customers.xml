@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE xml>
+
+<customer-root>
+	<configs>
+		<titles>
+			<title code="mr">Mr.</title>
+			<title code="mrs">Mrs.</title>
+			<title code="miss">Miss</title>
+		</titles>
+<!-- 	 <orders> -->
+<!-- 			<order code=></order> -->
+<!-- 				<orderName>Flipkart</orderName> -->
+<!-- 				<orderDate>2022-12-23</orderDate> -->
+<!-- 				<deliveryDate>2022-12-25</deliveryDate> -->
+<!--             <order>		 -->
+<!-- 				<orderName>amazon</orderName> -->
+<!-- 				<orderDate>2022-12-22</orderDate> -->
+<!-- 				<deliveryDate>2022-12-27<deliveryDate> -->
+<!-- 			</order> -->
+<!--     </orders> -->
+	</configs>
+
+ <customers>
+<!--  customer 1 -->	
+		<customer>
+			<title code="mrs">Mrs.</title>
+		    <name type="F">mili</name>
+		    <name type="M">k</name>
+		    <name type="L">kumari</name>
+		    <dateOfBirth>1998-06-12</dateOfBirth>
+		    <my>
+		        <address-list>
+		            <address>
+		               <line1>My</line1>
+		               <line2>Home</line2>
+					   <city>Hyderabad</city>
+		               <zip>1234</zip>					   
+					   <state>Telangana</state>
+					   <country>India</country>
+		            </address>
+		            <address>
+		               <line1>My</line1>
+		               <line2>Office</line2>
+		               <city>Bannglore</city>
+		               <zip>5678</zip>
+					   <state>Karnataka</state>
+					   <country>India</country>
+		            </address>
+		        </address-list>
+		      </my>
+		</customer>
+		
+<!--  customer 2 -->		
+		<customer>
+			<title code="mr">Mr.</title>
+		    <name type="F">Ram</name>
+		    <name type="M">Kumar</name>
+		    <name type="L">R</name>
+		    <dateOfBirth>2000-10-02</dateOfBirth>
+		    <email>ram.r@gmail.com</email>
+		    <phone>4145646556</phone>
+		    <myorder>
+		    		<order-list>
+		    				<orders>
+				      			<orderName>amazon</orderName>
+				      			<orderDate>22/12/2022</orderDate>
+				      			<deliveryDate>27/12/2022</deliveryDate>
+				      			<active>true</active>				      			
+				      		</orders>
+			      		</order-list>
+		      		</myorder>
+		</customer>
+	
+<!--  customer 3 -->			
+		<customer>
+		 	<title>Miss</title>
+            <name type="F">feen</name>
+		    <name type="M">mary</name>               
+            <name type="L">p</name>
+             <dateOfBirth>1999-08-24</dateOfBirth>
+     		<email>feen.mary@gmail.com</email>
+		      <my>
+		        <address-list>
+		            <address>
+		               <line1>My</line1>
+		               <line2>Home</line2>
+					   <city>Hyderabad</city>
+		               <zip>1234</zip>					   
+					   <state>Telangana</state>
+					   <country>India</country>
+		            </address>
+		            <address>
+		               <line1>My</line1>
+		               <line2>Office</line2>
+		               <city>Bannglore</city>
+		               <zip>5678</zip>
+					   <state>Karnataka</state>
+					   <country>India</country>
+		            </address>
+		        </address-list>
+		      </my>
+		      		<myorder>
+			      		<order-list>
+				      		<orders>
+				      			<orderName>Flipkart</orderName>
+				      			<orderDate>23/12/2022</orderDate>
+				      			<deliveryDate>25/12/2022</deliveryDate>
+				      			<active>false</active>				      			
+				      		</orders>
+				      		
+				      		<orders>
+				      			<orderName>amazon</orderName>
+				      			<orderDate>22/12/2022</orderDate>
+				      			<deliveryDate>27/12/2022</deliveryDate>
+				      			<active>f</active>
+				      		</orders>
+			      		</order-list>
+		      		</myorder>
+  	  </customer>
+ </customers>
+</customer-root>
+

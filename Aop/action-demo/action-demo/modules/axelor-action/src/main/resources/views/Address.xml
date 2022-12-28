@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+<grid name="address-grid"  title="Address grid" model="com.axelor.action.db.Address">
+<!--             <field name="acode" /> -->
+            <field name="street" />
+			<field name="area" />
+			<field name="city" />
+			<field name="state" />
+			<field name="zip" />
+			<field name="country" />
+</grid>
+
+<form name="address-form" title="Address form" model="com.axelor.action.db.Address">
+<!--             <field name="acode" /> -->
+ 			<field name="street" />
+			<field name="area" />
+			<field name="city" />
+			<field name="state" />
+			<field name="zip" />
+			<field name="country" />
+</form>
+  
+  
+</object-views>

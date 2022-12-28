@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
+  http://axelor.com/xml/ns/domain-models/domain-models_5.4.xsd">
+
+  <module name="app" package="com.axelor.app.db"/>
+
+<!-- sequence  -->
+  <sequence name="entery-logindetails.sequence" initial="1" increment="1" padding="10" prefix="SUJIT" />
+
+
+<entity name="LoginDetails" cacheable="true" >
+    <string name="firstName" required="true" /> 
+    <string name="middleName" required="true" /> 
+    <string name="lastName" required="true" />
+
+    <string name="fullName" namecolumn="true" search="firstName,middleName,lastName"> 
+	    <![CDATA[
+		    if (firstName == null && lastName == null) {
+		        return null;
+		    }
+		        return firstName + " " + middleName + " " + lastName;
+	    ]]></string>
+
+
+<!-- sequence -->	   
+ <string name="seq" sequence="entery-logindetails.sequence"  readonly="true"/>
+	    
+	    
+<!-- enum -->	    
+<enum name="gender" ref="GenderType" />
+
+
+<!-- date  -->
+    <date name="loginDate" />
+
+<!-- time -->
+	<time name="loginTime" />
+
+<!-- binary picture -->	
+	<binary name="photo" image="true" />
+	
+    <string name="email" required="true" encrypted="true"/>
+    <string name="phone" max="20" massUpdate="true" />
+    <string name="notes" title="About Order" large="true" />
+
+    <one-to-many name="personaddresses" ref="PersonAddress" mappedBy="hello" /> 
+
+<!-- boolean -->
+<boolean name="active"/>
+
+
+    <finder-method name="findByName" using="fullName" /> 
+    <finder-method name="findByEmail" using="email" />
+
+<!-- extra import -->
+  <extra-imports> 
+	    <![CDATA[
+ 	    import javax.persistence.PostPersist; 
+ 	    import javax.persistence.PostUpdate;  
+	    	    ]]>  
+  </extra-imports> 
+
+<!-- extra code -->
+<extra-code>
+		  <![CDATA[
+			@PostPersist
+			public void inserted(LoginDetails ld)
+			{
+	    		System.out.println("Logindetails inserted --> " +ld);
+	    	}
+	    	
+	    	@PostUpdate
+			public void update(LoginDetails ld)
+			{
+	    		System.out.println("Logindetails update --> " +ld);
+	    	}
+	       ]]>
+</extra-code> 
+
+
+<!-- entity-listener -->
+    <entity-listener class="com.axelor.app.db.repo.LoginDetailsRepository"/>
+
+  </entity>
+  
+<enum name="GenderType">
+  <item name="MALE" />
+  <item name="FEMALE" />
+  <item name="OTHER" />
+</enum>
+
+</domain-models>
