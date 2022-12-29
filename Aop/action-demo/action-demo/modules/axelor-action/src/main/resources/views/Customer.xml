@@ -28,9 +28,9 @@
 
 	<form name="customer-form" title="Details"
 		model="com.axelor.action.db.Customer" width="large" canSave="true"
-		onNew="action-record-onnew-test" onSave="action-condition-test-gender">
+		onNew="action-record-onnew-test" onSave="action-condition-test-gender" >
 
-		<panel name="overviewPanel" title="Overview">
+		<panel name="overviewPanel" title="Overview" icon="fa-user" >
 			<field name="seq" title="Customer Id" colSpan="2" />
 			<field name="image" widget="image" colSpan="3" />
 			
@@ -55,7 +55,7 @@
 			
 			<field name="dateOfBirth" colSpan="4" />
 			<!-- <separator colSpan="12" /> -->
-			<field name="email" colSpan="4" widget="email">
+			<field name="email" colSpan="4" widget="email" onChange="com.axelor.action.controller.HelloController:validate(email)">
 				<viewer><![CDATA[ 
       						  <a href="mailto:{{record.email}}">{{record.email}}</a>
         				]]></viewer>
@@ -124,6 +124,9 @@
 				title="One Address Adding" colSpan="2" />
 			<button onClick="delete-address" name="deleting-value"
 				title="One Address Deleting" colSpan="2" />
+			<button onClick="com.axelor.action.controller.HelloController:say"
+			    name="test-Controller" title="Test Controller" colSpan="2" />
+			
 		</panel>
 
 
@@ -242,7 +245,7 @@
 <!-- selection field for image -->
 	<selection name="selection-for-image">
 		<option
-			value="https://cdn.pixabay.com/photo/2016/12/15/23/22/lake-1910263__340.jpg"></option>
+			value="https://content3.jdmagicbox.com/comp/bangalore/a5/080pxx80.xx80.210325123401.p1a5/catalogue/the-image-sahakara-nagar-bangalore-dentists-q64k61lpqn.jpg"></option>
 		<option
 			value="https://img.freepik.com/free-photo/beautiful-scenery-phragmites-plants-by-sea-with-swimming-pelican-sunset_181624-37787.jpg"></option>
 		<option

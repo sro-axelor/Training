@@ -16,7 +16,7 @@
 		tag-style="important" />
 
 	<action-view name="customer.all" title="Details"
-		model="com.axelor.action.db.Customer">
+		model="com.axelor.action.db.Customer" >
 		<view type="grid" name="customer-grid" />
 		<view type="form" name="customer-form" />
 <!-- view-param -->
