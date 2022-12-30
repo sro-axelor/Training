@@ -34,8 +34,18 @@
 		   <bind column="orderlist_id" to="orderlist" search="self.id in :orderlist_id" eval="orderlist_id.split('\\|') as List" />
     </input>
 
-
-
+	
+<!-- 	<input file="permission.csv" type="com.axelor.action.db.Title" search="self.name = :name"> -->
+<!-- 	    <bind column="code" to="code" /> -->
+<!-- 	    <bind column="name" to="name" /> -->
+<!-- 	    <bind column="domain" to="condition" /> -->
+<!-- 	    <bind column="domain-params" to="conditionParams" /> -->
+<!-- 	    <bind column="canCreate" to="canCreate" /> -->
+<!-- 	    <bind column="canRead" to="canRead" /> -->
+<!-- 	    <bind column="canWrite" to="canWrite" /> -->
+<!-- 	    <bind column="canRemove" to="canRemove" /> -->
+<!-- 	    <bind column="canExport" to="canExport" /> -->
+<!-- 	</input> -->
 
 
 <!-- this below thins are for some testing purpose for me -->

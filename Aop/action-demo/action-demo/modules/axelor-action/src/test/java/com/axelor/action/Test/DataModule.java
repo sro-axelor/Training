@@ -11,12 +11,10 @@ public class DataModule extends Module{
 
 	public DataModule(Long id, String location, ModuleContainer container, EnumSet<Settings> settings, int startlevel) {
 		super(id, location, container, settings, startlevel);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public Bundle getBundle() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

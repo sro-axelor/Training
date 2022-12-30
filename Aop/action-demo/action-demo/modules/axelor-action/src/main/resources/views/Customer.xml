@@ -25,10 +25,15 @@
 		<field name="seq" title="Customer Id" />
 		<field name="gender" />
 	</grid>
+	
 
 	<form name="customer-form" title="Details"
 		model="com.axelor.action.db.Customer" width="large" canSave="true"
 		onNew="action-record-onnew-test" onSave="action-condition-test-gender" >
+		
+<!-- 		<toolbar> -->
+<!-- 					<button onClick="report-test-action" name="report-test" title="Report-Test" css="btn-success" /> -->
+<!-- 		</toolbar> -->
 
 		<panel name="overviewPanel" title="Overview" icon="fa-user" >
 			<field name="seq" title="Customer Id" colSpan="2" />
@@ -126,7 +131,9 @@
 				title="One Address Deleting" colSpan="2" />
 			<button onClick="com.axelor.action.controller.HelloController:say"
 			    name="test-Controller" title="Test Controller" colSpan="2" />
-			
+			    
+			<button onClick="report-test-action" name="report-test"
+			    title="Report-Test" css="btn-success" />
 		</panel>
 
 
@@ -267,5 +274,12 @@
 		<option value="com.axelor.action.db.Customer"
 			data-domain="self.email LIKE '%gmail%'" data-grid="customer-grid">Customer</option>
 	</selection>
+	
+<!-- report test -->
+<action-report output="Customer-${date}-${time}" name="report-test-action" design="Customer.rptdesign" format="pdf">
+
+                <param name="CustomerId" expr="eval: id" />
+
+        </action-report>
 
 </object-views>
