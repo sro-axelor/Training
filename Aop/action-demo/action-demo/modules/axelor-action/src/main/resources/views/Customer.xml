@@ -25,49 +25,54 @@
 		<field name="seq" title="Customer Id" />
 		<field name="gender" />
 	</grid>
-	
+
 
 	<form name="customer-form" title="Details"
 		model="com.axelor.action.db.Customer" width="large" canSave="true"
-		onNew="action-record-onnew-test" onSave="action-condition-test-gender" >
-		
-<!-- 		<toolbar> -->
-<!-- 					<button onClick="report-test-action" name="report-test" title="Report-Test" css="btn-success" /> -->
-<!-- 		</toolbar> -->
+		onNew="action-record-onnew-test" onSave="action-condition-test-gender">
 
-		<panel name="overviewPanel" title="Overview" icon="fa-user" >
+		<toolbar>
+			<button onClick="report-test-action" name="report-test"
+				title="Param-Report-Test" css="btn-warning" icon="fa-file" />
+			<button onClick="report-test-multiple-record-action"
+				name="report-multiple-record-test"
+				title="MultipleRecord-Report-Test" css="btn-info" icon="fa-file" />
+		</toolbar>
+
+		<panel name="overviewPanel" title="Overview" icon="fa-user">
 			<field name="seq" title="Customer Id" colSpan="2" />
 			<field name="image" widget="image" colSpan="3" />
-			
+
 			<field name="imageUrl" widget="ImageSelect"
 				selection="selection-for-image" colSpan="2" />
-				
+
 			<field name="icon" widget="ImageSelect"
 				selection="selection-for-icon" colSpan="2" />
 			<spacer colSpan="12" />
 			<!-- <field name="customerId" title="Customer Id"/> -->
-			
-<!-- title relation field -->
+
+			<!-- title relation field -->
 			<field name="title" x-type="many-to-one"
-			x-target="com.axelor.action.db.Title"
-			x-target-name="firstName" colSpan="3"/>
-			
+				x-target="com.axelor.action.db.Title" x-target-name="firstName"
+				colSpan="3" />
+
 			<field name="firstName" colSpan="3" widget="string" />
 			<field name="middleName" colSpan="3" />
 			<field name="lastName" colSpan="3" />
 
 			<spacer colSpan="12" />
-			
+
 			<field name="dateOfBirth" colSpan="4" />
 			<!-- <separator colSpan="12" /> -->
-			<field name="email" colSpan="4" widget="email" onChange="com.axelor.action.controller.HelloController:validate(email)">
+			<field name="email" colSpan="4" widget="email"
+				onChange="com.axelor.action.controller.HelloController:validate(email)">
 				<viewer><![CDATA[ 
       						  <a href="mailto:{{record.email}}">{{record.email}}</a>
         				]]></viewer>
 			</field>
 
 			<field name="phone" widget="phone"
-				x-placeholder-number-type="FIXED_LINE" colSpan="4"/>
+				x-placeholder-number-type="FIXED_LINE" colSpan="4" />
 			<!-- <field name="phone" widget="phone" /> -->
 			<spacer colSpan="12" />
 			<!-- on select -->
@@ -93,8 +98,8 @@
 					widget="html" colSpan="12" x-lite="true" />
 			</panel>
 
-			<field name="orderlist" widget="TagSelect"/>
-			
+			<field name="orderlist" widget="TagSelect" />
+
 			<!-- <field name="orderlist" colSpan="12" css="order-list" > -->
 			<!-- <viewer><![CDATA[ -->
 			<!-- <order> -->
@@ -110,32 +115,11 @@
 			<!-- <field name="orderQuantity" colSpan="4"/> -->
 			<!-- </editor> -->
 			<!-- </field> -->
-			
-			
+
 		</panel>
 
 		<panel-related field="addresslist" x-selector="checkbox"
 			canSelect="true" />
-
-		<!-- buttons for test attributes -->
-		<panel>
-			<button onClick="actionattribute-for-test"
-				name="collapse-test" title="Collapse Test" colSpan="2" />
-			<button onClick="actionrecord-for-actionmethod-text"
-				name="actionmethod-test" title="ActionMethod Test" colSpan="2" />
-			<button onClick="item.all" name="test" title="Test"
-				colSpan="2" />
-			<button onClick="add-address" name="adding-value"
-				title="One Address Adding" colSpan="2" />
-			<button onClick="delete-address" name="deleting-value"
-				title="One Address Deleting" colSpan="2" />
-			<button onClick="com.axelor.action.controller.HelloController:say"
-			    name="test-Controller" title="Test Controller" colSpan="2" />
-			    
-			<button onClick="report-test-action" name="report-test"
-			    title="Report-Test" css="btn-success" />
-		</panel>
-
 
 		<panel name="detailsPanel" title="Details Panel">
 			<field name="createdOn" />
@@ -150,6 +134,25 @@
 				prompt="You want's to save Record" css="btn-success" />
 			<button onClick="delete" name="Delete" title="Delete"
 				prompt="You want's to deleted Record" css="btn-danger" />
+		</panel>
+
+<!-- buttons for test attributes -->
+		<panel sidebar="true">
+			<button onClick="actionattribute-for-test"
+				name="collapse-test" title="Collapse Test" />
+			<button onClick="actionrecord-for-actionmethod-text"
+				name="actionmethod-test" title="ActionMethod Test" />
+			<button onClick="item.all" name="test" title="Test" />
+			<button onClick="add-address" name="adding-value"
+				title="One Address Adding" />
+			<button onClick="delete-address" name="deleting-value"
+				title="One Address Deleting" />
+			<button
+				onClick="com.axelor.action.controller.HelloController:say"
+				name="test-Controller" title="Test Controller" />
+
+			<!-- <button onClick="report-test-action" name="report-test" -->
+			<!-- title="Report-Test" css="btn-success" /> -->
 		</panel>
 
 	</form>
@@ -274,12 +277,20 @@
 		<option value="com.axelor.action.db.Customer"
 			data-domain="self.email LIKE '%gmail%'" data-grid="customer-grid">Customer</option>
 	</selection>
-	
-<!-- report test -->
-<action-report output="Customer-${date}-${time}" name="report-test-action" design="Customer.rptdesign" format="pdf">
 
-                <param name="CustomerId" expr="eval: id" />
+<!-- report test for param -->
+	<action-report output="Customer-${date}-${time}"
+		name="report-test-action" design="Customer.rptdesign" format="pdf">
 
-        </action-report>
+		<param name="CustomerId" expr="eval: id" />
+
+	</action-report>
+
+<!-- report test for multiple record -->
+	<action-report output="Customer-${date}-${time}"
+		name="report-test-multiple-record-action"
+		design="MultiCustomer.rptdesign" format="pdf">
+
+	</action-report>
 
 </object-views>

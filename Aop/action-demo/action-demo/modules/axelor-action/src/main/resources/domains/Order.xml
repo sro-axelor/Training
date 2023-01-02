@@ -8,25 +8,37 @@
 
 	<module name="action" package="com.axelor.action.db" />
 
-<entity name="Order" cacheable="true">
+	<entity name="Order" cacheable="true">
 
-<!-- 	<integer name="orderId" min="1" max="1000" /> -->
-<!-- 	<string name="code"/> -->
+		<!-- <integer name="orderId" min="1" max="1000" /> -->
+		<!-- <string name="code"/> -->
 		<string name="orderName" />
 		<date name="orderDate" />
 		<date name="deliveryDate" />
-		<time name="timeTest"/>
-		<datetime name="dateTimeTest"/>
+		<time name="timeTest" />
+		<datetime name="dateTimeTest" />
 		<boolean name="active" />
 		<string name="orderStatus" selection="status" />
 		<integer name="orderQuantity" selection="quantity" />
 		<decimal name="price" />
-		<binary name="binaryTest"/>
-<!-- 	<many-to-many name="customerlist" ref="Customer" /> -->
+		<binary name="binaryTest" />
+		<!-- <many-to-many name="customerlist" ref="Customer" /> -->
 
-		<one-to-many name="itemlist" ref="Item" mappedBy="orderes"/>
+		<one-to-many name="itemlist" ref="Item" mappedBy="orderes" />
+
+		<track>
+			<field name="orderName" />
+		    <field name="orderDate" on="CREATE" />
+		    <field name="deliveryDate" />
+		    <field name="orderStatus"/>
+		    <message if="true" on="CREATE" tag="info" >Order created.</message>
+		    <message if="orderStatus == 'ordered'" tag="success">Order placed.</message>
+		    <message if="orderStatus == 'draft'" tag="important">Draft</message>
+		    <message if="orderStatus == 'canceled'" tag="warning">Canceled</message>
+		    <message if="orderStatus == 'wishlist'" tag="info">Wishlist</message>
+		</track>
 		
-</entity>
+	</entity>
 
 
 </domain-models>

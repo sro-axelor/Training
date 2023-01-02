@@ -22,7 +22,7 @@
 	
 <!-- 		<integer name="customerId"/> -->
 
-		<string name="firstName" required="true" />
+		<string name="firstName" required="true" help="true"  translatable="true"/>
 		<string name="middleName" />
 		<string name="lastName" required="true" />	
 		<date name="dateOfBirth"/>

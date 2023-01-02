@@ -32,7 +32,7 @@
 		<panel>
 <!-- 			<field name="orderId"  title="Order Id"/> -->
 <!-- 	      	<field name="code" /> -->
-			<field name="orderName" readonlyIf="orderStatus != ordered "/>
+			<field name="orderName" />
 			<field name="orderDate" />
 			<field name="deliveryDate" widget="date" />
 			<field name="orderStatus" selection="status"  widget="SingleSelect"  /> <!-- widget="MultiSelect" --> 
@@ -58,12 +58,6 @@
 		    </static>
 		</panel>
 
-<!-- buttons for test attributes -->
-		<panel>
-				<button onClick="action-script-test" name="action-script" title="Using Action-Script" colSpan="2"/>
-				<button onClick="create.hello" name="action-script-custom-models" title="Action-Script Custom-Models" colSpan="2"/>
-<!-- 			<button onClick="action-order-validate" name="action-validate" title="Using Action-Validate" colSpan="2"/> -->
-		</panel>
 
 <!-- panel relatted feild -->
 		<panel-related field="customerlist" />
@@ -87,6 +81,20 @@
 			<button onClick="delete" name="Delete" title="Discard"
 				css="btn-info" />
 		</panel>
+		
+<!-- buttons for test attributes -->
+		<panel sidebar="true">
+				<button onClick="action-script-test" name="action-script" title="Using Action-Script"/>
+				<button onClick="create.hello" name="action-script-custom-models" title="Action-Script Custom-Models" />
+<!-- 			<button onClick="action-order-validate" name="action-validate" title="Using Action-Validate" colSpan="2"/> -->
+		</panel>
+
+<!-- for messaging 	 -->
+		<panel-mail>
+	        <mail-messages limit="4" />
+	        <mail-followers />
+   	    </panel-mail>
+		
   </form>
 
 	<selection name="status" >
@@ -194,5 +202,5 @@
         <action name="action-order-validate"/>
         <action name="action-condition-test-orderStatus"/>
     </action-group>
-
+    
 </object-views>
