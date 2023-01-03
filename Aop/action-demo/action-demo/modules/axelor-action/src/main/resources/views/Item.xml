@@ -9,6 +9,8 @@
 		model="com.axelor.action.db.Item">
 		<field name="itemCode" />
 		<field name="itemName" />
+		<field name="price" />
+		<field name="quantity" />
 		<field name="whichItem" />		
 	    <field name="selectItem" />
 	</grid>
@@ -18,6 +20,8 @@
 		<panel>
 			<field name="itemCode" />
 			<field name="itemName" />
+		    <field name="price" />
+		    <field name="quantity" />
 			<field name="whichItem" />
 			<field name="selectItem" selection="color.item.selection" widget="MultiSelect"/>
 		</panel>	

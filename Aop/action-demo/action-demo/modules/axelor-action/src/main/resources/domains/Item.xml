@@ -9,12 +9,18 @@
 	<module name="action" package="com.axelor.action.db" />
 
 	<entity name="Item">
-		<string name="itemCode" />
-		<string name="itemName" />
+		<string name="itemCode"/>
+		<string name="itemName"/>
+		<decimal name="price"/>
+		<integer name="quantity"/>
 		<enum name="whichItem" ref="Whichitems" />
-		<many-to-one name="orderes" ref="Order" />
 		<string name="selectItem"/>
+		
+		<many-to-one name="orderes" ref="Order" />
+	
 	</entity>
+	
+	
 	
 	<enum name="Whichitems" >
 	    <item name="MOBILES"/>

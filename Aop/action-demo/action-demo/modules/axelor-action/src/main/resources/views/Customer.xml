@@ -29,7 +29,7 @@
 
 	<form name="customer-form" title="Details"
 		model="com.axelor.action.db.Customer" width="large" canSave="true"
-		onNew="action-record-onnew-test" onSave="action-condition-test-gender">
+		onNew="action-record-onnew-test" onSave="action-condition-test-gender ,com.axelor.action.controller.HelloController:validate(email)">
 
 		<toolbar>
 			<button onClick="report-test-action" name="report-test"
@@ -64,7 +64,7 @@
 
 			<field name="dateOfBirth" colSpan="4" />
 			<!-- <separator colSpan="12" /> -->
-			<field name="email" colSpan="4" widget="email"
+			<field name="email" colSpan="4"
 				onChange="com.axelor.action.controller.HelloController:validate(email)">
 				<viewer><![CDATA[ 
       						  <a href="mailto:{{record.email}}">{{record.email}}</a>
@@ -147,12 +147,15 @@
 				title="One Address Adding" />
 			<button onClick="delete-address" name="deleting-value"
 				title="One Address Deleting" />
-			<button
-				onClick="com.axelor.action.controller.HelloController:say"
-				name="test-Controller" title="Test Controller" />
 
 			<!-- <button onClick="report-test-action" name="report-test" -->
 			<!-- title="Report-Test" css="btn-success" /> -->
+			
+			<button onClick="com.axelor.action.controller.HelloController:say"
+			        name="test-Controller" title="Test Controller" />
+			<button onClick="data.import.test" name="action-import-test"
+			        title="ActionImport Test" />
+			
 		</panel>
 
 	</form>
@@ -271,6 +274,7 @@
 		<option value="fa-book"></option>
 	</selection>
 
+
 <!-- RefSelect.selection -->
 	<selection name="RefSelect.selection">
 		<option value="com.axelor.action.db.Order">Order</option>
@@ -278,19 +282,30 @@
 			data-domain="self.email LIKE '%gmail%'" data-grid="customer-grid">Customer</option>
 	</selection>
 
+
 <!-- report test for param -->
 	<action-report output="Customer-${date}-${time}"
 		name="report-test-action" design="Customer.rptdesign" format="pdf">
-
 		<param name="CustomerId" expr="eval: id" />
-
 	</action-report>
+
 
 <!-- report test for multiple record -->
 	<action-report output="Customer-${date}-${time}"
 		name="report-test-multiple-record-action"
 		design="MultiCustomer.rptdesign" format="pdf">
-
 	</action-report>
+
+
+<!-- action import (import record)-->
+	<action-import name="data.import.test" config="data/csv-config.xml">
+	    <import file="addresses.csv" provider="" name="importtest"/>
+    </action-import>
+
+
+<!-- action webservice (it can be used to call a SOAP web services , this action is used as a provider action to the <action-import>)-->
+<!-- 	<action-ws name="ws.1" service="http://localhost:8080/action-demo/"> -->
+<!-- 	 	 <action name="SoapServiceName" template="data/ws/ws-login.tmpl" engine="groovy"/> -->
+<!-- 	</action-ws> -->
 
 </object-views>

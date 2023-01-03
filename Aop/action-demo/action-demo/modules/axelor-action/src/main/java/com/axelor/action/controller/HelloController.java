@@ -1,7 +1,9 @@
 package com.axelor.action.controller;
 
 import com.axelor.action.db.Customer;
+import com.axelor.action.i18n.I18nDemo;
 import com.axelor.action.service.HelloService;
+import com.axelor.i18n.I18n;
 import com.axelor.inject.Beans;
 import com.axelor.meta.CallMethod;
 import com.axelor.rpc.ActionRequest;
@@ -40,7 +42,7 @@ public class HelloController {
 	    if (email == null) {
 	      response.addError("email", "Email required");
 	    } else if (!email.matches("^(.+)@(\\S+)$")) {
-	      response.addError("email", "Invalid email.");
+	      response.addError("email", I18n.get(I18nDemo.INVALID_EMAIL));
 	    }
 
 	    return response;
