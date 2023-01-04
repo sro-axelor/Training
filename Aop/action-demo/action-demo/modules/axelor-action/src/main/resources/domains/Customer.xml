@@ -5,7 +5,8 @@
 	xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
   http://axelor.com/xml/ns/domain-models/domain-models_5.4.xsd">
 
-<module name="action" package="com.axelor.action.db" />
+<module name="action" package="
+" />
 
 	<sequence name="entery-customer.sequence" initial="5"
 		increment="1" padding="5" prefix="SU" />
@@ -35,6 +36,12 @@
 		<string name="notes" title="About Order"  />
 		<string name="reference" /> 
         <integer name="referenceId" />
+        
+        
+		<string name="attrs" title="Attributes" json="true" />
+		<string name="customAttrs" title="Custom Attributes" json="true" />
+        <string name="extraAttrs" title="Extra Attributes" json="true" />
+		
 		
 		<many-to-one name="title" ref="Title"/>
 
